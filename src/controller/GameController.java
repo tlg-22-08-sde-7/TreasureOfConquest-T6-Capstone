@@ -6,6 +6,8 @@ import com.apps.util.Prompter;
 
 import java.util.Scanner;
 import com.apps.util.Prompter;
+import com.apps.util.SplashApp;
+import model.SplashScreen;
 import view.GameView;
 
 import javax.swing.*;
@@ -20,9 +22,11 @@ import static jdk.internal.org.jline.keymap.KeyMap.display;
 
 public class GameController {
     private GameView gameView;
+    SplashScreen splashScreen = new SplashScreen();
 
     public GameController() {
         gameView = new GameView();
+
     }
 
     public void run() {
@@ -32,7 +36,8 @@ public class GameController {
     private void playerSetup() {
 
         Prompter prompter = new Prompter(new Scanner(System.in));
-        display("instructions.txt");
+        System.out.println(splashScreen.getSplashScreenArt());
+        //display("instructions.txt");
         Console.pause(2000L);
 
         String name = prompter.prompt("Enter player name: ");
