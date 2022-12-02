@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Dialogue {
 
-    private Map<String, Set<String>> commands = new HashMap<>();
+    private static final Map<String, Set<String>> COMMANDS_MAP = new HashMap<>();
 
     public Dialogue() {};
 
@@ -15,15 +15,15 @@ public class Dialogue {
     public String findMatchingNoun(String expectedCommand, String userInput) {
         /*
          * findMatchingNoun parses userInput for the expected command and a noun thats paired
-         * to expectedCommand in the commands Hashmap.
+         * to expectedCommand in the COMMANDS_MAP Hashmap.
          * If both are found then it returns the noun, else it identifies the input in userInput
          * and returns it.
          * CURRENTLY, DOES NOT WORK FOR NOUNS THAT CONSIST OF >1 WORDS
          */
         expectedCommand = expectedCommand.toLowerCase();
         String result = null;
-        Set<String> commandKeys = commands.keySet();
-        Set<String> availableCountries = commands.get(expectedCommand);
+        Set<String> commandKeys = COMMANDS_MAP.keySet();
+        Set<String> availableCountries = COMMANDS_MAP.get(expectedCommand);
         List<String> userTextSplit = List.of(userInput.split("\\s")); // splits based on whitespace
 
         String matchingVerb = null;
@@ -53,8 +53,8 @@ public class Dialogue {
     };
 
     private Map<String, Set<String>> getCommands() {
-        return commands;
-    }
+        return COMMANDS_MAP;
+    };
 
     public void setCommands(List<String> verbs, List<String> nouns) {
         List<String> listOfNouns;
@@ -63,8 +63,7 @@ public class Dialogue {
             listOfNouns = List.of(nouns.get(i).split(","));
             HashSet<String> nounsSet = new HashSet<String>(listOfNouns);
 
-            commands.put(verbs.get(i), nounsSet);
+            COMMANDS_MAP.put(verbs.get(i), nounsSet);
         };
     };
-
 };
