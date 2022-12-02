@@ -1,0 +1,13 @@
+{"go": {
+    "synonyms": [],
+    "locations": ["mexico", "japan", "nigeria", "canada"]
+  },
+"buy": {
+    "synonyms": [],
+    "categories": {
+        "food": [],
+        "treasures": [],
+        "weapons": []
+    }
+  }
+}

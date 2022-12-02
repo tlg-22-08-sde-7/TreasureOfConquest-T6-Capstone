@@ -16,7 +16,7 @@ public class Dialogue {
         /*
          * findMatchingNoun parses userInput for the expected command and a noun thats paired
          * to expectedCommand in the COMMANDS_MAP Hashmap.
-         * If both are found then it returns the noun, else it identifies the input in userInput
+         * If both are found then it returns the noun, else it identifies the input error in userInput
          * and returns it.
          * CURRENTLY, DOES NOT WORK FOR NOUNS THAT CONSIST OF >1 WORDS
          */
@@ -47,7 +47,7 @@ public class Dialogue {
         }
         else {
             result = matchingNoun;
-        }
+        };
 
         return result;
     };
