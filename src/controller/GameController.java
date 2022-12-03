@@ -36,7 +36,7 @@ public class GameController {
     private void playerSetup() {
 
         Prompter prompter = new Prompter(new Scanner(System.in));
-        System.out.println(splashScreen.getSplashScreenArt());
+        gameView.showSplashScreen();
         //display("instructions.txt");
         Console.pause(2000L);
 

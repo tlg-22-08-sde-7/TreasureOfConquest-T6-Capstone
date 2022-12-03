@@ -11,7 +11,7 @@ public class SplashScreen {
 
         String splashScreenArt = null;
         try {
-            splashScreenArt = Files.readString(Path.of("assets/assciiart/test.txt"));
+            splashScreenArt = Files.readString(Path.of("assets/assciiart/splashscreen.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }
