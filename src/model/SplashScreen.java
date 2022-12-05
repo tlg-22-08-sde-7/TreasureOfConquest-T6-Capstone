@@ -6,6 +6,7 @@ import java.nio.file.Path;
 
 public class SplashScreen {
     String splashScreenArt = loadSplashScreen();
+    String gameInst = loadGameInstructions();
 
     private static String loadSplashScreen(){
 
@@ -17,6 +18,22 @@ public class SplashScreen {
         }
         return splashScreenArt ;
     }
+
+    private static String loadGameInstructions(){
+
+        String gameInst = null;
+        try {
+            gameInst = Files.readString(Path.of("assets/instructions.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return gameInst ;
+    }
+
+    public String getGameInst() {
+        return gameInst;
+    }
+
 
     public String getSplashScreenArt() {
         return splashScreenArt;
