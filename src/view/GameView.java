@@ -8,12 +8,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class GameView {
-    private Prompter prompter;
+
     private SplashScreen splash = null;
 
-    public void playerSetup(String name) {
 
-    }
 
     public void showInstructions(){
         splash = new SplashScreen();
