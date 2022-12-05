@@ -11,7 +11,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="junit4" level="project" />
-    <orderEntry type="library" name="app-utils-1.1" level="project" />
+    <orderEntry type="library" name="app-utils-1.12" level="project" />
+    <orderEntry type="library" name="google.code.gson" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -21,6 +22,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="google.code.gson" level="project" />
+    <orderEntry type="library" name="app-utils-1.11" level="project" />
   </component>
 </module>
