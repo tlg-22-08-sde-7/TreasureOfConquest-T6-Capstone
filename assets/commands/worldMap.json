@@ -1,0 +1,186 @@
+{
+  "mexico": {
+    "meta": {
+      "zone": 1,
+      "cost": 700,
+      "funFacts": {
+        "funFact1": {
+          "text": "Is this a riddle?",
+          "answer": "No"
+        },
+        "funFact2": {
+          "text": "Is this fact2?",
+          "answer": "Yes"
+        }
+      }
+    },
+    "attraction1": {
+      "name": "Chichen Itza",
+      "location": "Yucatan",
+      "cost": 25,
+      "treasures": {
+        "treasure1": {
+          "name": "Item 1",
+          "value": 35
+        },
+        "treasure2": {
+          "name": "Item 2",
+          "value": 10
+        }
+      },
+      "challenges": {
+        "challenge1": {
+          "text": "This is challenge 1",
+          "options": [
+            "answer",
+            "incorrect1",
+            "incorrect2",
+            "incorrect3"
+          ],
+          "answer": "answer"
+        },
+        "challenge2": {
+          "text": "This is challenge 2",
+          "options": [
+            "answer2",
+            "incorrect1",
+            "incorrect2",
+            "incorrect3"
+          ],
+          "answer": "answer2"
+        }
+      }
+    },
+    "restaurant1": {
+      "name": "A Great Restaurant",
+      "item1": {
+        "name": "Burrito",
+        "cost": 10,
+        "value": 5
+      },
+      "item2": {
+        "name": "Enchiladas and Tamales",
+        "cost": 30,
+        "value": 25
+      }
+    },
+    "restaurant2": {
+      "name": "Another Great Restaurant",
+      "item1": {
+        "name": "Another Mexican dish",
+        "cost": 11,
+        "value": 6
+      },
+      "item2": {
+        "name": "A more expensive Mexican dish",
+        "cost": 31,
+        "value": 26
+      }
+    },
+    "weaponStore1": {
+      "name": "A Mexican Weapon Store",
+      "weapon1": {
+        "name": "weapon1",
+        "cost": 10,
+        "damage": 20
+      },
+      "weapon2": {
+        "name": "weapon2",
+        "cost": 30,
+        "damage": 40
+      }
+    }
+  },
+  "japan": {
+    "meta": {
+      "zone": 1,
+      "cost": 700,
+      "funFacts": {
+        "funFact1": {
+          "text": "Is this a riddle?",
+          "answer": "No"
+        },
+        "funFact2": {
+          "text": "Is this fact2?",
+          "answer": "Yes"
+        }
+      }
+    },
+    "attraction1": {
+      "name": "Mt Fuji",
+      "location": "Yucatan",
+      "cost": 25,
+      "treasures": {
+        "treasure1": {
+          "name": "Item 1",
+          "value": 35
+        },
+        "treasure2": {
+          "name": "Item 2",
+          "value": 10
+        }
+      },
+      "challenges": {
+        "challenge1": {
+          "text": "This is challenge 1",
+          "options": [
+            "answer",
+            "incorrect1",
+            "incorrect2",
+            "incorrect3"
+          ],
+          "answer": "answer"
+        },
+        "challenge2": {
+          "text": "This is challenge 2",
+          "options": [
+            "answer2",
+            "incorrect1",
+            "incorrect2",
+            "incorrect3"
+          ],
+          "answer": "answer2"
+        }
+      }
+    },
+    "restaurant1": {
+      "name": "A Great Restaurant",
+      "item1": {
+        "name": "Burrito",
+        "cost": 10,
+        "value": 5
+      },
+      "item2": {
+        "name": "Enchiladas and Tamales",
+        "cost": 30,
+        "value": 25
+      }
+    },
+    "restaurant2": {
+      "name": "Another Great Restaurant",
+      "item1": {
+        "name": "Another Mexican dish",
+        "cost": 11,
+        "value": 6
+      },
+      "item2": {
+        "name": "A more expensive Mexican dish",
+        "cost": 31,
+        "value": 26
+      }
+    },
+    "weaponStore1": {
+      "name": "A Mexican Weapon Store",
+      "weapon1": {
+        "name": "weapon1",
+        "cost": 10,
+        "damage": 20
+      },
+      "weapon2": {
+        "name": "weapon2",
+        "cost": 30,
+        "damage": 40
+      }
+    }
+  }
+}
