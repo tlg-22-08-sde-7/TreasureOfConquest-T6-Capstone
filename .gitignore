@@ -26,6 +26,9 @@ hs_err_pid*
 # - build output
 /out/
 
+# - GSON
+.idea/libraries/google_code_gson.xml
+
 
 ### Eclipse ###
 .settings/
