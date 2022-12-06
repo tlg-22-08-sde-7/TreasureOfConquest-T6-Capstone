@@ -11,14 +11,39 @@
 #   including misc.xml in Git will result in needless merge conflicts.
 !.idea/misc.xml
 
+## Java ##############################
+.mtj.tmp/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+
 # - temporary files
 /captures/
 
 # - build output
 /out/
 
+# - GSON
+.idea/libraries/google_code_gson.xml
+
 
 ### Eclipse ###
+.settings/
+bin/
+tmp/
+.metadata
+.classpath
+.project
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.factorypath
 
 # - metadata
 /.settings/
@@ -31,6 +56,12 @@
 
 
 ### Gradle ###
+bin/
+build/
+.gradle
+.gradletasknamecache
+gradle-app.setting
+!gradle-wrapper.jar
 
 # - temporary files
 /.gradle/
@@ -43,6 +74,17 @@ local.properties
 
 
 ### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+pom.xml.bak
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
 
 # Developer information
 HELP.md
