@@ -5,12 +5,12 @@
       "cost": 700,
       "funFacts": {
         "funFact1": {
-          "text": "Is this a riddle?",
-          "answer": "No"
+          "text": "What kind of Mexican food can give you frostbite?",
+          "answer": "A burr-ito"
         },
         "funFact2": {
-          "text": "Is this fact2?",
-          "answer": "Yes"
+          "text": "69 different languages are spoken in Mexico. True or False?",
+          "answer": "True"
         }
       }
     },
@@ -20,74 +20,79 @@
       "cost": 25,
       "treasures": {
         "treasure1": {
-          "name": "Item 1",
+          "name": "Gold",
           "value": 35
         },
         "treasure2": {
-          "name": "Item 2",
+          "name": "Emerald",
           "value": 10
         }
       },
-      "challenges": {
-        "challenge1": {
-          "text": "This is challenge 1",
+      "riddles": {
+        "riddle1": {
+          "text": " I was recently in Mexico and visited Chichen Itza. Mayan kings ruled the people who built this magnificent complex. Which of the following particular physical attributes or features did the Mayan value?",
           "options": [
-            "answer",
-            "incorrect1",
-            "incorrect2",
-            "incorrect3"
+            "Flattening of the forehead",
+            "All of these",
+            "Having gems inlaid in their teeth",
+            "Cross-eyedness"
           ],
-          "answer": "answer"
+          "answer": "All of these"
         },
-        "challenge2": {
-          "text": "This is challenge 2",
+        "riddle2": {
+          "text": "Chichen Itza was built near a particular sacred place. Can you guess what that might be?",
           "options": [
-            "answer2",
-            "incorrect1",
-            "incorrect2",
-            "incorrect3"
+            "A high terraced mountain",
+            "A volcano",
+            "A sacrificial pool",
+            "A sacred beach"
           ],
-          "answer": "answer2"
+          "answer": "A high terraced mountain"
         }
       }
     },
     "restaurant1": {
-      "name": "A Great Restaurant",
+      "name": "Pujol",
       "item1": {
         "name": "Burrito",
         "cost": 10,
         "value": 5
       },
       "item2": {
-        "name": "Enchiladas and Tamales",
+        "name": "Enchiladas",
         "cost": 30,
         "value": 25
       }
     },
     "restaurant2": {
-      "name": "Another Great Restaurant",
+      "name": "El Cardenal",
       "item1": {
-        "name": "Another Mexican dish",
+        "name": "Tacos",
         "cost": 11,
         "value": 6
       },
       "item2": {
-        "name": "A more expensive Mexican dish",
+        "name": "Chilaquiles",
         "cost": 31,
         "value": 26
       }
     },
     "weaponStore1": {
-      "name": "A Mexican Weapon Store",
+      "name": "Directorate of Arms and Munitions Sales",
       "weapon1": {
-        "name": "weapon1",
-        "cost": 10,
-        "damage": 20
+        "name": "gun",
+        "cost": 300,
+        "damage": 75
       },
       "weapon2": {
-        "name": "weapon2",
-        "cost": 30,
+        "name": "knife",
+        "cost": 75,
         "damage": 40
+      },
+      "weapon3": {
+        "name": "bat",
+        "cost": 30,
+        "damage": 25
       }
     }
   },
@@ -97,18 +102,18 @@
       "cost": 700,
       "funFacts": {
         "funFact1": {
-          "text": "Is this a riddle?",
-          "answer": "No"
+          "text": "I flew to Japan, and I bought a pair of shoes and a shirt. What did I buy first?",
+          "answer": "plane ticket"
         },
         "funFact2": {
-          "text": "Is this fact2?",
-          "answer": "Yes"
+          "text": "35% of the Japanese population is aged 65 and older, the highest proportion in the world. True or False?",
+          "answer": "False"
         }
       }
     },
     "attraction1": {
       "name": "Mt Fuji",
-      "location": "Yucatan",
+      "location": "Chiyoda",
       "cost": 25,
       "treasures": {
         "treasure1": {
