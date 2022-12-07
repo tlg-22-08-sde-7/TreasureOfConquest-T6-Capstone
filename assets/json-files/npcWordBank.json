@@ -1,0 +1,48 @@
+{
+  "tourGuide": {
+    "commands": [
+      "go",
+      "advance",
+      "progress",
+      "march",
+      "run",
+      "hop",
+      "travel",
+      "move",
+      "take me"
+    ],
+    "responses": [
+      "Okay! I can take you there",
+      "Sure! Let's do it!"
+    ]
+  },
+  "waiter": {
+    "commands": [
+      "order",
+      "eat",
+      "consume",
+      "buy",
+      "have",
+      "get",
+      "take",
+      "want",
+      "let me get"
+    ],
+    "responses": [
+
+    ]
+  },
+  "airportAgent": {
+    "commands": [
+      "fly",
+      "travel",
+      "purchase",
+      "ticket",
+      "want",
+      "get"
+    ],
+    "responses": [
+
+    ]
+  }
+}

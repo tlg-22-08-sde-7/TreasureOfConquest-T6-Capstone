@@ -8,7 +8,7 @@ public class GSONTesting2 {
 
     public static void main(String[] args) throws FileNotFoundException {
         Gson gson = new Gson();
-        WorldMap worldMap = gson.fromJson(new FileReader("assets/commands/worldMap.json"), WorldMap.class);
+        WorldMap worldMap = gson.fromJson(new FileReader("assets/json-files/worldMap.json"), WorldMap.class);
 
         // Country instantiation
         WorldMap.Mexico mexico = worldMap.getMexico();

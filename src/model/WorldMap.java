@@ -116,7 +116,7 @@ public class WorldMap {
             private String location;
             private Integer cost;
             private Treasures treasures;
-            private Challenges challenges;
+            private Riddles riddles;
 
             public static class Treasures {
                 private Treasure1 treasure1;
@@ -174,14 +174,14 @@ public class WorldMap {
 
             };
 
-            public static class Challenges {
-                private Challenge1 challenge1;
-                private Challenge2 challenge2;
+            public static class Riddles {
+                private Riddle1 riddle1;
+                private Riddle2 riddle2;
 
-                public Challenges() {
+                public Riddles() {
                 };
 
-                private static class ChallengeStructure {
+                private static class RiddlesStructure {
                     private String text;
                     private String[] options;
                     private String answer;
@@ -211,31 +211,31 @@ public class WorldMap {
                     }
                 }
 
-                public static class Challenge1 extends ChallengeStructure {
-                    public Challenge1() {
+                public static class Riddle1 extends RiddlesStructure {
+                    public Riddle1() {
                     }
                 }
 
-                public static class Challenge2 extends ChallengeStructure {
-                    public Challenge2() {
+                public static class Riddle2 extends RiddlesStructure {
+                    public Riddle2() {
                     }
                 }
 
                 // Getters and Setters
-                public Challenge1 getChallenge1() {
-                    return challenge1;
+                public Riddle1 getRiddle1() {
+                    return riddle1;
                 }
 
-                public void setChallenge1(Challenge1 challenge1) {
-                    this.challenge1 = challenge1;
+                public void setRiddle1(Riddle1 riddle1) {
+                    this.riddle1 = riddle1;
                 }
 
-                public Challenge2 getChallenge2() {
-                    return challenge2;
+                public Riddle2 getRiddle2() {
+                    return riddle2;
                 }
 
-                public void setChallenge2(Challenge2 challenge2) {
-                    this.challenge2 = challenge2;
+                public void setRiddle2(Riddle2 riddle2) {
+                    this.riddle2 = riddle2;
                 }
             }
 
@@ -272,12 +272,12 @@ public class WorldMap {
                 this.treasures = treasures;
             }
 
-            public Challenges getChallenges() {
-                return challenges;
+            public Riddles getChallenges() {
+                return riddles;
             }
 
-            public void setChallenges(Challenges challenges) {
-                this.challenges = challenges;
+            public void setChallenges(Riddles riddles) {
+                this.riddles = riddles;
             }
         }
 
