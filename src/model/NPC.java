@@ -14,6 +14,7 @@ public class NPC {
     private String npcType;
     private String [] commands;
     private String [] responds;
+    private List<NPC> npcList;
 
     public NPC (){
 
@@ -29,11 +30,14 @@ public class NPC {
         try {
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Path.of("assets/json-files/npcWordBank.json"));
-            List<NPC> npcList = Arrays.asList(gson.fromJson(reader,NPC[].class));
+            npcList = Arrays.asList(gson.fromJson(reader,NPC[].class));
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public List<NPC> getNpcList() {
+        return npcList;
+    }
 }
