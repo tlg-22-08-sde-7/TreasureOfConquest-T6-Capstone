@@ -7,10 +7,12 @@ public class WorldMap {
     private Japan japan;
 
     // No-arg Ctor
-    public WorldMap() {};
+    public WorldMap() {
+
+    }
 
     // Template
-    private static class CountriesStructure {
+    public static class CountriesStructure {
         /*
          * Countries should extend this class
          */
@@ -25,6 +27,7 @@ public class WorldMap {
         // Meta
         public static class Meta {
             // Properties
+            private String name;
             private Integer zone;
             private Integer cost;
             private FunFacts funFacts;
@@ -82,9 +85,18 @@ public class WorldMap {
                 public void setFunFact2(FunFact2 funFact2) {
                     this.funFact2 = funFact2;
                 }
+
             }
 
             // Getters and Setters
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
             public Integer getZone() {
                 return zone;
             }
@@ -272,11 +284,11 @@ public class WorldMap {
                 this.treasures = treasures;
             }
 
-            public Riddles getChallenges() {
+            public Riddles getRiddles() {
                 return riddles;
             }
 
-            public void setChallenges(Riddles riddles) {
+            public void setRiddles(Riddles riddles) {
                 this.riddles = riddles;
             }
         }

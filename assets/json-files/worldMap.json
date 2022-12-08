@@ -1,6 +1,7 @@
 {
   "mexico": {
     "meta": {
+      "name": "mexico",
       "zone": 1,
       "cost": 700,
       "funFacts": {
@@ -98,6 +99,7 @@
   },
   "japan": {
     "meta": {
+      "name": "japan",
       "zone": 1,
       "cost": 700,
       "funFacts": {
