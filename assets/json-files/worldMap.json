@@ -117,72 +117,72 @@
       "cost": 25,
       "treasures": {
         "treasure1": {
-          "name": "Item 1",
+          "name": "mirror Yata no Kagami ",
           "value": 35
         },
         "treasure2": {
-          "name": "Item 2",
+          "name": "jewel Yasakani no Magatama",
           "value": 10
         }
       },
       "challenges": {
         "challenge1": {
-          "text": "This is challenge 1",
+          "text": "I'm made up of thousands of islands\nAnd my highest point is Mt. Fuji\nI'm well known for my fast bullet train\nHaikus, sumo and Hello Kitty\n\n",
           "options": [
-            "answer",
-            "incorrect1",
-            "incorrect2",
-            "incorrect3"
+            "Mt. Fuji",
+            "Japan",
+            "China",
+            "Asia"
           ],
-          "answer": "answer"
+          "answer": "Japan"
         },
         "challenge2": {
-          "text": "This is challenge 2",
+          "text": "Which science-fiction movie had been filmed on Mount Fuji?",
           "options": [
-            "answer2",
-            "incorrect1",
-            "incorrect2",
-            "incorrect3"
+            "Sasquatch Mountain",
+            "Star Trek",
+            "Pacific Rim: Uprising",
+            "Interstellar"
           ],
-          "answer": "answer2"
+          "answer": "Pacific Rim: Uprising"
         }
       }
     },
     "restaurant1": {
-      "name": "A Great Restaurant",
+      "name": "Ise Sueyoshi",
       "item1": {
-        "name": "Burrito",
+        "name": "Ramen",
         "cost": 10,
         "value": 5
       },
       "item2": {
-        "name": "Enchiladas and Tamales",
+        "name": "Yakitori",
         "cost": 30,
         "value": 25
       }
     },
     "restaurant2": {
-      "name": "Another Great Restaurant",
+      "name": "Sushisho Masa",
       "item1": {
-        "name": "Another Mexican dish",
+        "name": "Sushi",
         "cost": 11,
         "value": 6
       },
       "item2": {
-        "name": "A more expensive Mexican dish",
+        "name": "Okonomiyaki",
         "cost": 31,
         "value": 26
       }
     },
     "weaponStore1": {
-      "name": "A Mexican Weapon Store",
+      "name": "Akihabara Busou Shoten",
       "weapon1": {
-        "name": "weapon1",
+        "name": "Shuriken",
         "cost": 10,
         "damage": 20
       },
       "weapon2": {
-        "name": "weapon2",
+        "name": "sword",
         "cost": 30,
         "damage": 40
       }
