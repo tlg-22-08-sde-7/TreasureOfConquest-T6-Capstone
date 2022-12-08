@@ -6,6 +6,8 @@ public class NPCWordBank {
     private String[] tourGuide;
     private String[] waiter;
     private String[] airportAgent;
+    private String[] weaponSalesRep;
+    private String[] treasuresRep;
 
     // Getters and Setters
     public String[] getTourGuide() {
@@ -30,5 +32,21 @@ public class NPCWordBank {
 
     public void setAirportAgent(String[] airportAgent) {
         this.airportAgent = airportAgent;
+    }
+
+    public String[] getWeaponSalesRep() {
+        return weaponSalesRep;
+    }
+
+    public void setWeaponSalesRep(String[] weaponSalesRep) {
+        this.weaponSalesRep = weaponSalesRep;
+    }
+
+    public String[] getTreasuresRep() {
+        return treasuresRep;
+    }
+
+    public void setTreasuresRep(String[] treasuresRep) {
+        this.treasuresRep = treasuresRep;
     }
 }
