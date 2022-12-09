@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TreasureOfConquest:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/TreasureOfConquest_jar2</output-path>
+    <root id="archive" name="TreasureOfConquest.jar">
+      <element id="module-output" name="TreasureOfConquest" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../jeopardy/lib/app-utils-1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.10/gson-2.10.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

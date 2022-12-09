@@ -1,0 +1,130 @@
+[
+  {"npcType": "tourGuide",
+  "commands": [
+    "go",
+    "advance",
+    "progress",
+    "march",
+    "run",
+    "hop",
+    "travel",
+    "move",
+    "take me"
+  ],
+  "responses": [
+    "What would you like to do?",
+    "Sure! I can take you there!",
+    "Which excursion would you like to go on this beautiful day?",
+    "Would you like to go shopping for weapons or treasures?"
+
+  ],
+  "values": []
+},
+  {"npcType": "waiter",
+  "commands": [
+    "order",
+    "eat",
+    "consume",
+    "buy",
+    "have",
+    "get",
+    "take",
+    "want",
+    "let me get"
+  ],
+  "responses": [
+    "Can I start you off with a glass of water or something to drink?",
+    "Here is our menu.",
+    "What would you like to order?"
+  ],
+  "values": []
+},
+  {"npcType": "airportAgent",
+  "commands": [
+    "fly",
+    "travel",
+    "purchase",
+    "ticket",
+    "want",
+    "get",
+    "flight"
+  ],
+  "responses": [
+    "Hi, how may I help you today?",
+    "Where would you like to visit?",
+    "Your flight purchase was successful.",
+    "Your flight will be leaving momentarily."
+  ],
+  "values": []
+},
+  {"npcType": "weaponSalesRep",
+  "commands": [
+    "go",
+    "buy",
+    "purchase",
+    "weapon",
+    "want",
+    "get"
+  ],
+  "responses": [
+    "Hi, how may I help you today?",
+    "What weapon would you like to purchase today?",
+    "Thank you for shopping with us.",
+    "Enjoy your purchase!",
+    "Sure! That's a great choice."
+  ],
+  "values": []
+},
+  {"npcType": "treasuresRep",
+  "commands": [
+    "go",
+    "buy",
+    "purchase",
+    "want",
+    "get"
+  ],
+  "responses": [
+    "Hi, how may I help you today?",
+    "What treasure would you like to purchase today?",
+    "Would you like to purchase gold, emerald, pearls, coral?",
+    "Would you like to buy a mirror or jewel?"
+  ],
+  "values": []
+  },
+  {"npcType": "villains",
+    "commands": [],
+    "responses": [
+      "Hi, how may I help you today?",
+      "What treasure would you like to purchase today?",
+      "Would you like to purchase gold, emerald, pearls, coral?",
+      "Would you like to buy a mirror or jewel?"
+    ],
+    "values": [
+      -5,
+      -10,
+      -15,
+      -20,
+      -35,
+      -65
+    ]
+  },
+  {"npcType": "allies",
+    "commands": [],
+    "responses": [
+      "Hi, how may I help you today?",
+      "What treasure would you like to purchase today?",
+      "Would you like to purchase gold, emerald, pearls, coral?",
+      "Would you like to buy a mirror or jewel?"
+    ],
+    "values": [
+      5,
+      10,
+      15,
+      20,
+      35,
+      65
+    ]
+  }
+]
+
+

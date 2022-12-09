@@ -12,7 +12,7 @@ public class SplashScreen {
 
         String splashScreenArt = null;
         try {
-            splashScreenArt = Files.readString(Path.of("assets/assciiart/splashscreen.txt"));
+            splashScreenArt = Files.readString(Path.of("resources/assets/assciiart/splashscreen.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -23,7 +23,7 @@ public class SplashScreen {
 
         String gameInst = null;
         try {
-            gameInst = Files.readString(Path.of("assets/instructions.txt"));
+            gameInst = Files.readString(Path.of("resources/assets/instructions.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -11,8 +11,6 @@ public class GameView {
 
     private SplashScreen splash = null;
 
-
-
     public void showInstructions(){
         splash = new SplashScreen();
         String result = splash.getGameInst();
