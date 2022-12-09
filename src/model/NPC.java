@@ -1,8 +1,10 @@
 package model;
 
 import com.google.gson.Gson;
+import test.TestGSON;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -30,14 +32,11 @@ public class NPC {
     }
 
     private void populateNPCList(){
-        try {
-            Gson gson = new Gson();
-            Reader reader = Files.newBufferedReader(Path.of("assets/json-files/npcWordBank.json"));
-            npcList = Arrays.asList(gson.fromJson(reader, NPC[].class));
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Gson gson = new Gson();
+        // worldMap = gson.fromJson(new InputStreamReader(TestGSON.getFileFromResourceAsStream("assets/json-files/worldMap.json")), WorldMap.class);
+        //Reader reader = Files.newBufferedReader(("assets/json-files/npcWordBank.json"));
+        npcList = Arrays.asList(gson.fromJson(new InputStreamReader(TestGSON.getFileFromResourceAsStream("assets/json-files/npcWordBank.json")), NPC[].class));
+        //reader.close();
     }
 
     public List<NPC> getNpcList() {

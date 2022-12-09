@@ -5,6 +5,7 @@ import com.apps.util.Prompter;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.*;
 
 import com.google.gson.Gson;
@@ -12,6 +13,7 @@ import model.NPC;
 import model.Player;
 import model.SplashScreen;
 import model.WorldMap;
+import test.TestGSON;
 import view.GameView;
 
 
@@ -189,7 +191,7 @@ public class GameController {
     private void fillCountryMap() throws FileNotFoundException {
         // deserialize json
         Gson gson = new Gson();
-        worldMap = gson.fromJson(new FileReader("assets/json-files/worldMap.json"), WorldMap.class);
+        worldMap = gson.fromJson(new InputStreamReader(TestGSON.getFileFromResourceAsStream("assets/json-files/worldMap.json")), WorldMap.class);
 
         for (WorldMap.Countries country : worldMap.getCountries()) {
             countries.put(country.getName().toLowerCase(), country);

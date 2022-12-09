@@ -1,0 +1,21 @@
+{"npcType": "tourGuide",
+  "commands": [
+    "go",
+    "advance",
+    "progress",
+    "march",
+    "run",
+    "hop",
+    "travel",
+    "move",
+    "take me"
+  ],
+  "responses": [
+    "What would you like to do?",
+    "Sure! I can take you there!",
+    "Which excursion would you like to go on this beautiful day?",
+    "Would you like to go shopping for weapons or treasures?"
+
+  ],
+  "values": []
+}
