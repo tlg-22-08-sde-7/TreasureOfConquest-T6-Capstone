@@ -22,7 +22,7 @@ public class GameController {
     private Prompter prompter;
     private static boolean gameOver = false;
     private WorldMap worldMap;
-    private Map<String, WorldMap.Countries> countries;
+    private Map<String, WorldMap.Countries> countries = new HashMap<>();
     private TextParser textParser;
     private final Map<String, NPC> npc = new HashMap<String, NPC>();
     private List<NPC> randomNPCs;
