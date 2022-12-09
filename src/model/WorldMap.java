@@ -1,253 +1,127 @@
 package model;
 
+import java.util.List;
+
 public class WorldMap {
 
     // Properties
-    private Mexico mexico;
-    private Japan japan;
+    private List<? extends Countries> countries;
 
     // No-arg Ctor
     public WorldMap() {
 
     }
 
-    // Template
-    public static class CountriesStructure {
-        /*
-         * Countries should extend this class
-         */
-
+    // Countries
+    public static class Countries {
         // Properties
-        private Meta meta;
-        private Attraction1 attraction1;
-        private Restaurant1 restaurant1;
-        private Restaurant2 restaurant2;
-        private WeaponStore1 weaponStore1;
+        private String name;
+        private int zone;
+        private int cost;
+        private List<? extends FunFacts> funFacts;
+        private List<? extends Attractions> attractions;
+        private List<? extends Restaurants> restaurants;
+        private List<? extends WeaponStores> weaponStores;
 
-        // Meta
-        public static class Meta {
-            // Properties
-            private String name;
-            private Integer zone;
-            private Integer cost;
-            private FunFacts funFacts;
+        public Countries() {
+        }
 
-            // No-arg Ctor
-            public Meta() {};
+        // Class Types
+        public static class FunFacts {
+            //Properties
+            private String text;
+            private String answer;
 
-            public static class FunFacts {
-                private FunFact1 funFact1;
-                private FunFact2 funFact2;
-
-                public FunFacts() {};
-
-                private static class FunFactsStructure {
-                    private String text;
-                    private String answer;
-
-                    public String getText() {
-                        return text;
-                    }
-
-                    public void setText(String text) {
-                        this.text = text;
-                    }
-
-                    public String getAnswer() {
-                        return answer;
-                    }
-
-                    public void setAnswer(String answer) {
-                        this.answer = answer;
-                    }
-                }
-
-                public static class FunFact1 extends FunFactsStructure {
-                    public FunFact1() {};
-                }
-
-                public static class FunFact2 extends FunFactsStructure {
-                    public FunFact2() {};
-                }
-
-                public FunFact1 getFunFact1() {
-                    return funFact1;
-                }
-
-                public void setFunFact1(FunFact1 funFact1) {
-                    this.funFact1 = funFact1;
-                }
-
-                public FunFact2 getFunFact2() {
-                    return funFact2;
-                }
-
-                public void setFunFact2(FunFact2 funFact2) {
-                    this.funFact2 = funFact2;
-                }
-
+            // No-arg ctor
+            public FunFacts() {
             }
 
             // Getters and Setters
-            public String getName() {
-                return name;
+            public String getText() {
+                return text;
             }
 
-            public void setName(String name) {
-                this.name = name;
+            public void setText(String text) {
+                this.text = text;
             }
 
-            public Integer getZone() {
-                return zone;
+            public String getAnswer() {
+                return answer;
             }
 
-            public void setZone(Integer zone) {
-                this.zone = zone;
-            }
-
-            public Integer getCost() {
-                return cost;
-            }
-
-            public void setCost(Integer cost) {
-                this.cost = cost;
-            }
-
-            public FunFacts getFunFacts() {
-                return funFacts;
-            }
-
-            public void setFunFacts(FunFacts funFacts) {
-                this.funFacts = funFacts;
+            public void setAnswer(String answer) {
+                this.answer = answer;
             }
         }
 
-        // Attractions
-        private static class AttractionsStructure {
+        public static class Attractions {
+            // Properties
             private String name;
+            private String type;
             private String location;
-            private Integer cost;
-            private Treasures treasures;
-            private Riddles riddles;
+            private int cost;
+            private List<? extends Treasures> treasures;
+            private List<? extends Riddles> riddles;
+
+            // No-arg ctor
+            public Attractions() {
+            }
 
             public static class Treasures {
-                private Treasure1 treasure1;
-                private Treasure2 treasure2;
+                private String name;
+                private int value;
 
                 public Treasures() {};
 
-                private static class TreasuresStructure {
-                    private String name;
-                    private Integer value;
-
-                    public String getName() {
-                        return name;
-                    }
-
-                    public void setName(String name) {
-                        this.name = name;
-                    }
-
-                    public Integer getValue() {
-                        return value;
-                    }
-
-                    public void setValue(Integer value) {
-                        this.value = value;
-                    }
+                public String getName() {
+                    return name;
                 }
 
-                public static class Treasure1 extends TreasuresStructure {
-                    public Treasure1() {
-                    }
+                public void setName(String name) {
+                    this.name = name;
                 }
 
-                public static class Treasure2 extends TreasuresStructure {
-                    public Treasure2() {
-                    }
+                public int getValue() {
+                    return value;
                 }
 
-                public Treasure1 getTreasure1() {
-                    return treasure1;
+                public void setValue(int value) {
+                    this.value = value;
                 }
-
-                public void setTreasure1(Treasure1 treasure1) {
-                    this.treasure1 = treasure1;
-                }
-
-                public Treasure2 getTreasure2() {
-                    return treasure2;
-                }
-
-                public void setTreasure2(Treasure2 treasure2) {
-                    this.treasure2 = treasure2;
-                }
-
-
             };
 
             public static class Riddles {
-                private Riddle1 riddle1;
-                private Riddle2 riddle2;
+                private String text;
+                private List<String> options;
+                private String answer;
 
+                // No-arg ctor
                 public Riddles() {
                 };
 
-                private static class RiddlesStructure {
-                    private String text;
-                    private String[] options;
-                    private String answer;
-
-                    public String getText() {
-                        return text;
-                    }
-
-                    public void setText(String text) {
-                        this.text = text;
-                    }
-
-                    public String[] getOptions() {
-                        return options;
-                    }
-
-                    public void setOptions(String[] options) {
-                        this.options = options;
-                    }
-
-                    public String getAnswer() {
-                        return answer;
-                    }
-
-                    public void setAnswer(String answer) {
-                        this.answer = answer;
-                    }
-                }
-
-                public static class Riddle1 extends RiddlesStructure {
-                    public Riddle1() {
-                    }
-                }
-
-                public static class Riddle2 extends RiddlesStructure {
-                    public Riddle2() {
-                    }
-                }
-
                 // Getters and Setters
-                public Riddle1 getRiddle1() {
-                    return riddle1;
+                public String getText() {
+                    return text;
                 }
 
-                public void setRiddle1(Riddle1 riddle1) {
-                    this.riddle1 = riddle1;
+                public void setText(String text) {
+                    this.text = text;
                 }
 
-                public Riddle2 getRiddle2() {
-                    return riddle2;
+                public List<String>  getOptions() {
+                    return options;
                 }
 
-                public void setRiddle2(Riddle2 riddle2) {
-                    this.riddle2 = riddle2;
+                public void setOptions(List<String>  options) {
+                    this.options = options;
+                }
+
+                public String getAnswer() {
+                    return answer;
+                }
+
+                public void setAnswer(String answer) {
+                    this.answer = answer;
                 }
             }
 
@@ -258,6 +132,14 @@ public class WorldMap {
 
             public void setName(String name) {
                 this.name = name;
+            }
+
+            public String getType() {
+                return type;
+            }
+
+            public void setType(String type) {
+                this.type = type;
             }
 
             public String getLocation() {
@@ -272,45 +154,47 @@ public class WorldMap {
                 return cost;
             }
 
-            public void setCost(Integer cost) {
+            public void setCost(int cost) {
                 this.cost = cost;
             }
 
-            public Treasures getTreasures() {
+            public List<? extends Treasures> getTreasures() {
                 return treasures;
             }
 
-            public void setTreasures(Treasures treasures) {
+            public void setTreasures(List<? extends Treasures> treasures) {
                 this.treasures = treasures;
             }
 
-            public Riddles getRiddles() {
+            public List<? extends Riddles> getRiddles() {
                 return riddles;
             }
 
-            public void setRiddles(Riddles riddles) {
+            public void setRiddles(List<? extends Riddles> riddles) {
                 this.riddles = riddles;
             }
         }
 
-        public static class Attraction1 extends AttractionsStructure {
-            public Attraction1() {
-            };
-        }
-
-        // Restaurants
-        private static class RestaurantStructure {
+        public static class Restaurants {
             // Properties
             private String name;
-            private Item1 item1;
-            private Item2 item2;
+            private String type;
+            private List<Items> items;
+
+            // No-arg ctor
+            public Restaurants() {
+            }
 
             // Template
-            private static class ItemStructure {
+            public static class Items {
                 // Properties
                 private String name;
                 private Integer cost;
                 private Integer value;
+
+                // No-arg ctor
+                public Items() {
+                }
 
                 // Getters and Setters
                 public String getName() {
@@ -338,17 +222,6 @@ public class WorldMap {
                 }
             }
 
-            // Items
-            public static class Item1 extends ItemStructure {
-                public Item1() {
-                }
-            }
-
-            public static class Item2 extends ItemStructure {
-                public Item2() {
-                }
-            }
-
             // Getters and Setters
             public String getName() {
                 return name;
@@ -358,46 +231,43 @@ public class WorldMap {
                 this.name = name;
             }
 
-            public Item1 getItem1() {
-                return item1;
+            public String getType() {
+                return type;
             }
 
-            public void setItem1(Item1 item1) {
-                this.item1 = item1;
+            public void setType(String type) {
+                this.type = type;
             }
 
-            public Item2 getItem2() {
-                return item2;
+            public List<Items> getItems() {
+                return items;
             }
 
-            public void setItem2(Item2 item2) {
-                this.item2 = item2;
-            }
-        }
-
-        public static class Restaurant1 extends RestaurantStructure {
-            public Restaurant1() {
+            public void setItems(List<Items> items) {
+                this.items = items;
             }
         }
 
-        public static class Restaurant2 extends RestaurantStructure {
-            public Restaurant2() {
-            }
-        }
-
-        // Weapons
-        private static class WeaponStoreStructure {
+        private static class WeaponStores {
             // Properties
             private String name;
-            private Weapon1 weapon1;
-            private Weapon2 weapon2;
+            private List<Weapons> weapons;
+
+            // No-arg ctor
+            public WeaponStores() {
+            }
 
             // Template
-            private static class WeaponStructure {
+            public static class Weapons {
                 private String name;
-                private Integer cost;
-                private Integer damage;
+                private int cost;
+                private int damage;
 
+                // No-arg ctor
+                public Weapons() {
+                }
+
+                // Getters and Setters
                 public String getName() {
                     return name;
                 }
@@ -410,7 +280,7 @@ public class WorldMap {
                     return cost;
                 }
 
-                public void setCost(Integer cost) {
+                public void setCost(int cost) {
                     this.cost = cost;
                 }
 
@@ -418,19 +288,8 @@ public class WorldMap {
                     return damage;
                 }
 
-                public void setDamage(Integer damage) {
+                public void setDamage(int damage) {
                     this.damage = damage;
-                }
-            }
-
-            // Weapons
-            public static class Weapon1 extends WeaponStructure {
-                public Weapon1() {
-                }
-            }
-
-            public static class Weapon2 extends WeaponStructure {
-                public Weapon2() {
                 }
             }
 
@@ -443,96 +302,79 @@ public class WorldMap {
                 this.name = name;
             }
 
-            public Weapon1 getWeapon1() {
-                return weapon1;
+            public List<Weapons> getWeapons() {
+                return weapons;
             }
 
-            public void setWeapon1(Weapon1 weapon1) {
-                this.weapon1 = weapon1;
-            }
-
-            public Weapon2 getWeapon2() {
-                return weapon2;
-            }
-
-            public void setWeapon2(Weapon2 weapon2) {
-                this.weapon2 = weapon2;
+            public void setWeapons(List<Weapons> weapons) {
+                this.weapons = weapons;
             }
         }
-
-        public static class WeaponStore1 extends WeaponStoreStructure {
-            public WeaponStore1() {
-            }
-        }
-
 
         // Getters and Setters
-        public Meta getMeta() {
-            return meta;
+        public String getName() {
+            return name;
         }
 
-        public void setMeta(Meta meta) {
-            this.meta = meta;
+        public void setName(String name) {
+            this.name = name;
         }
 
-        public Attraction1 getAttraction1() {
-            return attraction1;
+        public int getZone() {
+            return zone;
         }
 
-        public void setAttraction1(Attraction1 attraction1) {
-            this.attraction1 = attraction1;
+        public void setZone(int zone) {
+            this.zone = zone;
         }
 
-        public Restaurant1 getRestaurant1() {
-            return restaurant1;
+        public int getCost() {
+            return cost;
         }
 
-        public void setRestaurant1(Restaurant1 restaurant1) {
-            this.restaurant1 = restaurant1;
+        public void setCost(int cost) {
+            this.cost = cost;
         }
 
-        public Restaurant2 getRestaurant2() {
-            return restaurant2;
+        public List<? extends FunFacts> getFunFacts() {
+            return funFacts;
         }
 
-        public void setRestaurant2(Restaurant2 restaurant2) {
-            this.restaurant2 = restaurant2;
+        public void setFunFacts(List<? extends FunFacts> funFacts) {
+            this.funFacts = funFacts;
         }
 
-        public WeaponStore1 getWeaponStore1() {
-            return weaponStore1;
+        public List<? extends Attractions> getAttractions() {
+            return attractions;
         }
 
-        public void setWeaponStore1(WeaponStore1 weaponStore1) {
-            this.weaponStore1 = weaponStore1;
+        public void setAttractions(List<? extends Attractions> attractions) {
+            this.attractions = attractions;
         }
-    }
 
-    // Countries
-    public static class Mexico extends CountriesStructure {
-        public Mexico() {
+        public List<? extends Restaurants> getRestaurants() {
+            return restaurants;
         }
-    }
 
-    public static class Japan extends CountriesStructure {
-        public Japan() {
+        public void setRestaurants(List<? extends Restaurants> restaurants) {
+            this.restaurants = restaurants;
+        }
+
+        public List<? extends WeaponStores> getWeaponStores() {
+            return weaponStores;
+        }
+
+        public void setWeaponStores(List<? extends WeaponStores> weaponStores) {
+            this.weaponStores = weaponStores;
         }
     }
 
     // Getters and Setters
-    public Mexico getMexico() {
-        return mexico;
+    public List<? extends Countries> getCountries() {
+        return countries;
     }
 
-    public void setMexico(Mexico mexico) {
-        this.mexico = mexico;
-    }
-
-    public Japan getJapan() {
-        return japan;
-    }
-
-    public void setJapan(Japan japan) {
-        this.japan = japan;
+    public void setCountries(List<? extends Countries> countries) {
+        this.countries = countries;
     }
 }

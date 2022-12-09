@@ -5,9 +5,10 @@ import com.apps.util.Prompter;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Scanner;
+import java.util.*;
 
 import com.google.gson.Gson;
+import model.NPC;
 import model.Player;
 import model.SplashScreen;
 import model.WorldMap;
@@ -21,12 +22,11 @@ public class GameController {
     private Prompter prompter;
     private static boolean gameOver = false;
     private WorldMap worldMap;
-    private WorldMap.CountriesStructure[] countries;
+    private Map<String, WorldMap.Countries> countries;
     private TextParser textParser;
-    // private NPC waiter;
-    // private NPC airportAgent
-    // private NPC tourGuide
-    // private NPC weaponsAgent
+    private final Map<String, NPC> npc = new HashMap<String, NPC>();
+    private List<NPC> randomNPCs;
+
 
     public GameController() {
         setupGame();
@@ -57,7 +57,6 @@ public class GameController {
         if (isGameOver()){
             System.out.println("Game Over");
         }
-
     }
 
     public void startQuest(){
@@ -68,16 +67,16 @@ public class GameController {
 
         switch (player.getPlayerCurrentLocation()) {
             case "airport":
-                userInput = playerVisitsAirport();
+                playerVisitsAirport();
                 break;
             case "restaurant":
-                userInput = playerVisitsRestaurant();
+                playerVisitsRestaurant();
                 break;
             case "weapon store":
-                userInput = playerVisitsWeaponStore();
+                playerVisitsWeaponStore();
                 break;
             case "attraction":
-                userInput = playerVisitsAttraction();
+                playerVisitsAttraction();
             default:
                 break;
     }
@@ -89,35 +88,39 @@ public class GameController {
         }
     }
 
-    private String playerVisitsAirport() {
-        String command;
-        String[] availableFlights = new String[]{};
-        String[] acceptableCommands = new String[]{};
+    private void playerVisitsAirport() {
+        String userInput = null;
+        String parsedUserInput = null;
+        String[] availableFlights = countries.keySet().toArray(new String[0]);
+        String[] acceptableCommands = npc.get("airportAgent").getCommands();
 
         System.out.println("You are at the airport in "+ player.getPlayerTown() + ". " +
                 "In front of you is the desk with airline agent" );
 
-        command = prompter.prompt("Where would you like to go?");
+        while (parsedUserInput == null) {
+            userInput = prompter.prompt("Where would you like to go?");
+            parsedUserInput = textParser.parse(userInput, acceptableCommands, availableFlights).toLowerCase();
 
-        return command;
+            if (parsedUserInput.contains("error")) {
+                System.out.println(parsedUserInput);
+                parsedUserInput = null;
+            }
+        }
+
+        player.setPlayerCurrentLocation(parsedUserInput);
+        // take money from player
     }
 
-    private String playerVisitsRestaurant() {
-        String command;
+    private void playerVisitsRestaurant() {
 
-        return command;
     }
 
-    private String playerVisitsWeaponStore() {
-        String command;
+    private void playerVisitsWeaponStore() {
 
-        return command;
     }
 
-    private String playerVisitsAttraction() {
-        String command;
+    private void playerVisitsAttraction() {
 
-        return command;
     }
 
     private void playerSpeaksWithTourGuide() {
@@ -129,14 +132,18 @@ public class GameController {
         userInput = prompter.prompt("Hi, I am the tour guide. Where" +
                 "would you like to visit?");
 
+        //parsedUserInput = textParser.parse(userInput, tourGuide.getCommands(),)
     }
 
     private void playerInteractsWithRandomNPC() {
+        //TODO: Incomplete method
         /*
          * As the player navigates the world, they may run into random characters
          * who give gifts or attempt to steal money
          */
-        int randomNum;
+        if (Math.random() * 100 % 2 == 0) {
+            player.setPlayerHealth(-15);
+        }
     }
 
     private void setupGame() {
@@ -145,7 +152,6 @@ public class GameController {
         player = new Player();
         prompter = new Prompter(new Scanner(System.in));
         textParser = TextParser.getInstance();
-
         player.setPlayerCurrentLocation("airport");
 
         try {
@@ -169,12 +175,34 @@ public class GameController {
     }
 
     private void createWorld() throws FileNotFoundException {
+
+        try {
+            fillCountryMap();
+            fillNPCMap();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            // end game
+        }
+
+    }
+
+    private void fillCountryMap() throws FileNotFoundException {
         // deserialize json
         Gson gson = new Gson();
         worldMap = gson.fromJson(new FileReader("assets/json-files/worldMap.json"), WorldMap.class);
 
-        // place country objects into array
-        countries = new WorldMap.CountriesStructure[] { worldMap.getMexico(), worldMap.getJapan() };
+        for (WorldMap.Countries country : worldMap.getCountries()) {
+            countries.put(country.getName().toLowerCase(), country);
+        }
+
+    }
+
+    private void fillNPCMap() {
+        List<NPC> npcList = new NPC().getNpcList();
+
+        for (NPC item : npcList) {
+            npc.put(item.getNpcType(), item);
+        }
     }
 
 }

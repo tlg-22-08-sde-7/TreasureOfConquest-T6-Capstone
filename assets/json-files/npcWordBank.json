@@ -1,5 +1,5 @@
 [
-  {"npcType": "guide",
+  {"npcType": "tourGuide",
   "commands": [
     "go",
     "advance",
@@ -17,7 +17,8 @@
     "Which excursion would you like to go on this beautiful day?",
     "Would you like to go shopping for weapons or treasures?"
 
-  ]
+  ],
+  "values": []
 },
   {"npcType": "waiter",
   "commands": [
@@ -35,9 +36,10 @@
     "Can I start you off with a glass of water or something to drink?",
     "Here is our menu.",
     "What would you like to order?"
-  ]
+  ],
+  "values": []
 },
-  {"npcType": "agent",
+  {"npcType": "airportAgent",
   "commands": [
     "fly",
     "travel",
@@ -52,7 +54,8 @@
     "Where would you like to visit?",
     "Your flight purchase was successful.",
     "Your flight will be leaving momentarily."
-  ]
+  ],
+  "values": []
 },
   {"npcType": "weaponSalesRep",
   "commands": [
@@ -69,7 +72,8 @@
     "Thank you for shopping with us.",
     "Enjoy your purchase!",
     "Sure! That's a great choice."
-  ]
+  ],
+  "values": []
 },
   {"npcType": "treasuresRep",
   "commands": [
@@ -84,7 +88,42 @@
     "What treasure would you like to purchase today?",
     "Would you like to purchase gold, emerald, pearls, coral?",
     "Would you like to buy a mirror or jewel?"
-  ]
+  ],
+  "values": []
+  },
+  {"npcType": "villains",
+    "commands": [],
+    "responses": [
+      "Hi, how may I help you today?",
+      "What treasure would you like to purchase today?",
+      "Would you like to purchase gold, emerald, pearls, coral?",
+      "Would you like to buy a mirror or jewel?"
+    ],
+    "values": [
+      -5,
+      -10,
+      -15,
+      -20,
+      -35,
+      -65
+    ]
+  },
+  {"npcType": "allies",
+    "commands": [],
+    "responses": [
+      "Hi, how may I help you today?",
+      "What treasure would you like to purchase today?",
+      "Would you like to purchase gold, emerald, pearls, coral?",
+      "Would you like to buy a mirror or jewel?"
+    ],
+    "values": [
+      5,
+      10,
+      15,
+      20,
+      35,
+      65
+    ]
   }
 ]
 
