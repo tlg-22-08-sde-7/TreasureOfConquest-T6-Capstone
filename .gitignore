@@ -18,6 +18,7 @@
 *.war
 *.ear
 *.nar
+*.iml
 hs_err_pid*
 
 # - temporary files

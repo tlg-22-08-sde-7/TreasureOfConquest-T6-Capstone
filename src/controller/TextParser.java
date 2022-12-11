@@ -21,7 +21,7 @@ public class TextParser {
 
     private TextParser() {};
 
-    public String parse(String userInput, String[] listOfVerbs, String[] listOfNouns) {
+    public String parse(String userInput, List<String> listOfVerbs, List<String> listOfNouns) {
         String resultOfStringParsing;
 
         if (userInputFoundInListOfVerbs(userInput, listOfVerbs)) {
@@ -35,13 +35,12 @@ public class TextParser {
         return resultOfStringParsing;
     }
 
-    private boolean userInputFoundInListOfVerbs(String userInput, String[] listOfVerbs) {
+    private boolean userInputFoundInListOfVerbs(String userInput, List<String> listOfVerbs) {
         boolean inputFound = false;
         String[] userInputList = userInput.split("\\s");
-        List<String> arrayListOfVerbs = new ArrayList<String>(List.of(listOfVerbs));
 
         for (String word : userInputList) {
-            if (arrayListOfVerbs.contains(word.toLowerCase())) {
+            if (listOfVerbs.contains(word.toLowerCase())) {
                 inputFound = true;
                 break;
             }
@@ -50,7 +49,7 @@ public class TextParser {
         return inputFound;
     }
 
-    private String findClosestMatchingNoun(String userInput, String[] listOfNouns) {
+    private String findClosestMatchingNoun(String userInput, List<String> listOfNouns) {
         int longestSubstringLen = 0;
         String closestMatchingNoun = null;
         userInput = userInput.toLowerCase().replaceAll("\\s", "");

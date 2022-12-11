@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public class Player {
     //Variables
-    private String playerName;
-    private String playerTown;
-    private String playerCurrentLocation;
-    private int playerHealth = 100;
+    private String name;
+    private String hometown;
+    private String currentLocation;
+    private int health = 100;
 
     Prompter playerInput = new Prompter(new Scanner(System.in));
 
@@ -17,40 +17,40 @@ public class Player {
     public void playerSetup() {
         String name = playerInput.prompt("Enter player name: ");
         String home = playerInput.prompt("Enter your hometown: ");
-        setPlayerTown(home);
-        setPlayerName(name);
+        setHometown(home);
+        setName(name);
     }
 
     //Getter and Setter
-    public String getPlayerCurrentLocation() {
-        return playerCurrentLocation;
+    public String getCurrentLocation() {
+        return currentLocation;
     }
 
-    public void setPlayerCurrentLocation(String playerCurrentLocation) {
-        this.playerCurrentLocation = playerCurrentLocation;
+    public void setCurrentLocation(String currentLocation) {
+        this.currentLocation = currentLocation;
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public String getName() {
+        return name;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPlayerTown() {
-        return playerTown;
+    public String getHometown() {
+        return hometown;
     }
 
-    public void setPlayerTown(String playerTown) {
-        this.playerTown = playerTown;
+    public void setHometown(String hometown) {
+        this.hometown = hometown;
     }
 
-    public int getPlayerHealth() {
-        return playerHealth;
+    public int getHealth() {
+        return health;
     }
 
-    public void setPlayerHealth(int playerHealth) {
-        this.playerHealth = getPlayerHealth() + playerHealth;
+    public void setHealth(int health) {
+        this.health = getHealth() + health;
     }
 }
