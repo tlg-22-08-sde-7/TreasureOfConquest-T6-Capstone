@@ -47,7 +47,8 @@
     "ticket",
     "want",
     "get",
-    "flight"
+    "flight",
+    "go"
   ],
   "responses": [
     "Hi, how may I help you today?",

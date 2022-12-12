@@ -6,10 +6,11 @@ import java.util.Scanner;
 
 public class Player {
     //Variables
-    private String playerName;
-    private String playerTown;
-    private String playerCurrentLocation;
-    private int playerHealth = 100;
+    private String name;
+    private String hometown;
+    private String currentCountry;
+    private String currentAttraction;
+    private int health = 100;
 
     Prompter playerInput = new Prompter(new Scanner(System.in));
 
@@ -17,40 +18,48 @@ public class Player {
     public void playerSetup() {
         String name = playerInput.prompt("Enter player name: ");
         String home = playerInput.prompt("Enter your hometown: ");
-        setPlayerTown(home);
-        setPlayerName(name);
+        setHometown(home);
+        setName(name);
     }
 
     //Getter and Setter
-    public String getPlayerCurrentLocation() {
-        return playerCurrentLocation;
+    public String getName() {
+        return name;
     }
 
-    public void setPlayerCurrentLocation(String playerCurrentLocation) {
-        this.playerCurrentLocation = playerCurrentLocation;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public String getHometown() {
+        return hometown;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public void setHometown(String hometown) {
+        this.hometown = hometown;
     }
 
-    public String getPlayerTown() {
-        return playerTown;
+    public String getCurrentCountry() {
+        return currentCountry;
     }
 
-    public void setPlayerTown(String playerTown) {
-        this.playerTown = playerTown;
+    public void setCurrentCountry(String currentCountry) {
+        this.currentCountry = currentCountry;
     }
 
-    public int getPlayerHealth() {
-        return playerHealth;
+    public String getCurrentAttraction() {
+        return currentAttraction;
     }
 
-    public void setPlayerHealth(int playerHealth) {
-        this.playerHealth = getPlayerHealth() + playerHealth;
+    public void setCurrentAttraction(String currentAttraction) {
+        this.currentAttraction = currentAttraction;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = getHealth() + health;
     }
 }
