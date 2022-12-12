@@ -16,6 +16,7 @@ public class Player {
     private int health = 100;
     private int amountOfCash = 2000;
 
+
     Prompter playerInput = new Prompter(new Scanner(System.in));
 
     //Methods
@@ -57,6 +58,7 @@ public class Player {
 
     public void setCurrentAttraction(String currentAttraction) {
         this.currentAttraction = currentAttraction;
+
     }
 
     public List<WorldMap.Countries.WeaponStore.Weapons> getWeaponInventory() {

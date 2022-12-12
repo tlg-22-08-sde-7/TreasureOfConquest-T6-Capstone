@@ -25,7 +25,7 @@ public class GameController {
     private Map<String, WorldMap.Countries> countries = new HashMap<>();
     private TextParser textParser;
     private final Map<String, NPC> npc = new HashMap<String, NPC>();
-    private List<NPC> randomNPCs;
+    private List<NPC> villainsAndAllies;
 
 
     public GameController() {
@@ -65,7 +65,9 @@ public class GameController {
         String[] listOfCommands;
         String[] listOfNouns;
 
+
         switch (player.getCurrentAttraction()) {
+
             case "airport":
                 playerVisitsAirport();
                 break;
@@ -152,6 +154,12 @@ public class GameController {
             userInput = prompter.prompt("Where would you like to go?");
             parsedUserInput = textParser.parse(userInput, acceptableCommands, availableFlights).toLowerCase();
 
+            // Quit App
+            // TODO: Modify quit logic to match design. Currently it just abruptly ends app
+            if (userInput.toLowerCase().contains("quit")) {
+                System.exit(0);
+            }
+
             if (parsedUserInput.contains("error")) {
                 System.out.println(parsedUserInput);
                 parsedUserInput = null;
@@ -178,6 +186,7 @@ public class GameController {
         // find specific attraction
 
         // have player solve random riddle
+
     }
 
     private void playerInteractsWithRandomNPC() {
@@ -198,6 +207,7 @@ public class GameController {
         prompter = new Prompter(new Scanner(System.in));
         textParser = TextParser.getInstance();
         player.setCurrentAttraction("airport");
+
 
         try {
             createWorld();
