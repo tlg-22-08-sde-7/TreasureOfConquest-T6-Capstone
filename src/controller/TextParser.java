@@ -11,6 +11,8 @@ public class TextParser {
 
     private static TextParser textParser = null;
 
+    private TextParser() {};
+
     public String parse(String userInput, List<String> listOfVerbs, List<String> listOfNouns) {
         String resultOfStringParsing;
 
@@ -25,6 +27,10 @@ public class TextParser {
         return resultOfStringParsing;
     }
 
+    public String parse(String userInput, List<String> lisfOfNouns) {
+        return findClosestMatchingNoun(userInput, lisfOfNouns);
+    }
+    
     private boolean userInputFoundInListOfVerbs(String userInput, List<String> listOfVerbs) {
         boolean inputFound = false;
         String[] userInputList = userInput.split("\\s");
@@ -40,16 +46,6 @@ public class TextParser {
     }
 
     private String findClosestMatchingNoun(String userInput, List<String> listOfNouns) {
-        /*
-         * This method concatenates userinput into a single string of all lower cased letters with all spaces removed.
-         * It then iterates over each noun in listOfNouns. In each iteration, it finds the longest matching
-         * substring of userInput that is a substring of listOfNouns.get(i). This occurs by searching
-         * for a matching character of the first letter in the noun, which then launches a helper method that returns
-         * the number of matching, contiguous, pieces. Users can misspell a noun by having nonmatching index positions.
-         *
-         * It returns the longest matching substring of userInput or an error string if no substring is found.
-         */
-
         int longestSubstringLen = 0;
         String closestMatchingNoun = null;
         boolean exactMatchFound = false;

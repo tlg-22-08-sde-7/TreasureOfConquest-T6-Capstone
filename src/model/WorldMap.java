@@ -18,22 +18,22 @@ public class WorldMap {
         private String name;
         private int zone;
         private int cost;
-        private List<? extends FunFacts> funFacts;
-        private List<? extends Attractions> attractions;
-        private List<? extends Restaurants> restaurants;
-        private List<? extends WeaponStores> weaponStores;
+        private List<? extends FunFact> funFacts;
+        private List<? extends Attraction> attractions;
+        private List<? extends Restaurant> restaurants;
+        private List<? extends WeaponStore> weaponStores;
 
         public Countries() {
         }
 
         // Class Types
-        public static class FunFacts {
+        public static class FunFact {
             //Properties
             private String text;
             private String answer;
 
             // No-arg ctor
-            public FunFacts() {
+            public FunFact() {
             }
 
             // Getters and Setters
@@ -54,7 +54,7 @@ public class WorldMap {
             }
         }
 
-        public static class Attractions {
+        public static class Attraction {
             // Properties
             private String name;
             private String type;
@@ -64,7 +64,7 @@ public class WorldMap {
             private List<? extends Riddles> riddles;
 
             // No-arg ctor
-            public Attractions() {
+            public Attraction() {
             }
 
             public static class Treasures {
@@ -175,14 +175,14 @@ public class WorldMap {
             }
         }
 
-        public static class Restaurants {
+        public static class Restaurant {
             // Properties
             private String name;
             private String type;
             private List<Items> items;
 
             // No-arg ctor
-            public Restaurants() {
+            public Restaurant() {
             }
 
             // Template
@@ -248,13 +248,13 @@ public class WorldMap {
             }
         }
 
-        private static class WeaponStores {
+        public static class WeaponStore {
             // Properties
             private String name;
             private List<Weapons> weapons;
 
             // No-arg ctor
-            public WeaponStores() {
+            public WeaponStore() {
             }
 
             // Template
@@ -336,35 +336,35 @@ public class WorldMap {
             this.cost = cost;
         }
 
-        public List<? extends FunFacts> getFunFacts() {
+        public List<? extends FunFact> getFunFacts() {
             return funFacts;
         }
 
-        public void setFunFacts(List<? extends FunFacts> funFacts) {
+        public void setFunFacts(List<? extends FunFact> funFacts) {
             this.funFacts = funFacts;
         }
 
-        public List<? extends Attractions> getAttractions() {
+        public List<? extends Attraction> getAttractions() {
             return attractions;
         }
 
-        public void setAttractions(List<? extends Attractions> attractions) {
+        public void setAttractions(List<? extends Attraction> attractions) {
             this.attractions = attractions;
         }
 
-        public List<? extends Restaurants> getRestaurants() {
+        public List<? extends Restaurant> getRestaurants() {
             return restaurants;
         }
 
-        public void setRestaurants(List<? extends Restaurants> restaurants) {
+        public void setRestaurants(List<? extends Restaurant> restaurants) {
             this.restaurants = restaurants;
         }
 
-        public List<? extends WeaponStores> getWeaponStores() {
+        public List<? extends WeaponStore> getWeaponStores() {
             return weaponStores;
         }
 
-        public void setWeaponStores(List<? extends WeaponStores> weaponStores) {
+        public void setWeaponStores(List<? extends WeaponStore> weaponStores) {
             this.weaponStores = weaponStores;
         }
     }

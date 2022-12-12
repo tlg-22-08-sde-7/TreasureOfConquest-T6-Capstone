@@ -2,14 +2,20 @@ package model;
 
 import com.apps.util.Prompter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Player {
     //Variables
     private String name;
     private String hometown;
-    private String currentLocation;
+    private String currentCountry;
+    private String currentAttraction;
+    private final List<WorldMap.Countries.WeaponStore.Weapons> weaponInventory = new ArrayList<>();
     private int health = 100;
+    private int amountOfCash = 2000;
+
 
     Prompter playerInput = new Prompter(new Scanner(System.in));
 
@@ -22,14 +28,6 @@ public class Player {
     }
 
     //Getter and Setter
-    public String getCurrentLocation() {
-        return currentLocation;
-    }
-
-    public void setCurrentLocation(String currentLocation) {
-        this.currentLocation = currentLocation;
-    }
-
     public String getName() {
         return name;
     }
@@ -46,6 +44,31 @@ public class Player {
         this.hometown = hometown;
     }
 
+    public String getCurrentCountry() {
+        return currentCountry;
+    }
+
+    public void setCurrentCountry(String currentCountry) {
+        this.currentCountry = currentCountry;
+    }
+
+    public String getCurrentAttraction() {
+        return currentAttraction;
+    }
+
+    public void setCurrentAttraction(String currentAttraction) {
+        this.currentAttraction = currentAttraction;
+
+    }
+
+    public List<WorldMap.Countries.WeaponStore.Weapons> getWeaponInventory() {
+        return weaponInventory;
+    }
+
+    public void addWeaponToInventory(WorldMap.Countries.WeaponStore.Weapons weapon) {
+        weaponInventory.add(weapon);
+    }
+
     public int getHealth() {
         return health;
     }
@@ -53,4 +76,14 @@ public class Player {
     public void setHealth(int health) {
         this.health = getHealth() + health;
     }
+
+    public int getAmountOfCash() {
+        return amountOfCash;
+    }
+
+    public void makePurchase(int amountOfCash) {
+        this.amountOfCash -= amountOfCash;
+    }
+
+    public void receiveMoney(int amountOfCash) { this.amountOfCash += amountOfCash; }
 }

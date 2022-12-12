@@ -15,7 +15,6 @@ import model.WorldMap;
 import test.TestGSON;
 import view.GameView;
 
-
 public class GameController {
     private GameView gameView;
     private SplashScreen splashScreen;
@@ -66,7 +65,9 @@ public class GameController {
         String[] listOfCommands;
         String[] listOfNouns;
 
-        switch (player.getCurrentLocation()) {
+
+        switch (player.getCurrentAttraction()) {
+
             case "airport":
                 playerVisitsAirport();
                 break;
@@ -87,6 +88,57 @@ public class GameController {
         if (Math.random() * 100 % 2 != 0) {
             playerInteractsWithRandomNPC();
         }
+
+        // Print out information about current game
+        // Current Country
+        System.out.println();
+        System.out.println("---------- Current Country ----------");
+        System.out.println(player.getCurrentCountry());
+
+        // Weapons
+        System.out.println();
+        System.out.println("---------- WEAPON INVENTORY ----------");
+        for (WorldMap.Countries.WeaponStore.Weapons weapon : player.getWeaponInventory()) {
+            System.out.println(weapon.getName());
+        }
+
+        // Cash
+        System.out.println();
+        System.out.println("---------- ACCOUNT BALANCE ----------");
+        System.out.println("$" + player.getAmountOfCash());
+
+        // Health
+        System.out.println();
+        System.out.println("---------- REMAINING XP----------");
+        System.out.println(player.getHealth());
+
+        System.out.println();
+    }
+
+    private void playerSpeaksWithTourGuide() {
+        // TOUR GUIDE GREETS PLAYER AND ASKS FOR COMMAND
+        String userInput;
+        String parsedUserInput = null;
+        String newLocation = null;
+        ArrayList<String> options = new ArrayList<>(Arrays.asList("attraction", "restaurant", "weapon store"));
+        List<String> attractionChoices = new ArrayList<String>();
+
+        // Find what type of location user would like to visit
+        while (null == parsedUserInput) {
+            userInput = prompter.prompt("Hi, I am the tour guide. Would" +
+                    "you like to visit an attraction, restaurant, or weapon store");
+
+            //parsedUserInput = textParser.parse(userInput, npc.get("tourGuide").getCommands(), options);
+            parsedUserInput = textParser.parse(userInput, options);
+
+            if (parsedUserInput.toLowerCase().contains("error")) {
+                // TODO: add better error message providing specific instructions to user
+                System.out.println(parsedUserInput);
+                parsedUserInput = null;
+            }
+        }
+
+        player.setCurrentAttraction(parsedUserInput);
     }
 
     private void playerVisitsAirport() {
@@ -114,42 +166,27 @@ public class GameController {
             }
         }
 
-        player.setCurrentLocation(parsedUserInput);
+        player.setCurrentCountry(parsedUserInput);
         // take money from player
     }
 
     private void playerVisitsRestaurant() {
+        String npcResponse = getRandomNPCResponse(npc.get("waiter").getResponses());
 
+        System.out.println(npcResponse);
     }
 
     private void playerVisitsWeaponStore() {
+        String npcResponse = getRandomNPCResponse(npc.get("weaponSalesRep").getResponses());
 
+        System.out.println(npcResponse);
     }
 
     private void playerVisitsAttraction() {
+        // find specific attraction
 
-    }
+        // have player solve random riddle
 
-    private void playerSpeaksWithTourGuide() {
-        // TOUR GUIDE GREETS PLAYER AND ASKS FOR COMMAND
-        String userInput;
-        String parsedUserInput;
-        List<String> attractions = new ArrayList<>();
-
-        // Fill attractions
-        for (WorldMap.Countries.Attractions attraction : countries.get(player.getCurrentLocation()).getAttractions()) {
-            attractions.add(attraction.getName());
-        }
-
-        userInput = prompter.prompt("Hi, I am the tour guide. Welcome to "
-                        + player.getCurrentLocation() + ". Where " + "would you like to visit?");
-
-        // Quit App
-        // TODO change this to fit game model
-        if (userInput.toLowerCase().contains("quit")) {
-            System.exit(0);
-        }
-        parsedUserInput = textParser.parse(userInput, npc.get("tourGuide").getCommands(), attractions);
     }
 
     private void playerInteractsWithRandomNPC() {
@@ -169,7 +206,8 @@ public class GameController {
         player = new Player();
         prompter = new Prompter(new Scanner(System.in));
         textParser = TextParser.getInstance();
-        player.setCurrentLocation("airport");
+        player.setCurrentAttraction("airport");
+
 
         try {
             createWorld();
@@ -222,4 +260,9 @@ public class GameController {
         }
     }
 
+    private String getRandomNPCResponse(List<String> responses) {
+        int randomNum = (int) (Math.random() * responses.size());
+
+        return responses.get(randomNum);
+    }
 }
