@@ -9,23 +9,13 @@ public class TextParser {
      * TextParser is a singleton class. Call TextParser.getInstance() to create original instance
      */
 
-    /*
-     * TODO - Implement KMP (https://www.geeksforgeeks.org/java-program-for-kmp-algorithm-for-pattern-searching-2/) algorithm for searching the closest match of keys within the country
-     *  EG: If they're in Mexico and said "I want to go to Chichen Itza" you should join that string
-     *  (using String.join() [https://stackoverflow.com/questions/1978933/a-quick-and-easy-way-to-join-array-elements-with-a-separator-the-opposite-of-sp]
-     *  so that it reads "iwanttogotochicentiza". Then loop through attraction1, restaurant1, restaurant2, weaponStore1, etc
-     *  to find the best match.
-     */
-
     private static TextParser textParser = null;
-
-    private TextParser() {};
 
     public String parse(String userInput, List<String> listOfVerbs, List<String> listOfNouns) {
         String resultOfStringParsing;
 
         if (userInputFoundInListOfVerbs(userInput, listOfVerbs)) {
-            // check list of nouns
+            // return the closest word matching an entry in listOfNouns
             resultOfStringParsing = findClosestMatchingNoun(userInput, listOfNouns);
         }
         else {
@@ -50,26 +40,45 @@ public class TextParser {
     }
 
     private String findClosestMatchingNoun(String userInput, List<String> listOfNouns) {
+        /*
+         * This method concatenates userinput into a single string of all lower cased letters with all spaces removed.
+         * It then iterates over each noun in listOfNouns. In each iteration, it finds the longest matching
+         * substring of userInput that is a substring of listOfNouns.get(i). This occurs by searching
+         * for a matching character of the first letter in the noun, which then launches a helper method that returns
+         * the number of matching, contiguous, pieces. Users can misspell a noun by having nonmatching index positions.
+         *
+         * It returns the longest matching substring of userInput or an error string if no substring is found.
+         */
+
         int longestSubstringLen = 0;
         String closestMatchingNoun = null;
-        userInput = userInput.toLowerCase().replaceAll("\\s", "");
+        boolean exactMatchFound = false;
+        String concatenatedUserInput = userInput.toLowerCase().replaceAll("\\s", "");
 
         for (String noun : listOfNouns) {
-            int userInputLength = userInput.length();
-            String nounCopy = noun.toLowerCase().replaceAll("\\s", "");
+            String concatenatedNoun = noun.toLowerCase().replaceAll("\\s", "");
 
-            for (int i = 0; i < userInputLength; i++) {
-                Character nounChar = nounCopy.charAt(0);
-                Character userInputChar = userInput.charAt(i);
+            for (int i = 0; i < concatenatedUserInput.length(); i++) {
+                Character nounChar = concatenatedNoun.toLowerCase().charAt(0);
+                Character userInputChar = concatenatedUserInput.charAt(i);
 
                 if (nounChar.equals(userInputChar)) {
-                    int substringLength = findSubstring(nounCopy, userInput, i);
+                    int substringLength = findSubstring(concatenatedNoun, concatenatedUserInput, i);
+
+                    if (substringLength == noun.length()) {
+                        closestMatchingNoun = noun;
+                        exactMatchFound = true;
+                        break;
+                    }
 
                     if (substringLength > longestSubstringLen) {
                         longestSubstringLen = substringLength;
                         closestMatchingNoun = noun;
                     }
                 }
+            }
+            if (exactMatchFound) {
+                break;
             }
         }
 
@@ -98,7 +107,7 @@ public class TextParser {
             else {
                 numOfErrors++;
 
-                if (numOfErrors >= maxNumOfErrors) {
+                if (numOfErrors > maxNumOfErrors) {
                     break;
                 }
             }
