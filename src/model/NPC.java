@@ -15,8 +15,8 @@ public class NPC {
     //TODO: Setup structure for allies and villains in npcWordBank
 
     private String npcType;
-    private String[] commands;
-    private String[] responses;
+    private List<String> commands;
+    private List<String> responses;
     private int[] values;
     private List<NPC> npcList;
 
@@ -24,7 +24,7 @@ public class NPC {
 
     }
 
-    public NPC (String npcType, String[] commands, String[] responses, int[] values){
+    public NPC (String npcType, List<String> commands, List<String> responses, int[] values){
         this.npcType = npcType;
         this.commands = commands;
         this.responses = responses;
@@ -52,19 +52,19 @@ public class NPC {
         this.npcType = npcType;
     }
 
-    public String[] getCommands() {
+    public List<String> getCommands() {
         return commands;
     }
 
-    private void setCommands(String[] commands) {
+    private void setCommands(List<String> commands) {
         this.commands = commands;
     }
 
-    public String[] getResponses() {
+    public List<String> getResponses() {
         return responses;
     }
 
-    private void setResponses(String[] responses) {
+    private void setResponses(List<String> responses) {
         this.responses = responses;
     }
 

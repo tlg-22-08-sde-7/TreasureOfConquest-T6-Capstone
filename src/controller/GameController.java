@@ -4,7 +4,6 @@ package controller;
 import com.apps.util.Prompter;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.*;
 
@@ -27,7 +26,7 @@ public class GameController {
     private Map<String, WorldMap.Countries> countries = new HashMap<>();
     private TextParser textParser;
     private final Map<String, NPC> npc = new HashMap<String, NPC>();
-    private List<NPC> randomNPCs;
+    private List<NPC> villainsAndAllies;
 
 
     public GameController() {
@@ -46,7 +45,7 @@ public class GameController {
             player.playerSetup();
         }
         else if(newGamePrompt.equals("no")){
-            System.out.println("Welcome back " + player.getPlayerName());
+            System.out.println("Welcome back " + player.getName());
         }
         else {
             System.out.println("Please enter yes or no!");
@@ -67,7 +66,7 @@ public class GameController {
         String[] listOfCommands;
         String[] listOfNouns;
 
-        switch (player.getPlayerCurrentLocation()) {
+        switch (player.getCurrentLocation()) {
             case "airport":
                 playerVisitsAirport();
                 break;
@@ -93,15 +92,21 @@ public class GameController {
     private void playerVisitsAirport() {
         String userInput = null;
         String parsedUserInput = null;
-        String[] availableFlights = countries.keySet().toArray(new String[0]);
-        String[] acceptableCommands = npc.get("airportAgent").getCommands();
+        List<String> availableFlights = List.of(countries.keySet().toArray(new String[0]));
+        List<String> acceptableCommands = npc.get("airportAgent").getCommands();
 
-        System.out.println("You are at the airport in "+ player.getPlayerTown() + ". " +
+        System.out.println("You are at the airport in "+ player.getHometown() + ". " +
                 "In front of you is the desk with airline agent" );
 
         while (parsedUserInput == null) {
             userInput = prompter.prompt("Where would you like to go?");
             parsedUserInput = textParser.parse(userInput, acceptableCommands, availableFlights).toLowerCase();
+
+            // Quit App
+            // TODO: Modify quit logic to match design. Currently it just abruptly ends app
+            if (userInput.toLowerCase().contains("quit")) {
+                System.exit(0);
+            }
 
             if (parsedUserInput.contains("error")) {
                 System.out.println(parsedUserInput);
@@ -109,7 +114,7 @@ public class GameController {
             }
         }
 
-        player.setPlayerCurrentLocation(parsedUserInput);
+        player.setCurrentLocation(parsedUserInput);
         // take money from player
     }
 
@@ -129,12 +134,22 @@ public class GameController {
         // TOUR GUIDE GREETS PLAYER AND ASKS FOR COMMAND
         String userInput;
         String parsedUserInput;
+        List<String> attractions = new ArrayList<>();
 
+        // Fill attractions
+        for (WorldMap.Countries.Attractions attraction : countries.get(player.getCurrentLocation()).getAttractions()) {
+            attractions.add(attraction.getName());
+        }
 
-        userInput = prompter.prompt("Hi, I am the tour guide. Where" +
-                "would you like to visit?");
+        userInput = prompter.prompt("Hi, I am the tour guide. Welcome to "
+                        + player.getCurrentLocation() + ". Where " + "would you like to visit?");
 
-        //parsedUserInput = textParser.parse(userInput, tourGuide.getCommands(),)
+        // Quit App
+        // TODO change this to fit game model
+        if (userInput.toLowerCase().contains("quit")) {
+            System.exit(0);
+        }
+        parsedUserInput = textParser.parse(userInput, npc.get("tourGuide").getCommands(), attractions);
     }
 
     private void playerInteractsWithRandomNPC() {
@@ -144,7 +159,7 @@ public class GameController {
          * who give gifts or attempt to steal money
          */
         if (Math.random() * 100 % 2 == 0) {
-            player.setPlayerHealth(-15);
+            player.setHealth(-15);
         }
     }
 
@@ -154,7 +169,7 @@ public class GameController {
         player = new Player();
         prompter = new Prompter(new Scanner(System.in));
         textParser = TextParser.getInstance();
-        player.setPlayerCurrentLocation("airport");
+        player.setCurrentLocation("airport");
 
         try {
             createWorld();
