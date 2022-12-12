@@ -83,11 +83,34 @@ public class GameController {
 
         playerSpeaksWithTourGuide();
 
-        System.out.println("Player attraction is " + player.getCurrentAttraction());
-
         if (Math.random() * 100 % 2 != 0) {
             playerInteractsWithRandomNPC();
         }
+
+        // Print out information about current game
+        // Current Country
+        System.out.println();
+        System.out.println("---------- Current Country ----------");
+        System.out.println(player.getCurrentCountry());
+
+        // Weapons
+        System.out.println();
+        System.out.println("---------- WEAPON INVENTORY ----------");
+        for (WorldMap.Countries.WeaponStore.Weapons weapon : player.getWeaponInventory()) {
+            System.out.println(weapon.getName());
+        }
+
+        // Cash
+        System.out.println();
+        System.out.println("---------- ACCOUNT BALANCE ----------");
+        System.out.println("$" + player.getAmountOfCash());
+
+        // Health
+        System.out.println();
+        System.out.println("---------- REMAINING XP----------");
+        System.out.println(player.getHealth());
+
+        System.out.println();
     }
 
     private void playerSpeaksWithTourGuide() {
