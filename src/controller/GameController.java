@@ -251,13 +251,17 @@ public class GameController {
     }
 
     private void playerInteractsWithRandomNPC() {
-        //TODO: Incomplete method
-        /*
-         * As the player navigates the world, they may run into random characters
-         * who give gifts or attempt to steal money
-         */
-        if (Math.random() * 100 % 2 == 0) {
-            player.setHealth(-15);
+        NPC currNPC = (Math.random() * 100 % 2 == 0) ? npc.get("allies") : npc.get("villains");
+        int responsesSize = currNPC.getResponses().size();
+
+        System.out.println(currNPC.getResponses().get((int) (Math.random() * responsesSize)));
+        System.out.println();
+
+        if (currNPC.getNpcType().equals("allies")) {
+            playerInteractsWithAlly(currNPC);
+        }
+        else {
+            playerBattlesEnemy(currNPC);
         }
     }
 
@@ -344,6 +348,47 @@ public class GameController {
 
         for (NPC item : npcList) {
             npc.put(item.getNpcType(), item);
+        }
+    }
+
+    private void playerInteractsWithAlly(NPC ally) {
+        int valuesSize = ally.getValues().size();
+        int cashGift = ally.getValues().get((int) (Math.random() * valuesSize));
+
+        System.out.println("Hey friend here's $" + cashGift);
+        player.gainMoney(cashGift);
+    }
+
+    private void playerBattlesEnemy(NPC enemyNPC) {
+        int maxNumber = 15;
+        int minNumber = 0;
+        int randomNumber = (int) (Math.random() * maxNumber);
+        int enemyChoice;
+        int enemyChoiceDifference;
+        int playerChoice;
+        int playerChoiceDifference;
+
+        System.out.println("You have ran into an enemy who looks to harm you! Use your weapon to " +
+                "defeat them!");
+        System.out.println("You and the enemy will guess a number between " + minNumber +
+                " and " + maxNumber + "(non-inclusive)");
+
+        // Player Chooses
+        // TODO: Add error catching here for when user enters non-number
+        playerChoice = Integer.parseInt(prompter.prompt("Enter a number"));
+        playerChoiceDifference = Math.abs(randomNumber - playerChoice);
+
+        // Enemy Chooses
+        enemyChoice = (int) (Math.random() * maxNumber);
+        enemyChoiceDifference = Math.abs(randomNumber - enemyChoice);
+
+        // TODO: Add battle functionality
+        if (playerChoiceDifference < enemyChoiceDifference) {
+            System.out.println("Player attacks enemy!");
+        } else if (enemyChoice < playerChoice) {
+            System.out.println("Enemy attacks player!");
+        } else {
+            System.out.println("Draw! You both guessed equally!");
         }
     }
 

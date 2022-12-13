@@ -32,6 +32,10 @@ public class Player {
         decreaseCashBalance(dish.getCost());
     }
 
+    public void gainMoney(int money) {
+        setAmountOfCash(getAmountOfCash() + money);
+    }
+
     // Helper Methods
     private void increaseHealth(int addedHealth) {
         setHealth(Math.min(getHealth() + addedHealth, maxHealth));

@@ -17,14 +17,14 @@ public class NPC {
     private String npcType;
     private List<String> commands;
     private List<String> responses;
-    private int[] values;
+    private List<Integer> values;
     private List<NPC> npcList;
 
     public NPC (){
 
     }
 
-    public NPC (String npcType, List<String> commands, List<String> responses, int[] values){
+    public NPC (String npcType, List<String> commands, List<String> responses, List<Integer> values){
         this.npcType = npcType;
         this.commands = commands;
         this.responses = responses;
@@ -68,11 +68,11 @@ public class NPC {
         this.responses = responses;
     }
 
-    public int[] getValues() {
+    public List<Integer> getValues() {
         return values;
     }
 
-    private void setValues(int[] values) {
+    private void setValues(List<Integer> values) {
         this.values = values;
     }
 }
