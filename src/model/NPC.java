@@ -12,8 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class NPC {
-    //TODO: Setup structure for allies and villains in npcWordBank
-
     private String npcType;
     private List<String> commands;
     private List<String> responses;
