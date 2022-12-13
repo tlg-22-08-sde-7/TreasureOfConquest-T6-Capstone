@@ -24,6 +24,7 @@ public class Player {
         String name = playerInput.prompt("Enter player name: ");
         String home = playerInput.prompt("Enter your hometown: ");
         setHometown(home);
+        setCurrentCountry("united states");
         setName(name);
     }
 
@@ -58,7 +59,6 @@ public class Player {
 
     public void setCurrentAttraction(String currentAttraction) {
         this.currentAttraction = currentAttraction;
-
     }
 
     public List<WorldMap.Countries.WeaponStore.Weapons> getWeaponInventory() {

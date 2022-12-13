@@ -65,9 +65,10 @@ public class GameController {
         String[] listOfCommands;
         String[] listOfNouns;
 
+        // Print out information about current game
+        printGameStatus();
 
         switch (player.getCurrentAttraction()) {
-
             case "airport":
                 playerVisitsAirport();
                 break;
@@ -81,38 +82,15 @@ public class GameController {
                 playerVisitsAttraction();
             default:
                 break;
-    }
+        }
+        // Print out information about current game
+        printGameStatus();
 
         playerSpeaksWithTourGuide();
 
         if (Math.random() * 100 % 2 != 0) {
             playerInteractsWithRandomNPC();
         }
-
-        // Print out information about current game
-        // Current Country
-        System.out.println();
-        System.out.println("---------- Current Country ----------");
-        System.out.println(player.getCurrentCountry());
-
-        // Weapons
-        System.out.println();
-        System.out.println("---------- WEAPON INVENTORY ----------");
-        for (WorldMap.Countries.WeaponStore.Weapons weapon : player.getWeaponInventory()) {
-            System.out.println(weapon.getName());
-        }
-
-        // Cash
-        System.out.println();
-        System.out.println("---------- ACCOUNT BALANCE ----------");
-        System.out.println("$" + player.getAmountOfCash());
-
-        // Health
-        System.out.println();
-        System.out.println("---------- REMAINING XP----------");
-        System.out.println(player.getHealth());
-
-        System.out.println();
     }
 
     private void playerSpeaksWithTourGuide() {
@@ -137,7 +115,7 @@ public class GameController {
                 parsedUserInput = null;
             }
         }
-
+        // Set player attraction
         player.setCurrentAttraction(parsedUserInput);
     }
 
@@ -146,11 +124,21 @@ public class GameController {
         String parsedUserInput = null;
         List<String> availableFlights = List.of(countries.keySet().toArray(new String[0]));
         List<String> acceptableCommands = npc.get("airportAgent").getCommands();
+        int flightCost = 0;
 
-        System.out.println("You are at the airport in "+ player.getHometown() + ". " +
-                "In front of you is the desk with airline agent" );
+        System.out.println("Hi! Welcome to Single Airport of " + player.getCurrentCountry() +
+                 " Where would you like to visit?");
+        System.out.println();
 
         while (parsedUserInput == null) {
+            // Print list of available countries
+            for (WorldMap.Countries country : worldMap.getCountries()) {
+                if (!country.getName().equals(player.getCurrentCountry())) {
+                    System.out.print("Country: " + country.getName());
+                    System.out.println(" Price of ticket: " + calculateFlightCost(country));
+                    System.out.println();
+                }
+            }
             userInput = prompter.prompt("Where would you like to go?");
             parsedUserInput = textParser.parse(userInput, acceptableCommands, availableFlights).toLowerCase();
 
@@ -159,15 +147,23 @@ public class GameController {
             if (userInput.toLowerCase().contains("quit")) {
                 System.exit(0);
             }
-
+            // Check for error
             if (parsedUserInput.contains("error")) {
                 System.out.println(parsedUserInput);
                 parsedUserInput = null;
+                continue;
+            }
+
+            // Attempt to purchase flight
+            flightCost = calculateFlightCost(countries.get(parsedUserInput));
+
+            if (player.getAmountOfCash() < flightCost) {
+                System.out.println("Sorry, you do not have enough money to purchase this flight");
+                parsedUserInput = null;
             }
         }
-
+        player.makePurchase(flightCost);
         player.setCurrentCountry(parsedUserInput);
-        // take money from player
     }
 
     private void playerVisitsRestaurant() {
@@ -229,6 +225,32 @@ public class GameController {
         GameController.gameOver = gameOver;
     }
 
+    private void printGameStatus() {
+        // Current Country
+        System.out.println();
+        System.out.println("---------- Current Country ----------");
+        System.out.println(player.getCurrentCountry());
+
+        // Weapons
+        System.out.println();
+        System.out.println("---------- WEAPON INVENTORY ----------");
+        for (WorldMap.Countries.WeaponStore.Weapons weapon : player.getWeaponInventory()) {
+            System.out.println(weapon.getName());
+        }
+
+        // Cash
+        System.out.println();
+        System.out.println("---------- ACCOUNT BALANCE ----------");
+        System.out.println("$" + player.getAmountOfCash());
+
+        // Health
+        System.out.println();
+        System.out.println("---------- REMAINING XP----------");
+        System.out.println(player.getHealth());
+
+        System.out.println();
+    }
+
     private void createWorld() throws FileNotFoundException {
 
         try {
@@ -264,5 +286,14 @@ public class GameController {
         int randomNum = (int) (Math.random() * responses.size());
 
         return responses.get(randomNum);
+    }
+
+    private int calculateFlightCost(WorldMap.Countries destinationCountry) {
+        int cost;
+        int currentZone = countries.get(player.getCurrentCountry()).getZone();
+
+        cost = destinationCountry.getCost() + ( Math.abs(currentZone - destinationCountry.getZone()) * 100 ) ;
+
+        return cost;
     }
 }
