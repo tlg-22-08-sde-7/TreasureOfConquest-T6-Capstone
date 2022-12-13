@@ -187,7 +187,7 @@ public class GameController {
         while (null == restaurantChoice) {
             System.out.println("Here are a list of restaurants. Which would you like to visit?");
             for (WorldMap.Countries.Restaurant restaurant : countries.get(player.getCurrentCountry()).getRestaurants()) {
-                restaurantsMap.put(restaurant.getName(), restaurant);
+                restaurantsMap.put(restaurant.getName().toLowerCase(), restaurant);
                 restaurants.add(restaurant.getName());
                 System.out.println(restaurant.getName());
             }
@@ -212,7 +212,7 @@ public class GameController {
                     System.out.println("Item: " + dish.getName() + " | " + "Added health: " + dish.getValue() +
                             " | " + "Cost: " + dish.getCost());
                     dishes.add(dish.getName());
-                    dishesMap.put(dish.getName(), dish);
+                    dishesMap.put(dish.getName().toLowerCase(), dish);
             }
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
@@ -225,12 +225,11 @@ public class GameController {
                         dishesMap.get(parsedUserInput).getCost());
                 System.out.println("This dish will give up to " + dishesMap.get(parsedUserInput).getValue() +
                         " in value!");
+                dishChoice = parsedUserInput;
             } else if (dishesMap.get(parsedUserInput).getCost() > player.getAmountOfCash()) {
                 System.out.println("Sorry! You only have $" + player.getAmountOfCash() + ". This item costs " +
                         dishesMap.get(parsedUserInput) + ". Please select a dish thats equal to or below " +
                         player.getAmountOfCash());
-            } else {
-                dishChoice = parsedUserInput;
             }
         }
 
