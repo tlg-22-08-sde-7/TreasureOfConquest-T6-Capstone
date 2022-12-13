@@ -174,9 +174,68 @@ public class GameController {
     }
 
     private void playerVisitsRestaurant() {
-        String npcResponse = getRandomNPCResponse(npc.get("waiter").getResponses());
+        Map<String, WorldMap.Countries.Restaurant> restaurantsMap = new HashMap<>();
+        Map<String, WorldMap.Countries.Restaurant.Items> dishesMap = new HashMap<>();
+        List<String> restaurants = new ArrayList<>();
+        List<String> dishes = new ArrayList<>();
+        String restaurantChoice = null;
+        String dishChoice = null;
+        String userInput;
+        String parsedUserInput;
 
-        System.out.println(npcResponse);
+        // Choose Restaurant
+        while (null == restaurantChoice) {
+            System.out.println("Here are a list of restaurants. Which would you like to visit?");
+            for (WorldMap.Countries.Restaurant restaurant : countries.get(player.getCurrentCountry()).getRestaurants()) {
+                restaurantsMap.put(restaurant.getName(), restaurant);
+                restaurants.add(restaurant.getName());
+                System.out.println(restaurant.getName());
+            }
+            System.out.println();
+
+            userInput = prompter.prompt("Which restaurant would you like to visit?");
+            parsedUserInput = textParser.parse(userInput, restaurants).toLowerCase();
+
+            if (!parsedUserInput.contains("error")) {
+                restaurantChoice = parsedUserInput;
+            }
+        }
+
+        // Choose Dish
+        while (null == dishChoice) {
+            String npcResponse = getRandomNPCResponse(npc.get("waiter").getResponses());
+            System.out.println(npcResponse);
+            System.out.println();
+
+            System.out.println("~~~~~~~ HERE IS THE MENU ~~~~~~~");
+            for (WorldMap.Countries.Restaurant.Items dish : restaurantsMap.get(restaurantChoice).getItems()) {
+                    System.out.println("Item: " + dish.getName() + " | " + "Added health: " + dish.getValue() +
+                            " | " + "Cost: " + dish.getCost());
+                    dishes.add(dish.getName());
+                    dishesMap.put(dish.getName(), dish);
+            }
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+            System.out.println();
+            userInput = prompter.prompt("Which dish would you like to order?");
+            parsedUserInput = textParser.parse(userInput, npc.get("waiter").getCommands(), dishes).toLowerCase();
+
+            if (!parsedUserInput.contains("error")) {
+                System.out.println("You have selected: " + parsedUserInput + "! Your total cost is: " +
+                        dishesMap.get(parsedUserInput).getCost());
+                System.out.println("This dish will give up to " + dishesMap.get(parsedUserInput).getValue() +
+                        " in value!");
+            } else if (dishesMap.get(parsedUserInput).getCost() > player.getAmountOfCash()) {
+                System.out.println("Sorry! You only have $" + player.getAmountOfCash() + ". This item costs " +
+                        dishesMap.get(parsedUserInput) + ". Please select a dish thats equal to or below " +
+                        player.getAmountOfCash());
+            } else {
+                dishChoice = parsedUserInput;
+            }
+        }
+
+        // Adjust Player Stats
+        player.eat(dishesMap.get(dishChoice));
     }
 
     private void playerVisitsWeaponStore() {

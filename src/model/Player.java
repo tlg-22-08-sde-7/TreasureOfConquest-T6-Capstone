@@ -13,10 +13,9 @@ public class Player {
     private String currentCountry;
     private String currentAttraction;
     private final List<WorldMap.Countries.WeaponStore.Weapons> weaponInventory = new ArrayList<>();
-    private int health = 100;
+    private int maxHealth = 100;
+    private int health = maxHealth;
     private int amountOfCash = 2000;
-
-
     Prompter playerInput = new Prompter(new Scanner(System.in));
 
     //Methods
@@ -25,6 +24,21 @@ public class Player {
         setHomeCountry("united states");
         setCurrentCountry("united states");
         setName(name);
+    }
+
+    public void eat(WorldMap.Countries.Restaurant.Items dish) {
+        // Increase health
+        increaseHealth(dish.getValue());
+        decreaseCashBalance(dish.getCost());
+    }
+
+    // Helper Methods
+    private void increaseHealth(int addedHealth) {
+        setHealth(Math.min(getHealth() + addedHealth, maxHealth));
+    }
+
+    private void decreaseCashBalance(int cost) {
+        setAmountOfCash(getAmountOfCash() - cost);
     }
 
     //Getter and Setter
@@ -73,11 +87,15 @@ public class Player {
     }
 
     public void setHealth(int health) {
-        this.health = getHealth() + health;
+        this.health = health;
     }
 
     public int getAmountOfCash() {
         return amountOfCash;
+    }
+
+    public void setAmountOfCash(int amountOfCash) {
+        this.amountOfCash = amountOfCash;
     }
 
     public void makePurchase(int amountOfCash) {
