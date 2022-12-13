@@ -13,9 +13,10 @@ public class Player {
     private String currentCountry;
     private String currentAttraction;
     private final List<WorldMap.Countries.WeaponStore.Weapons> weaponInventory = new ArrayList<>();
-    private int maxHealth = 100;
+    private final int maxHealth = 100;
     private int health = maxHealth;
     private int amountOfCash = 2000;
+    private List<WorldMap.Countries.Attraction.Treasures> treasures = new ArrayList<>();
     Prompter playerInput = new Prompter(new Scanner(System.in));
 
     //Methods
@@ -34,6 +35,18 @@ public class Player {
 
     public void gainMoney(int money) {
         setAmountOfCash(getAmountOfCash() + money);
+    }
+
+    public void addWeapon(WorldMap.Countries.WeaponStore.Weapons weapon) {
+        weaponInventory.add(weapon);
+    }
+
+    public void addTreasure(WorldMap.Countries.Attraction.Treasures treasure) {
+        setTreasures(treasure);
+    }
+
+    public void makePurchase(int amountOfCash) {
+        this.amountOfCash -= amountOfCash;
     }
 
     // Helper Methods
@@ -102,9 +115,11 @@ public class Player {
         this.amountOfCash = amountOfCash;
     }
 
-    public void makePurchase(int amountOfCash) {
-        this.amountOfCash -= amountOfCash;
+    public List<WorldMap.Countries.Attraction.Treasures> getTreasures() {
+        return treasures;
     }
 
-    public void receiveMoney(int amountOfCash) { this.amountOfCash += amountOfCash; }
+    private void setTreasures(WorldMap.Countries.Attraction.Treasures treasure) {
+        treasures.add(treasure);
+    }
 }

@@ -70,9 +70,7 @@
   "responses": [
     "Hi, how may I help you today?",
     "What weapon would you like to purchase today?",
-    "Thank you for shopping with us.",
-    "Enjoy your purchase!",
-    "Sure! That's a great choice."
+    "Thank you for shopping with us."
   ],
   "values": []
 },
@@ -93,7 +91,11 @@
   "values": []
   },
   {"npcType": "villains",
-    "commands": [],
+    "commands": [
+      "talk ",
+      "converse",
+      "chat"
+    ],
     "responses": [
       "Hi, how may I help you today?",
       "What treasure would you like to purchase today?",
@@ -110,12 +112,14 @@
     ]
   },
   {"npcType": "allies",
-    "commands": [],
+    "commands": [
+      "talk ",
+      "converse",
+      "chat"
+    ],
     "responses": [
-      "Hi, how may I help you today?",
-      "What treasure would you like to purchase today?",
-      "Would you like to purchase gold, emerald, pearls, coral?",
-      "Would you like to buy a mirror or jewel?"
+      "Hi! I love your outfit! Here's some money to help you on your journey",
+      "I'm feeling gracious today! Here's some cash for you."
     ],
     "values": [
       5,

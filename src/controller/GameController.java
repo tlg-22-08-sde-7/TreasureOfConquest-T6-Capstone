@@ -3,6 +3,7 @@ package controller;
 
 import com.apps.util.Prompter;
 
+import java.io.Console;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -26,7 +27,8 @@ public class GameController {
     private TextParser textParser;
     private final Map<String, NPC> npc = new HashMap<String, NPC>();
     private List<NPC> villainsAndAllies;
-
+    private String userInput;
+    private String parsedUserInput;
 
     public GameController() {
         setupGame();
@@ -40,14 +42,15 @@ public class GameController {
     public void run() {
         String newGamePrompt = prompter.prompt("Would you like to start a new game?");
 
-        if(newGamePrompt.equals("yes")){
+        if(newGamePrompt.equalsIgnoreCase("yes")){
             player.playerSetup();
         }
-        else if(newGamePrompt.equals("no")){
+        else if(newGamePrompt.equalsIgnoreCase("no")){
             System.out.println("Welcome back " + player.getName());
         }
         else {
             System.out.println("Please enter yes or no!");
+            run();
         }
 
         while (!isGameOver()){
@@ -55,7 +58,19 @@ public class GameController {
         }
 
         // Game is over
-        System.out.println("Game Over");
+        if (player.getHealth() <= 0) {
+            System.out.println("Sorry! Your health is equal to or below 0! You lose :(");
+        } else {
+            System.out.println("YOU MADE IT BACK HOME CONGRATS!");
+            System.out.println();
+            System.out.println("~~~~~~~ HERE ARE YOUR STATS ~~~~~~~ ");
+            System.out.println("Remaining Health: " + player.getHealth());
+            System.out.println("Remaining Cash " + player.getAmountOfCash());
+            System.out.print("Collected Treasures: ");
+            for (WorldMap.Countries.Attraction.Treasures treasure : player.getTreasures()) {
+                System.out.print(treasure.getName() + " ");
+            }
+        }
     }
 
     public void startQuest(){
@@ -83,7 +98,7 @@ public class GameController {
                 break;
         }
 
-
+        // Check if user has returned home
         if (player.getHomeCountry().equals(player.getCurrentCountry())) {
             endQuest();
         } else {
@@ -92,8 +107,13 @@ public class GameController {
 
             playerSpeaksWithTourGuide();
 
-            if (Math.random() * 100 % 2 != 0) {
-                playerInteractsWithRandomNPC();
+            if (( (int) (Math.random() * 100) ) % 2 != 0) {
+                System.out.println("A random stranger has stopped us! They may be friendly" +
+                        "or may be looking to cause harm! Should we talk to them?");
+                userInput = prompter.prompt("Enter 'talk' to engage. All other responses will ignore.");
+                if (userInput.toLowerCase().contains("talk")) {
+                    playerInteractsWithRandomNPC();
+                }
             }
         }
     }
@@ -132,7 +152,7 @@ public class GameController {
         int flightCost = 0;
 
         System.out.println("Hi! Welcome to Single Airport of " + player.getCurrentCountry() +
-                 " Where would you like to visit?");
+                 "! Where would you like to visit?");
         System.out.println();
 
         while (parsedUserInput == null) {
@@ -227,7 +247,7 @@ public class GameController {
                         " in value!");
                 dishChoice = parsedUserInput;
             } else if (dishesMap.get(parsedUserInput).getCost() > player.getAmountOfCash()) {
-                System.out.println("Sorry! You only have $" + player.getAmountOfCash() + ". This item costs " +
+                System.out.println("Sorry! You only have $" + player.getAmountOfCash() + ". This item costs $" +
                         dishesMap.get(parsedUserInput) + ". Please select a dish thats equal to or below " +
                         player.getAmountOfCash());
             }
@@ -239,8 +259,64 @@ public class GameController {
 
     private void playerVisitsWeaponStore() {
         String npcResponse = getRandomNPCResponse(npc.get("weaponSalesRep").getResponses());
+        Map<String, WorldMap.Countries.WeaponStore> weaponStoreMap = new HashMap<>();
+        Map<String, WorldMap.Countries.WeaponStore.Weapons> weaponsMap = new HashMap<>();
+        String weaponStoreChoice = null;
+        String weaponChoice = null;
+        String userInput = null;
+        String parsedUserInput = null;
 
-        System.out.println(npcResponse);
+        // Choose weapon store
+        while (null == weaponStoreChoice) {
+            System.out.println("Here is a list of available weapon stores:");
+            for (WorldMap.Countries.WeaponStore weaponStore : countries.get(player.getCurrentCountry()).getWeaponStores()) {
+                System.out.println(weaponStore.getName());
+                weaponStoreMap.put(weaponStore.getName(), weaponStore);
+            }
+            System.out.println();
+
+            userInput = prompter.prompt("Which weapons store would you like to visit?");
+            parsedUserInput = textParser.parse(userInput, List.of(weaponStoreMap.keySet().toArray(new String[0])));
+
+            if (!parsedUserInput.toLowerCase().contains("error")) {
+                weaponStoreChoice = parsedUserInput;
+            } else {
+                System.out.println(parsedUserInput);
+                System.out.println();
+            }
+        }
+
+        // Choose weapon
+        while (null == weaponChoice) {
+            System.out.println(npcResponse);
+            System.out.println();
+
+            System.out.println("~~~~~~ WEAPON'S MENU ~~~~~~");
+            for (WorldMap.Countries.WeaponStore.Weapons weapon : weaponStoreMap.get(parsedUserInput).getWeapons()) {
+                System.out.println("This is the " + weapon.getName() + "! It costs " + weapon.getCost() +
+                        " and does a total damage of " + weapon.getDamage());
+                weaponsMap.put(weapon.getName(), weapon);
+            }
+            System.out.println();
+
+            userInput = prompter.prompt("Which weapon would you like to purchase?");
+            parsedUserInput = textParser.parse(userInput, npc.get("weaponSalesRep").getCommands(),
+                    List.of(weaponsMap.keySet().toArray(new String[0])));
+
+            if (!parsedUserInput.toLowerCase().contains("error")) {
+                weaponChoice = parsedUserInput;
+            } else if (player.getAmountOfCash() < weaponsMap.get(parsedUserInput).getCost()) {
+                System.out.println("Sorry! You do not have enough money to purchase the " + parsedUserInput);
+                System.out.println();
+            } else {
+                System.out.println(parsedUserInput);
+                System.out.println();
+            }
+        }
+
+        // Purchase weapon
+        player.addWeapon(weaponsMap.get(weaponChoice));
+        player.makePurchase(weaponsMap.get(weaponChoice).getCost());
     }
 
     private void playerVisitsAttraction() {
@@ -251,11 +327,10 @@ public class GameController {
     }
 
     private void playerInteractsWithRandomNPC() {
-        NPC currNPC = (Math.random() * 100 % 2 == 0) ? npc.get("allies") : npc.get("villains");
+        NPC currNPC = (( (int) (Math.random() * 100) ) % 2 == 0) ? npc.get("allies") : npc.get("villains");
         int responsesSize = currNPC.getResponses().size();
 
         System.out.println(currNPC.getResponses().get((int) (Math.random() * responsesSize)));
-        System.out.println();
 
         if (currNPC.getNpcType().equals("allies")) {
             playerInteractsWithAlly(currNPC);
@@ -297,14 +372,14 @@ public class GameController {
     private void printGameStatus() {
         // Current Country
         System.out.println();
-        System.out.println("---------- Current Country ----------");
+        System.out.println("---------- CURRENT COUNTRY ----------");
         System.out.println(player.getCurrentCountry());
 
         // Weapons
         System.out.println();
         System.out.println("---------- WEAPON INVENTORY ----------");
         for (WorldMap.Countries.WeaponStore.Weapons weapon : player.getWeaponInventory()) {
-            System.out.println(weapon.getName());
+            System.out.println("Name:" + weapon.getName() + " | Damage: " + weapon.getDamage());
         }
 
         // Cash
@@ -314,10 +389,15 @@ public class GameController {
 
         // Health
         System.out.println();
-        System.out.println("---------- REMAINING XP----------");
+        System.out.println("---------- REMAINING XP ----------");
         System.out.println(player.getHealth());
 
+        //Treasures
         System.out.println();
+        System.out.println("---------- TREASURES ----------");
+        for (WorldMap.Countries.Attraction.Treasures treasure : player.getTreasures()) {
+            System.out.print("Name: " + treasure.getName() + " | " + "Value: " + treasure.getValue());
+        }
     }
 
     private void createWorld() throws FileNotFoundException {
@@ -382,10 +462,14 @@ public class GameController {
         enemyChoice = (int) (Math.random() * maxNumber);
         enemyChoiceDifference = Math.abs(randomNumber - enemyChoice);
 
+        System.out.println("Enemy chose " + enemyChoice);
+        System.out.println();
+        System.out.println("The correct number is " + randomNumber);
+
         // TODO: Add battle functionality
         if (playerChoiceDifference < enemyChoiceDifference) {
             System.out.println("Player attacks enemy!");
-        } else if (enemyChoice < playerChoice) {
+        } else if (enemyChoiceDifference < playerChoiceDifference) {
             System.out.println("Enemy attacks player!");
         } else {
             System.out.println("Draw! You both guessed equally!");
