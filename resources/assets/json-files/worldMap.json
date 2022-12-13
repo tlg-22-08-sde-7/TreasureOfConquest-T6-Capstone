@@ -2,8 +2,8 @@
   "countries": [
     {
       "name": "mexico",
-      "zone": 1,
-      "cost": 700,
+      "zone": 2,
+      "cost": 500,
       "funFacts": [
         {
           "text": "What kind of Mexican food can give you frostbite?",
@@ -112,7 +112,7 @@
     },
     {
       "name": "japan",
-      "zone": 1,
+      "zone": 4,
       "cost": 700,
       "funFacts": [
         {
@@ -139,7 +139,7 @@
               "value": 10
             }
           ],
-          "challenges": [
+          "riddles": [
             {
               "text": "I'm made up of thousands of islands\nAnd my highest point is Mt. Fuji\nI'm well known for my fast bullet train\nHaikus, sumo and Hello Kitty\n\n",
               "options": [
@@ -208,6 +208,219 @@
               "name": "sword",
               "cost": 30,
               "damage": 40
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "nigeria",
+      "zone": 3,
+      "cost": 800,
+      "funFacts": [
+        {
+          "text": "I flew to Japan, and I bought a pair of shoes and a shirt. What did I buy first?",
+          "answer": "plane ticket"
+        },
+        {
+          "text": "35% of the Japanese population is aged 65 and older, the highest proportion in the world. True or False?",
+          "answer": "False"
+        }
+      ],
+      "attractions": [
+        {
+          "name": "Mt Fuji",
+          "location": "Chiyoda",
+          "cost": 25,
+          "treasures": [
+            {
+              "name": "mirror Yata no Kagami ",
+              "value": 35
+            },
+            {
+              "name": "jewel Yasakani no Magatama",
+              "value": 10
+            }
+          ],
+          "riddles": [
+            {
+              "text": "I'm made up of thousands of islands\nAnd my highest point is Mt. Fuji\nI'm well known for my fast bullet train\nHaikus, sumo and Hello Kitty\n\n",
+              "options": [
+                "Mt. Fuji",
+                "Japan",
+                "China",
+                "Asia"
+              ],
+              "answer": "Japan"
+            },
+            {
+              "text": "Which science-fiction movie had been filmed on Mount Fuji?",
+              "options": [
+                "Sasquatch Mountain",
+                "Star Trek",
+                "Pacific Rim: Uprising",
+                "Interstellar"
+              ],
+              "answer": "Pacific Rim: Uprising"
+            }
+          ]
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Ise Sueyoshi",
+          "items": [
+            {
+              "name": "Ramen",
+              "cost": 10,
+              "value": 5
+            },
+            {
+              "name": "Yakitori",
+              "cost": 30,
+              "value": 25
+            }
+          ]
+        },
+        {
+          "name": "Sushisho Masa",
+          "items": [
+            {
+              "name": "Sushi",
+              "cost": 11,
+              "value": 6
+            },
+            {
+              "name": "Okonomiyaki",
+              "cost": 31,
+              "value": 26
+            }
+          ]
+        }
+      ],
+      "weaponStores": [
+        {
+          "name": "Akihabara Busou Shoten",
+          "weapons": [
+            {
+              "name": "Shuriken",
+              "cost": 10,
+              "damage": 20
+            },
+            {
+              "name": "sword",
+              "cost": 30,
+              "damage": 40
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "united states",
+      "zone": 1,
+      "cost": 700,
+      "funFacts": [
+        {
+          "text": "What kind of Mexican food can give you frostbite?",
+          "answer": "A burr-ito"
+        },
+        {
+          "text": "69 different languages are spoken in Mexico. True or False?",
+          "answer": "True"
+        }
+      ],
+      "attractions": [
+        {
+          "name": "Chichen Itza",
+          "type": "restaurant",
+          "location": "Yucatan",
+          "cost": 25,
+          "treasures": [
+            {
+              "name": "Gold",
+              "value": 35
+            },
+            {
+              "name": "Emerald",
+              "value": 10
+            }
+          ],
+          "riddles": [
+            {
+              "text": " I was recently in Mexico and visited Chichen Itza. Mayan kings ruled the people who built this magnificent complex. Which of the following particular physical attributes or features did the Mayan value?",
+              "options": [
+                "Flattening of the forehead",
+                "All of these",
+                "Having gems inlaid in their teeth",
+                "Cross-eyedness"
+              ],
+              "answer": "All of these"
+            },
+            {
+              "text": "Chichen Itza was built near a particular sacred place. Can you guess what that might be?",
+              "options": [
+                "A high terraced mountain",
+                "A volcano",
+                "A sacrificial pool",
+                "A sacred beach"
+              ],
+              "answer": "A high terraced mountain"
+            }
+          ]
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Pujol",
+          "type": "restaurant",
+          "items": [
+            {
+              "name": "Burrito",
+              "cost": 10,
+              "value": 5
+            },
+            {
+              "name": "Enchiladas",
+              "cost": 30,
+              "value": 25
+            }
+          ]
+        },
+        {
+          "name": "El Cardenal",
+          "items": [
+            {
+              "name": "Tacos",
+              "cost": 11,
+              "value": 6
+            },
+            {
+              "name": "Chilaquiles",
+              "cost": 31,
+              "value": 26
+            }
+          ]
+        }
+      ],
+      "weaponStores": [
+        {
+          "name": "Directorate of Arms and Munitions Sales",
+          "weapons": [
+            {
+              "name": "gun",
+              "cost": 300,
+              "damage": 75
+            },
+            {
+              "name": "knife",
+              "cost": 75,
+              "damage": 40
+            },
+            {
+              "name": "bat",
+              "cost": 30,
+              "damage": 25
             }
           ]
         }

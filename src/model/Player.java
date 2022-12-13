@@ -9,22 +9,53 @@ import java.util.Scanner;
 public class Player {
     //Variables
     private String name;
-    private String hometown;
+    private String homeCountry;
     private String currentCountry;
     private String currentAttraction;
     private final List<WorldMap.Countries.WeaponStore.Weapons> weaponInventory = new ArrayList<>();
-    private int health = 100;
+    private final int maxHealth = 100;
+    private int health = maxHealth;
     private int amountOfCash = 2000;
-
-
+    private List<WorldMap.Countries.Attraction.Treasures> treasures = new ArrayList<>();
     Prompter playerInput = new Prompter(new Scanner(System.in));
 
     //Methods
     public void playerSetup() {
         String name = playerInput.prompt("Enter player name: ");
-        String home = playerInput.prompt("Enter your hometown: ");
-        setHometown(home);
+        setHomeCountry("united states");
+        setCurrentCountry("united states");
         setName(name);
+    }
+
+    public void eat(WorldMap.Countries.Restaurant.Items dish) {
+        // Increase health
+        increaseHealth(dish.getValue());
+        decreaseCashBalance(dish.getCost());
+    }
+
+    public void gainMoney(int money) {
+        setAmountOfCash(getAmountOfCash() + money);
+    }
+
+    public void addWeapon(WorldMap.Countries.WeaponStore.Weapons weapon) {
+        weaponInventory.add(weapon);
+    }
+
+    public void addTreasure(WorldMap.Countries.Attraction.Treasures treasure) {
+        setTreasures(treasure);
+    }
+
+    public void makePurchase(int amountOfCash) {
+        this.amountOfCash -= amountOfCash;
+    }
+
+    // Helper Methods
+    private void increaseHealth(int addedHealth) {
+        setHealth(Math.min(getHealth() + addedHealth, maxHealth));
+    }
+
+    private void decreaseCashBalance(int cost) {
+        setAmountOfCash(getAmountOfCash() - cost);
     }
 
     //Getter and Setter
@@ -36,12 +67,12 @@ public class Player {
         this.name = name;
     }
 
-    public String getHometown() {
-        return hometown;
+    public String getHomeCountry() {
+        return homeCountry;
     }
 
-    public void setHometown(String hometown) {
-        this.hometown = hometown;
+    public void setHomeCountry(String homeCountry) {
+        this.homeCountry = homeCountry;
     }
 
     public String getCurrentCountry() {
@@ -58,7 +89,6 @@ public class Player {
 
     public void setCurrentAttraction(String currentAttraction) {
         this.currentAttraction = currentAttraction;
-
     }
 
     public List<WorldMap.Countries.WeaponStore.Weapons> getWeaponInventory() {
@@ -74,16 +104,22 @@ public class Player {
     }
 
     public void setHealth(int health) {
-        this.health = getHealth() + health;
+        this.health = health;
     }
 
     public int getAmountOfCash() {
         return amountOfCash;
     }
 
-    public void makePurchase(int amountOfCash) {
-        this.amountOfCash -= amountOfCash;
+    public void setAmountOfCash(int amountOfCash) {
+        this.amountOfCash = amountOfCash;
     }
 
-    public void receiveMoney(int amountOfCash) { this.amountOfCash += amountOfCash; }
+    public List<WorldMap.Countries.Attraction.Treasures> getTreasures() {
+        return treasures;
+    }
+
+    private void setTreasures(WorldMap.Countries.Attraction.Treasures treasure) {
+        treasures.add(treasure);
+    }
 }

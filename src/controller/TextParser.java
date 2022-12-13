@@ -14,6 +14,11 @@ public class TextParser {
     private TextParser() {};
 
     public String parse(String userInput, List<String> listOfVerbs, List<String> listOfNouns) {
+        // Quit game
+        if ("quit".equals(userInput.toLowerCase())) {
+            System.exit(0);
+        }
+
         String resultOfStringParsing;
 
         if (userInputFoundInListOfVerbs(userInput, listOfVerbs)) {
@@ -28,6 +33,10 @@ public class TextParser {
     }
 
     public String parse(String userInput, List<String> lisfOfNouns) {
+        if ("quit".equals(userInput.toLowerCase())) {
+            System.exit(0);
+        }
+
         return findClosestMatchingNoun(userInput, lisfOfNouns);
     }
     
