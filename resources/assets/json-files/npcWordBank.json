@@ -9,7 +9,8 @@
     "hop",
     "travel",
     "move",
-    "take me"
+    "take me",
+    "visit"
   ],
   "responses": [
     "What would you like to do?",

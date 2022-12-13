@@ -3,7 +3,6 @@ package controller;
 
 import com.apps.util.Prompter;
 
-import java.io.Console;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -320,10 +319,42 @@ public class GameController {
     }
 
     private void playerVisitsAttraction() {
-        // find specific attraction
+        String attractionChoice = null;
+        Map<String, WorldMap.Countries.Attraction> attractionMap = new HashMap<>();
+        WorldMap.Countries.Attraction.Treasures treasure;
 
-        // have player solve random riddle
+        // Choose Attraction
+        while (attractionChoice == null) {
+            System.out.println("~~~~~~~ ATTRACTIONS ~~~~~~~");
+            for (WorldMap.Countries.Attraction attraction : countries.get(player.getCurrentCountry()).getAttractions()) {
+                System.out.println(attraction.getName());
+                attractionMap.put(attraction.getName().toLowerCase(), attraction);
+            }
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println();
 
+            userInput = prompter.prompt("Which attraction would you like to visit?");
+            parsedUserInput = textParser.parse(userInput, npc.get("tourGuide").getCommands(),
+                    List.of(attractionMap.keySet().toArray(new String[0])));
+
+            System.out.println();
+
+            if (!parsedUserInput.toLowerCase().contains("error")) {
+                attractionChoice = parsedUserInput;
+            } else {
+                System.out.println(parsedUserInput);
+            }
+        }
+
+        // Solve random riddle
+        if (solvedRandomAttractionRiddle(attractionMap.get(attractionChoice))) {
+            // Give player treasure
+            int treasuresSize = attractionMap.get(attractionChoice).getTreasures().size();
+
+            treasure = attractionMap.get(attractionChoice).getTreasures().get( (int) (Math.random() * treasuresSize) );
+
+            player.addTreasure(treasure);
+        };
     }
 
     private void playerInteractsWithRandomNPC() {
@@ -367,37 +398,6 @@ public class GameController {
 
     public static void setGameOver(boolean status) {
         gameOver = status;
-    }
-
-    private void printGameStatus() {
-        // Current Country
-        System.out.println();
-        System.out.println("---------- CURRENT COUNTRY ----------");
-        System.out.println(player.getCurrentCountry());
-
-        // Weapons
-        System.out.println();
-        System.out.println("---------- WEAPON INVENTORY ----------");
-        for (WorldMap.Countries.WeaponStore.Weapons weapon : player.getWeaponInventory()) {
-            System.out.println("Name:" + weapon.getName() + " | Damage: " + weapon.getDamage());
-        }
-
-        // Cash
-        System.out.println();
-        System.out.println("---------- ACCOUNT BALANCE ----------");
-        System.out.println("$" + player.getAmountOfCash());
-
-        // Health
-        System.out.println();
-        System.out.println("---------- REMAINING XP ----------");
-        System.out.println(player.getHealth());
-
-        //Treasures
-        System.out.println();
-        System.out.println("---------- TREASURES ----------");
-        for (WorldMap.Countries.Attraction.Treasures treasure : player.getTreasures()) {
-            System.out.print("Name: " + treasure.getName() + " | " + "Value: " + treasure.getValue());
-        }
     }
 
     private void createWorld() throws FileNotFoundException {
@@ -482,6 +482,33 @@ public class GameController {
         return responses.get(randomNum);
     }
 
+    private boolean solvedRandomAttractionRiddle(WorldMap.Countries.Attraction attraction) {
+        boolean solvedRiddle = false;
+        System.out.println(attraction);
+        System.out.println(attraction.getRiddles());
+        int randomNumber = (int) (Math.random() * attraction.getRiddles().size());
+        WorldMap.Countries.Attraction.Riddles riddle = attraction.getRiddles().get(randomNumber);
+
+        System.out.println("Question:");
+        System.out.println(riddle.getText());
+
+        System.out.println();
+
+        System.out.println("Here are your options:");
+        for (String option : riddle.getOptions()) {
+            System.out.println(option);
+        }
+
+        System.out.println();
+
+        userInput = prompter.prompt("What is the answer to the question?");
+        parsedUserInput = textParser.parse(userInput, riddle.getOptions());
+
+        solvedRiddle = riddle.getAnswer().equals(parsedUserInput);
+
+        return solvedRiddle;
+    }
+
     private int calculateFlightCost(WorldMap.Countries destinationCountry) {
         int cost;
         int currentZone = countries.get(player.getCurrentCountry()).getZone();
@@ -489,5 +516,37 @@ public class GameController {
         cost = destinationCountry.getCost() + ( Math.abs(currentZone - destinationCountry.getZone()) * 100 ) ;
 
         return cost;
+    }
+
+    private void printGameStatus() {
+        // Current Country
+        System.out.println();
+        System.out.println("---------- CURRENT COUNTRY ----------");
+        System.out.println(player.getCurrentCountry());
+
+        // Weapons
+        System.out.println();
+        System.out.println("---------- WEAPON INVENTORY ----------");
+        for (WorldMap.Countries.WeaponStore.Weapons weapon : player.getWeaponInventory()) {
+            System.out.println("Name:" + weapon.getName() + " | Damage: " + weapon.getDamage());
+        }
+
+        // Cash
+        System.out.println();
+        System.out.println("---------- ACCOUNT BALANCE ----------");
+        System.out.println("$" + player.getAmountOfCash());
+
+        // Health
+        System.out.println();
+        System.out.println("---------- REMAINING XP ----------");
+        System.out.println(player.getHealth());
+
+        //Treasures
+        System.out.println();
+        System.out.println("---------- TREASURES ----------");
+        for (WorldMap.Countries.Attraction.Treasures treasure : player.getTreasures()) {
+            System.out.println("Name: " + treasure.getName() + " | " + "Value: " + treasure.getValue());
+        }
+        System.out.println();
     }
 }
