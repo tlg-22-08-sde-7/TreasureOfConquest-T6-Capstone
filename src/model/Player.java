@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Player {
     //Variables
     private String name;
-    private String hometown;
+    private String homeCountry;
     private String currentCountry;
     private String currentAttraction;
     private final List<WorldMap.Countries.WeaponStore.Weapons> weaponInventory = new ArrayList<>();
@@ -22,8 +22,7 @@ public class Player {
     //Methods
     public void playerSetup() {
         String name = playerInput.prompt("Enter player name: ");
-        String home = playerInput.prompt("Enter your hometown: ");
-        setHometown(home);
+        setHomeCountry("united states");
         setCurrentCountry("united states");
         setName(name);
     }
@@ -37,12 +36,12 @@ public class Player {
         this.name = name;
     }
 
-    public String getHometown() {
-        return hometown;
+    public String getHomeCountry() {
+        return homeCountry;
     }
 
-    public void setHometown(String hometown) {
-        this.hometown = hometown;
+    public void setHomeCountry(String homeCountry) {
+        this.homeCountry = homeCountry;
     }
 
     public String getCurrentCountry() {

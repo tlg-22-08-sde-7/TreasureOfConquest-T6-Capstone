@@ -54,9 +54,8 @@ public class GameController {
             startQuest();
         }
 
-        if (isGameOver()){
-            System.out.println("Game Over");
-        }
+        // Game is over
+        System.out.println("Game Over");
     }
 
     public void startQuest(){
@@ -83,13 +82,19 @@ public class GameController {
             default:
                 break;
         }
-        // Print out information about current game
-        printGameStatus();
 
-        playerSpeaksWithTourGuide();
 
-        if (Math.random() * 100 % 2 != 0) {
-            playerInteractsWithRandomNPC();
+        if (player.getHomeCountry().equals(player.getCurrentCountry())) {
+            endQuest();
+        } else {
+            // Print out information about current game
+            printGameStatus();
+
+            playerSpeaksWithTourGuide();
+
+            if (Math.random() * 100 % 2 != 0) {
+                playerInteractsWithRandomNPC();
+            }
         }
     }
 
@@ -98,13 +103,13 @@ public class GameController {
         String userInput;
         String parsedUserInput = null;
         String newLocation = null;
-        ArrayList<String> options = new ArrayList<>(Arrays.asList("attraction", "restaurant", "weapon store"));
+        ArrayList<String> options = new ArrayList<>(Arrays.asList("attraction", "restaurant", "weapon store", "airport"));
         List<String> attractionChoices = new ArrayList<String>();
 
         // Find what type of location user would like to visit
         while (null == parsedUserInput) {
-            userInput = prompter.prompt("Hi, I am the tour guide. Would" +
-                    "you like to visit an attraction, restaurant, or weapon store");
+            userInput = prompter.prompt("Hi, I am the tour guide. Would " +
+                    "you like to visit an attraction, airport, restaurant, or weapon store");
 
             //parsedUserInput = textParser.parse(userInput, npc.get("tourGuide").getCommands(), options);
             parsedUserInput = textParser.parse(userInput, options);
@@ -159,6 +164,8 @@ public class GameController {
 
             if (player.getAmountOfCash() < flightCost) {
                 System.out.println("Sorry, you do not have enough money to purchase this flight");
+                System.out.println("Your current balance is " + player.getAmountOfCash());
+                System.out.println();
                 parsedUserInput = null;
             }
         }
@@ -221,8 +228,8 @@ public class GameController {
         return gameOver;
     }
 
-    public static void setGameOver(boolean gameOver) {
-        GameController.gameOver = gameOver;
+    public static void setGameOver(boolean status) {
+        gameOver = status;
     }
 
     private void printGameStatus() {
