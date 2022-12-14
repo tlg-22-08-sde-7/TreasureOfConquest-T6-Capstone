@@ -120,8 +120,8 @@ public class GameController {
                 playerVisitsAttraction();
                 break;
             default: // error has occurred
-                System.out.println("An application error has occurred. The player is set at an attraction" +
-                        " that is not detected by the system. Investigate Player.play() for debugging");
+                System.out.println(ANSI_RED + "An application error has occurred. The player is set at an attraction" +
+                        " that is not detected by the system. Investigate Player.play() for debugging" + ANSI_RESET);
                 System.out.println(player.getCurrentAttraction());
                 System.exit(0);
         }
@@ -157,7 +157,7 @@ public class GameController {
         ArrayList<String> options = new ArrayList<>(Arrays.asList("attraction", "restaurant", "weapon store", "airport"));
 
         // Print available commands
-        System.out.println("~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~");
+        System.out.println(ANSI_CYAN + "~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~" + ANSI_RESET);
         for (int i = 0; i < npc.get("tourGuide").getCommands().size(); i++) {
             System.out.print(npc.get("tourGuide").getCommands().get(i));
             if (i < npc.get("tourGuide").getCommands().size() - 1) {
@@ -197,7 +197,7 @@ public class GameController {
         while (parsedUserInput == null) {
 
             // Print available commands
-            System.out.println("~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~");
+            System.out.println(ANSI_CYAN + "~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~" + ANSI_RESET);
             for (int i = 0; i < npc.get("airportAgent").getCommands().size(); i++) {
                 System.out.print(npc.get("airportAgent").getCommands().get(i));
                 if (i < npc.get("airportAgent").getCommands().size() - 1) {
@@ -205,7 +205,7 @@ public class GameController {
                 }
             }
             System.out.println();
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println(ANSI_CYAN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
             System.out.println();
 
             System.out.println(ANSI_PURPLE + "Hi! Welcome to Single Airport of " + player.getCurrentCountry() +
@@ -260,7 +260,7 @@ public class GameController {
         String parsedUserInput;
 
         // Print available commands
-        System.out.println("~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~");
+        System.out.println(ANSI_CYAN + "~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~" + ANSI_RESET);
         for (int i = 0; i < npc.get("tourGuide").getCommands().size(); i++) {
             System.out.print(npc.get("tourGuide").getCommands().get(i));
             if (i < npc.get("tourGuide").getCommands().size() - 1) {
@@ -268,12 +268,12 @@ public class GameController {
             }
         }
         System.out.println();
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println(ANSI_CYAN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
         System.out.println();
 
         // Choose Restaurant
         while (null == restaurantChoice) {
-            System.out.println("Here are a list of restaurants. Which would you like to visit?");
+            System.out.println(ANSI_PURPLE + "Here are a list of restaurants. Which would you like to visit?" + ANSI_RESET);
             for (WorldMap.Countries.Restaurant restaurant : countries.get(player.getCurrentCountry()).getRestaurants()) {
                 restaurantsMap.put(restaurant.getName().toLowerCase(), restaurant);
                 restaurants.add(restaurant.getName());
@@ -337,7 +337,7 @@ public class GameController {
         String parsedUserInput = null;
 
         // Print available commands
-        System.out.println("~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~");
+        System.out.println(ANSI_CYAN + "~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~" + ANSI_RESET);
         for (int i = 0; i < npc.get("tourGuide").getCommands().size(); i++) {
             System.out.print(npc.get("tourGuide").getCommands().get(i));
             if (i < npc.get("tourGuide").getCommands().size() - 1) {
@@ -345,12 +345,12 @@ public class GameController {
             }
         }
         System.out.println();
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println(ANSI_CYAN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
         System.out.println();
 
         // Choose weapon store
         while (null == weaponStoreChoice) {
-            System.out.println("Here is a list of available weapon stores:");
+            System.out.println(ANSI_YELLOW + "Here is a list of available weapon stores:" + ANSI_RESET);
             for (WorldMap.Countries.WeaponStore weaponStore : countries.get(player.getCurrentCountry()).getWeaponStores()) {
                 System.out.println(weaponStore.getName());
                 weaponStoreMap.put(weaponStore.getName(), weaponStore);
@@ -390,7 +390,7 @@ public class GameController {
             if (!parsedUserInput.toLowerCase().contains("error") && !parsedUserInput.toLowerCase().contains("instructions")) {
                 weaponChoice = parsedUserInput;
             } else if (player.getAmountOfCash() < weaponsMap.get(parsedUserInput).getCost()) {
-                System.out.println("Sorry! You do not have enough money to purchase the " + parsedUserInput);
+                System.out.println(ANSI_RED + "Sorry! You do not have enough money to purchase the " + parsedUserInput + ANSI_RESET);
                 System.out.println();
             } else { // Error occurred
                 System.out.println(parsedUserInput); // prints out error message from textparser.parse()
@@ -410,7 +410,7 @@ public class GameController {
         int cashPrize = 500;
 
         // Print available commands
-        System.out.println("~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~");
+        System.out.println(ANSI_CYAN + "~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~" + ANSI_RESET);
         for (int i = 0; i < npc.get("tourGuide").getCommands().size(); i++) {
             System.out.print(npc.get("tourGuide").getCommands().get(i));
             if (i < npc.get("tourGuide").getCommands().size() - 1) {
@@ -418,7 +418,7 @@ public class GameController {
             }
         }
         System.out.println();
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println(ANSI_CYAN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET);
         System.out.println();
 
         // Choose Attraction
@@ -453,15 +453,15 @@ public class GameController {
             treasure = attractionMap.get(attractionChoice).getTreasures().get( (int) (Math.random() * treasuresSize) );
 
             // Inform player they answered correctly
-            System.out.println("~~~~~~ CORRECT! ~~~~~~");
-            System.out.println("You have been rewarded: " + treasure.getName() + " and $" + cashPrize);
+            System.out.println(ANSI_GREEN + "~~~~~~ CORRECT! ~~~~~~" + ANSI_RESET);
+            System.out.println(ANSI_BLUE + "You have been rewarded: " + treasure.getName() + " and $" + cashPrize + ANSI_RESET);
 
             // Pay out winnings
             player.addTreasure(treasure);
             player.gainMoney(cashPrize);
         } else {
-            System.out.println("~~~~~~ Incorrect! ~~~~~~");
-            System.out.println("Sorry, your answer " + attractionChoice + " is incorrect.");
+            System.out.println(ANSI_RED + "~~~~~~ Incorrect! ~~~~~~" + ANSI_RESET);
+            System.out.println(ANSI_YELLOW + "Sorry, your answer " + attractionChoice + " is incorrect." + ANSI_RESET);
         }
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println();
@@ -505,7 +505,7 @@ public class GameController {
         int npcStrength = enemyNPC.getValues().get( (int) (Math.random() * enemyNPC.getValues().size()) );
 
         // Begin Battle
-        System.out.println("~~~~~~~~ BEGIN BATTLE ~~~~~~~~");
+        System.out.println(ANSI_YELLOW + "~~~~~~~~ BEGIN BATTLE ~~~~~~~~" + ANSI_RESET);
         System.out.println(ANSI_RED + "You have run into an enemy who looks to harm you! Use your weapon to " +
                 "defeat them!" + ANSI_RESET);
 
