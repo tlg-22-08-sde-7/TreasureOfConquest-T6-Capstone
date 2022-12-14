@@ -17,7 +17,12 @@ public class Player {
     private int health = maxHealth;
     private int amountOfCash = 2000;
     private List<WorldMap.Countries.Attraction.Treasures> treasures = new ArrayList<>();
+
     Prompter playerInput = new Prompter(new Scanner(System.in));
+
+    public void Player() {
+
+    }
 
     //Methods
     public void playerSetup() {
@@ -25,6 +30,11 @@ public class Player {
         setHomeCountry("united states");
         setCurrentCountry("united states");
         setName(name);
+
+        // Player starts the game with a slingshot, knife, and gun
+        addWeapon( new WorldMap.Countries.WeaponStore.Weapons("slingshot", 5, 10) );
+        addWeapon( new WorldMap.Countries.WeaponStore.Weapons("knife", 15, 25) );
+        addWeapon( new WorldMap.Countries.WeaponStore.Weapons("gun", 35, 50) );
     }
 
     public void eat(WorldMap.Countries.Restaurant.Items dish) {
@@ -39,6 +49,15 @@ public class Player {
 
     public void addWeapon(WorldMap.Countries.WeaponStore.Weapons weapon) {
         weaponInventory.add(weapon);
+    }
+
+    public void removeWeapon(WorldMap.Countries.WeaponStore.Weapons weapon) {
+        getWeaponInventory().remove(weapon);
+
+    }
+
+    public void receiveDamage(int damage) {
+        setHealth(getHealth() - damage);
     }
 
     public void addTreasure(WorldMap.Countries.Attraction.Treasures treasure) {

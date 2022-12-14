@@ -263,8 +263,14 @@ public class WorldMap {
                 private int cost;
                 private int damage;
 
-                // No-arg ctor
-                public Weapons() {
+                // Constructors
+                public Weapons() { // No-arg ctor
+                }
+
+                public Weapons(String name, int cost, int damage) {
+                    setName(name);
+                    setCost(cost);
+                    setDamage(damage);
                 }
 
                 // Getters and Setters
