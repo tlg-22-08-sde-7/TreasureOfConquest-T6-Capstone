@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import static controller.GameController.ANSI_CYAN;
+import static controller.GameController.ANSI_RESET;
+
 public class GameView {
 
     private SplashScreen splash = null;
@@ -20,6 +23,6 @@ public class GameView {
     public void showSplashScreen(){
         splash = new SplashScreen();
         String result = splash.getSplashScreenArt();
-        System.out.println(result);
+        System.out.println(ANSI_CYAN + result + ANSI_RESET);
     }
 }

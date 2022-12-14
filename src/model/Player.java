@@ -2,55 +2,143 @@ package model;
 
 import com.apps.util.Prompter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Player {
     //Variables
-    private String playerName;
-    private String playerTown;
-    private String playerCurrentLocation;
-    private int playerHealth = 100;
+    private String name;
+    private String homeCountry;
+    private String currentCountry;
+    private String currentAttraction;
+    private final List<WorldMap.Countries.WeaponStore.Weapons> weaponInventory = new ArrayList<>();
+    private final int maxHealth = 100;
+    private int health = maxHealth;
+    private int amountOfCash = 2000;
+    private List<WorldMap.Countries.Attraction.Treasures> treasures = new ArrayList<>();
 
     Prompter playerInput = new Prompter(new Scanner(System.in));
+
+    public void Player() {
+
+    }
 
     //Methods
     public void playerSetup() {
         String name = playerInput.prompt("Enter player name: ");
-        String home = playerInput.prompt("Enter your hometown: ");
-        setPlayerTown(home);
-        setPlayerName(name);
+        setHomeCountry("united states");
+        setCurrentCountry("united states");
+        setName(name);
+
+        // Player starts the game with a slingshot, knife, and gun
+        addWeapon( new WorldMap.Countries.WeaponStore.Weapons("slingshot", 5, 10) );
+        addWeapon( new WorldMap.Countries.WeaponStore.Weapons("knife", 15, 25) );
+        addWeapon( new WorldMap.Countries.WeaponStore.Weapons("gun", 35, 50) );
+    }
+
+    public void eat(WorldMap.Countries.Restaurant.Items dish) {
+        // Increase health
+        increaseHealth(dish.getValue());
+        decreaseCashBalance(dish.getCost());
+    }
+
+    public void gainMoney(int money) {
+        setAmountOfCash(getAmountOfCash() + money);
+    }
+
+    public void addWeapon(WorldMap.Countries.WeaponStore.Weapons weapon) {
+        weaponInventory.add(weapon);
+    }
+
+    public void removeWeapon(WorldMap.Countries.WeaponStore.Weapons weapon) {
+        getWeaponInventory().remove(weapon);
+
+    }
+
+    public void receiveDamage(int damage) {
+        setHealth(getHealth() - damage);
+    }
+
+    public void addTreasure(WorldMap.Countries.Attraction.Treasures treasure) {
+        setTreasures(treasure);
+    }
+
+    public void makePurchase(int amountOfCash) {
+        this.amountOfCash -= amountOfCash;
+    }
+
+    // Helper Methods
+    private void increaseHealth(int addedHealth) {
+        setHealth(Math.min(getHealth() + addedHealth, maxHealth));
+    }
+
+    private void decreaseCashBalance(int cost) {
+        setAmountOfCash(getAmountOfCash() - cost);
     }
 
     //Getter and Setter
-    public String getPlayerCurrentLocation() {
-        return playerCurrentLocation;
+    public String getName() {
+        return name;
     }
 
-    public void setPlayerCurrentLocation(String playerCurrentLocation) {
-        this.playerCurrentLocation = playerCurrentLocation;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public String getHomeCountry() {
+        return homeCountry;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public void setHomeCountry(String homeCountry) {
+        this.homeCountry = homeCountry;
     }
 
-    public String getPlayerTown() {
-        return playerTown;
+    public String getCurrentCountry() {
+        return currentCountry;
     }
 
-    public void setPlayerTown(String playerTown) {
-        this.playerTown = playerTown;
+    public void setCurrentCountry(String currentCountry) {
+        this.currentCountry = currentCountry;
     }
 
-    public int getPlayerHealth() {
-        return playerHealth;
+    public String getCurrentAttraction() {
+        return currentAttraction;
     }
 
-    public void setPlayerHealth(int playerHealth) {
-        this.playerHealth = getPlayerHealth() + playerHealth;
+    public void setCurrentAttraction(String currentAttraction) {
+        this.currentAttraction = currentAttraction;
+    }
+
+    public List<WorldMap.Countries.WeaponStore.Weapons> getWeaponInventory() {
+        return weaponInventory;
+    }
+
+    public void addWeaponToInventory(WorldMap.Countries.WeaponStore.Weapons weapon) {
+        weaponInventory.add(weapon);
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getAmountOfCash() {
+        return amountOfCash;
+    }
+
+    public void setAmountOfCash(int amountOfCash) {
+        this.amountOfCash = amountOfCash;
+    }
+
+    public List<WorldMap.Countries.Attraction.Treasures> getTreasures() {
+        return treasures;
+    }
+
+    private void setTreasures(WorldMap.Countries.Attraction.Treasures treasure) {
+        treasures.add(treasure);
     }
 }

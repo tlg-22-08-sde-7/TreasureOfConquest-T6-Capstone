@@ -1,7 +1,426 @@
 {
   "countries": [
     {
-      "name": "mexico",
+      "name": "Mexico",
+      "zone": 2,
+      "cost": 500,
+      "funFacts": [
+        {
+          "text": "What kind of Mexican food can give you frostbite?",
+          "answer": "A burr-ito"
+        },
+        {
+          "text": "69 different languages are spoken in Mexico. True or False?",
+          "answer": "True"
+        }
+      ],
+      "attractions": [
+        {
+          "name": "Chichen Itza",
+          "type": "restaurant",
+          "location": "Yucatan",
+          "cost": 30,
+          "treasures": [
+            {
+              "name": "Gold",
+              "value": 35
+            },
+            {
+              "name": "Emerald",
+              "value": 10
+            }
+          ],
+          "riddles": [
+            {
+              "text": " I was recently in Mexico and visited Chichen Itza.\n Mayan kings ruled the people who built this magnificent complex.\n Which of the following particular physical attributes or features did the Mayan value?",
+              "options": [
+                "Flattening of the forehead",
+                "All of these",
+                "Having gems inlaid in their teeth",
+                "Cross-eyedness"
+              ],
+              "answer": "All of these"
+            },
+            {
+              "text": "Chichen Itza was built near a particular sacred place. Can you guess what that might be?",
+              "options": [
+                "A high terraced mountain",
+                "A volcano",
+                "A sacrificial pool",
+                "A sacred beach"
+              ],
+              "answer": "A high terraced mountain"
+            }
+          ]
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Pujol",
+          "type": "restaurant",
+          "items": [
+            {
+              "name": "Burrito",
+              "cost": 10,
+              "value": 5
+            },
+            {
+              "name": "Enchiladas",
+              "cost": 30,
+              "value": 25
+            }
+          ]
+        },
+        {
+          "name": "El Cardenal",
+          "items": [
+            {
+              "name": "Tacos",
+              "cost": 11,
+              "value": 6
+            },
+            {
+              "name": "Chilaquiles",
+              "cost": 31,
+              "value": 26
+            }
+          ]
+        }
+      ],
+      "weaponStores": [
+        {
+          "name": "Directorate of Arms and Munitions Sales",
+          "weapons": [
+            {
+              "name": "gun",
+              "cost": 300,
+              "damage": 75
+            },
+            {
+              "name": "knife",
+              "cost": 75,
+              "damage": 40
+            },
+            {
+              "name": "bat",
+              "cost": 30,
+              "damage": 25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Japan",
+      "zone": 4,
+      "cost": 700,
+      "funFacts": [
+        {
+          "text": "I flew to Japan, and I bought a pair of shoes and a shirt. What did I buy first?",
+          "answer": "plane ticket"
+        },
+        {
+          "text": "35% of the Japanese population is aged 65 and older, the highest proportion in the world.\n True or False?",
+          "answer": "False"
+        }
+      ],
+      "attractions": [
+        {
+          "name": "Mt Fuji",
+          "location": "Chiyoda",
+          "cost": 25,
+          "treasures": [
+            {
+              "name": "mirror Yata no Kagami ",
+              "value": 35
+            },
+            {
+              "name": "jewel Yasakani no Magatama",
+              "value": 10
+            }
+          ],
+          "riddles": [
+            {
+              "text": "I'm made up of thousands of islands\nAnd my highest point is Mt. Fuji\nI'm well known for my fast bullet train\nHaikus, sumo and Hello Kitty\n\n",
+              "options": [
+                "Mt. Fuji",
+                "Japan",
+                "China",
+                "Asia"
+              ],
+              "answer": "Japan"
+            },
+            {
+              "text": "Which science-fiction movie had been filmed on Mount Fuji?",
+              "options": [
+                "Sasquatch Mountain",
+                "Star Trek",
+                "Pacific Rim: Uprising",
+                "Interstellar"
+              ],
+              "answer": "Pacific Rim: Uprising"
+            }
+          ]
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Ise Sueyoshi",
+          "items": [
+            {
+              "name": "Ramen",
+              "cost": 10,
+              "value": 5
+            },
+            {
+              "name": "Yakitori",
+              "cost": 30,
+              "value": 25
+            }
+          ]
+        },
+        {
+          "name": "Sushisho Masa",
+          "items": [
+            {
+              "name": "Sushi",
+              "cost": 11,
+              "value": 6
+            },
+            {
+              "name": "Okonomiyaki",
+              "cost": 31,
+              "value": 26
+            }
+          ]
+        }
+      ],
+      "weaponStores": [
+        {
+          "name": "Akihabara Busou Shoten",
+          "weapons": [
+            {
+              "name": "Shuriken",
+              "cost": 10,
+              "damage": 20
+            },
+            {
+              "name": "sword",
+              "cost": 30,
+              "damage": 40
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nigeria",
+      "zone": 3,
+      "cost": 800,
+      "funFacts": [
+        {
+          "text": "Nigeria adopted what currency in 1973? Nigeria still uses this currency.",
+          "answer": "naira"
+        },
+        {
+          "text": "In Nigeria, women are barred from running for national office and can only hold a limited amount of\nlocal government seats. True or False?",
+          "answer": "False"
+        }
+      ],
+      "attractions": [
+        {
+          "name": "Kajuru Castle",
+          "location": "Kaduna",
+          "cost": 45,
+          "treasures": [
+            {
+              "name": "Benin Bronze",
+              "value": 75
+            },
+            {
+              "name": "Ife Head",
+              "value": 100
+            }
+          ],
+          "riddles": [
+            {
+              "text": "Where is Kajuru Castle located?",
+              "options": [
+                "Abuja",
+                "Kaduna",
+                "Kano",
+                "Lagos"
+              ],
+              "answer": "Kaduna"
+            },
+            {
+              "text": "Who built the Kajuru Castle?",
+              "options": [
+                "A Nigerian",
+                "A German Immigrant",
+                "A Kenyan",
+                "A British Immigrant"
+              ],
+              "answer": "Pacific Rim: Uprising"
+            }
+          ]
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Yellow Chili",
+          "items": [
+            {
+              "name": "Obe Dindin",
+              "cost": 8,
+              "value": 8
+            },
+            {
+              "name": "Jollof Rice",
+              "cost": 15,
+              "value": 15
+            }
+          ]
+        },
+        {
+          "name": "Zolene Restaurant",
+          "items": [
+            {
+              "name": "Goat Meat Broth",
+              "cost": 7,
+              "value": 7
+            },
+            {
+              "name": "Seafood Okro",
+              "cost": 14,
+              "value": 14
+            }
+          ]
+        }
+      ],
+      "weaponStores": [
+        {
+          "name": "Home of Fire Equipment",
+          "weapons": [
+            {
+              "name": "Daggers",
+              "cost": 20,
+              "damage": 20
+            },
+            {
+              "name": "African Arrows",
+              "cost": 35,
+              "damage": 40
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "France",
+      "zone": 4,
+      "cost": 1000,
+      "funFacts": [
+        {
+          "text": "What is in the middle of Paris?",
+          "answer": "r"
+        },
+        {
+          "text": "What did the French chef give to his wife on Valentine's Day?",
+          "answer": "a quiche"
+        }
+      ],
+      "attractions": [
+        {
+          "name": "Eiffel Tower",
+          "location": "Paris",
+          "cost": 18,
+          "treasures": [
+            {
+              "name": "Medallion",
+              "value": 45
+            },
+            {
+              "name": "Gold Offering Bowl",
+              "value": 60
+            }
+          ],
+          "riddles": [
+            {
+              "text": "How tall is the Eiffel Tower in ft?",
+              "options": [
+                "865 ft",
+                "1024 ft",
+                "1083 ft",
+                "997 ft"
+              ],
+              "answer": "1083 ft"
+            },
+            {
+              "text": "What is the name of the river by the Eiffel Tower?",
+              "options": [
+                "Loire River",
+                "Rhône River",
+                "Seine River",
+                "Garonne River"
+              ],
+              "answer": "Seine River"
+            }
+          ]
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Boutary",
+          "items": [
+            {
+              "name": "Caviar",
+              "cost": 73,
+              "value": 40
+            },
+            {
+              "name": "4 Course Meal",
+              "cost": 63,
+              "value": 30
+            }
+          ]
+        },
+        {
+          "name": "A. Lacroix Pâtissier",
+          "items": [
+            {
+              "name": "Bûche Tout Chocolat(Chocolate biscuit)",
+              "cost": 37,
+              "value": 20
+            },
+            {
+              "name": "Crème Brûlée",
+              "cost": 8,
+              "value": 10
+            }
+          ]
+        }
+      ],
+      "weaponStores": [
+        {
+          "name": "Armes Bastille",
+          "weapons": [
+            {
+              "name": "Survival Tool",
+              "cost": 25,
+              "damage": 20
+            },
+            {
+              "name": "Colt 1911",
+              "cost": 150,
+              "damage": 75
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "United States",
       "zone": 1,
       "cost": 700,
       "funFacts": [
@@ -105,109 +524,6 @@
               "name": "bat",
               "cost": 30,
               "damage": 25
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "japan",
-      "zone": 1,
-      "cost": 700,
-      "funFacts": [
-        {
-          "text": "I flew to Japan, and I bought a pair of shoes and a shirt. What did I buy first?",
-          "answer": "plane ticket"
-        },
-        {
-          "text": "35% of the Japanese population is aged 65 and older, the highest proportion in the world. True or False?",
-          "answer": "False"
-        }
-      ],
-      "attractions": [
-        {
-          "name": "Mt Fuji",
-          "location": "Chiyoda",
-          "cost": 25,
-          "treasures": [
-            {
-              "name": "mirror Yata no Kagami ",
-              "value": 35
-            },
-            {
-              "name": "jewel Yasakani no Magatama",
-              "value": 10
-            }
-          ],
-          "challenges": [
-            {
-              "text": "I'm made up of thousands of islands\nAnd my highest point is Mt. Fuji\nI'm well known for my fast bullet train\nHaikus, sumo and Hello Kitty\n\n",
-              "options": [
-                "Mt. Fuji",
-                "Japan",
-                "China",
-                "Asia"
-              ],
-              "answer": "Japan"
-            },
-            {
-              "text": "Which science-fiction movie had been filmed on Mount Fuji?",
-              "options": [
-                "Sasquatch Mountain",
-                "Star Trek",
-                "Pacific Rim: Uprising",
-                "Interstellar"
-              ],
-              "answer": "Pacific Rim: Uprising"
-            }
-          ]
-        }
-      ],
-      "restaurants": [
-        {
-          "name": "Ise Sueyoshi",
-          "items": [
-            {
-              "name": "Ramen",
-              "cost": 10,
-              "value": 5
-            },
-            {
-              "name": "Yakitori",
-              "cost": 30,
-              "value": 25
-            }
-          ]
-        },
-        {
-          "name": "Sushisho Masa",
-          "items": [
-            {
-              "name": "Sushi",
-              "cost": 11,
-              "value": 6
-            },
-            {
-              "name": "Okonomiyaki",
-              "cost": 31,
-              "value": 26
-            }
-          ]
-        }
-      ],
-      "weaponStores": [
-        {
-          "name": "Akihabara Busou Shoten",
-          "weapons": [
-            {
-              "name": "Shuriken",
-              "cost": 10,
-              "damage": 20
-            },
-            {
-              "name": "sword",
-              "cost": 30,
-              "damage": 40
             }
           ]
         }

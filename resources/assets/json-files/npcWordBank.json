@@ -9,14 +9,14 @@
     "hop",
     "travel",
     "move",
-    "take me"
+    "take me",
+    "visit"
   ],
   "responses": [
     "What would you like to do?",
     "Sure! I can take you there!",
     "Which excursion would you like to go on this beautiful day?",
     "Would you like to go shopping for weapons or treasures?"
-
   ],
   "values": []
 },
@@ -47,7 +47,9 @@
     "ticket",
     "want",
     "get",
-    "flight"
+    "flight",
+    "go",
+    "visit"
   ],
   "responses": [
     "Hi, how may I help you today?",
@@ -69,9 +71,7 @@
   "responses": [
     "Hi, how may I help you today?",
     "What weapon would you like to purchase today?",
-    "Thank you for shopping with us.",
-    "Enjoy your purchase!",
-    "Sure! That's a great choice."
+    "Thank you for shopping with us."
   ],
   "values": []
 },
@@ -92,29 +92,40 @@
   "values": []
   },
   {"npcType": "villains",
-    "commands": [],
+    "commands": [
+      "attack",
+      "beat",
+      "use",
+      "confront"
+    ],
     "responses": [
-      "Hi, how may I help you today?",
-      "What treasure would you like to purchase today?",
-      "Would you like to purchase gold, emerald, pearls, coral?",
-      "Would you like to buy a mirror or jewel?"
+      "I'm about to take everything that you have.",
+      "Give me your money now!",
+      "I don’t want to kill you but get in my way again and I just might have to.",
+      "You should accept the loss humbly while I still allow it.",
+      "You will never beat me!",
+      "I never lose! I'll be coming back for revenge!"
     ],
     "values": [
-      -5,
-      -10,
-      -15,
-      -20,
-      -35,
-      -65
+      5,
+      10,
+      15,
+      20,
+      35,
+      65
     ]
   },
   {"npcType": "allies",
-    "commands": [],
+    "commands": [
+      "talk",
+      "converse",
+      "chat"
+    ],
     "responses": [
-      "Hi, how may I help you today?",
-      "What treasure would you like to purchase today?",
-      "Would you like to purchase gold, emerald, pearls, coral?",
-      "Would you like to buy a mirror or jewel?"
+      "Hi! I love your outfit! Here's some money to help you on your journey",
+      "It was on my heart to help you out today. I'm giving you some cash!",
+      "Hope this brightens your day. Here's some cash!",
+      "I'm feeling gracious today! Here's some cash for you."
     ],
     "values": [
       5,

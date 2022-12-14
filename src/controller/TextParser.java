@@ -3,45 +3,70 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import static controller.GameController.ANSI_RED;
+import static controller.GameController.ANSI_RESET;
+
 public class TextParser {
 
     /*
      * TextParser is a singleton class. Call TextParser.getInstance() to create original instance
      */
 
-    /*
-     * TODO - Implement KMP (https://www.geeksforgeeks.org/java-program-for-kmp-algorithm-for-pattern-searching-2/) algorithm for searching the closest match of keys within the country
-     *  EG: If they're in Mexico and said "I want to go to Chichen Itza" you should join that string
-     *  (using String.join() [https://stackoverflow.com/questions/1978933/a-quick-and-easy-way-to-join-array-elements-with-a-separator-the-opposite-of-sp]
-     *  so that it reads "iwanttogotochicentiza". Then loop through attraction1, restaurant1, restaurant2, weaponStore1, etc
-     *  to find the best match.
-     */
-
     private static TextParser textParser = null;
 
     private TextParser() {};
 
-    public String parse(String userInput, String[] listOfVerbs, String[] listOfNouns) {
-        String resultOfStringParsing;
+    public String parse(String userInput, List<String> listOfVerbs, List<String> listOfNouns) {
+        String resultOfStringParsing = null;
 
-        if (userInputFoundInListOfVerbs(userInput, listOfVerbs)) {
-            // check list of nouns
-            resultOfStringParsing = findClosestMatchingNoun(userInput, listOfNouns);
-        }
-        else {
-            resultOfStringParsing = "ERROR - Invalid command. Verb was not found in the list of acceptable verbs.";
+        // Quit game
+        if ("quit".equals(userInput.toLowerCase())) {
+            System.exit(0);
+        } else if ("help".equalsIgnoreCase(userInput.toLowerCase())) {
+            printCommands();
+            resultOfStringParsing = "Instructions printed";
+        } else {
+            if (userInputFoundInListOfVerbs(userInput, listOfVerbs)) {
+                // return the closest word matching an entry in listOfNouns
+                resultOfStringParsing = findClosestMatchingNoun(userInput, listOfNouns);
+            }
+            else {
+                resultOfStringParsing = "ERROR - Invalid command. Verb was not found in the list of acceptable verbs.";
+            }
         }
 
         return resultOfStringParsing;
     }
 
-    private boolean userInputFoundInListOfVerbs(String userInput, String[] listOfVerbs) {
+    public String parse(String userInput, List<String> lisfOfNouns) {
+        String resultOfStringParsing = null;
+
+        if ("quit".equalsIgnoreCase(userInput.toLowerCase())) {
+            System.exit(0);
+        } else if ("help".equalsIgnoreCase(userInput.toLowerCase())) {
+            printCommands();
+            resultOfStringParsing = "Instructions printed";
+        } else {
+            resultOfStringParsing = findClosestMatchingNoun(userInput, lisfOfNouns);
+        }
+
+        return resultOfStringParsing;
+    }
+
+    public static TextParser getInstance() {
+        if (textParser == null) {
+            textParser = new TextParser();
+        }
+
+        return textParser;
+    }
+    
+    private boolean userInputFoundInListOfVerbs(String userInput, List<String> listOfVerbs) {
         boolean inputFound = false;
         String[] userInputList = userInput.split("\\s");
-        List<String> arrayListOfVerbs = new ArrayList<String>(List.of(listOfVerbs));
 
         for (String word : userInputList) {
-            if (arrayListOfVerbs.contains(word.toLowerCase())) {
+            if (listOfVerbs.contains(word.toLowerCase())) {
                 inputFound = true;
                 break;
             }
@@ -50,27 +75,36 @@ public class TextParser {
         return inputFound;
     }
 
-    private String findClosestMatchingNoun(String userInput, String[] listOfNouns) {
+    private String findClosestMatchingNoun(String userInput, List<String> listOfNouns) {
         int longestSubstringLen = 0;
         String closestMatchingNoun = null;
-        userInput = userInput.toLowerCase().replaceAll("\\s", "");
+        boolean exactMatchFound = false;
+        String concatenatedUserInput = userInput.toLowerCase().replaceAll("\\s", "");
 
         for (String noun : listOfNouns) {
-            int userInputLength = userInput.length();
-            String nounCopy = noun.toLowerCase().replaceAll("\\s", "");
+            String concatenatedNoun = noun.toLowerCase().replaceAll("\\s", "");
 
-            for (int i = 0; i < userInputLength; i++) {
-                Character nounChar = nounCopy.charAt(0);
-                Character userInputChar = userInput.charAt(i);
+            for (int i = 0; i < concatenatedUserInput.length(); i++) {
+                Character nounChar = concatenatedNoun.toLowerCase().charAt(0);
+                Character userInputChar = concatenatedUserInput.charAt(i);
 
                 if (nounChar.equals(userInputChar)) {
-                    int substringLength = findSubstring(nounCopy, userInput, i);
+                    int substringLength = findSubstring(concatenatedNoun, concatenatedUserInput, i);
+
+                    if (substringLength == noun.length()) {
+                        closestMatchingNoun = noun;
+                        exactMatchFound = true;
+                        break;
+                    }
 
                     if (substringLength > longestSubstringLen) {
                         longestSubstringLen = substringLength;
                         closestMatchingNoun = noun;
                     }
                 }
+            }
+            if (exactMatchFound) {
+                break;
             }
         }
 
@@ -99,7 +133,7 @@ public class TextParser {
             else {
                 numOfErrors++;
 
-                if (numOfErrors >= maxNumOfErrors) {
+                if (numOfErrors > maxNumOfErrors) {
                     break;
                 }
             }
@@ -108,11 +142,21 @@ public class TextParser {
         return matchingSubstringLen;
     }
 
-    public static TextParser getInstance() {
-        if (textParser == null) {
-            textParser = new TextParser();
-        }
-
-        return textParser;
+    private void printCommands() {
+        System.out.println();
+        System.out.println(ANSI_RED + "~~~~~~~~~ INSTRUCTIONS ~~~~~~~~~ " + ANSI_RESET);
+        System.out.println("To provide instructions to the game you must provide an acceptable verb and noun. \n" +
+                "Characters only understand a limited amount of verbs. These must be inserted into the same entry. \n" +
+                "When you are specifying a noun, you do not have to spell it correctly. The game will do its best \n" +
+                "to interpret what you are asking for. \n" +
+                "Here is an example of asking a waiter for a burrito: \n" +
+                "When you enter 'I want to eat a buriito', the system captures the acceptable verb 'eat' and \n" +
+                "returns 'burrito' as it is the closest matching noun in your sentence. Notice the system understood \n" +
+                "the interpreted 'buriito' as burrito. \n" +
+                "\n" + "Entering 'quit' will abruptly end the game. Your progress will not be saved"
+        );
+        System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " + ANSI_RESET);
+        System.out.println();
     }
+
 }
