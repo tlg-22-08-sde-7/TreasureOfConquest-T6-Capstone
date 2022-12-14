@@ -171,7 +171,7 @@ public class GameController {
         // Find what type of location user would like to visit
         while (null == parsedUserInput) {
             userInput = prompter.prompt("Hi, I am the tour guide. Would " +
-                    "you like to visit an attraction, airport, restaurant, or weapon store? " +
+                    "you like to visit an attraction, airport, restaurant, or weapon store? \n" +
                     "(Enter 'help' for instructions or 'quit' to end game)");
 
             parsedUserInput = textParser.parse(userInput, npc.get("tourGuide").getCommands(), options);
@@ -511,8 +511,8 @@ public class GameController {
 
         while (player.getHealth() > 0 && npcHealth > 0) {
             System.out.println("A random number has been chosen. You and the enemy will guess a number between "
-                    + minNumber + " and " + maxNumber + "(non-inclusive). Whoever guesses closest to the random " +
-                    "number takes a turn attacking the other person.");
+                    + minNumber + " and " + maxNumber + "(non-inclusive). \n" +
+                    "Whoever guesses closest to the random " + "number takes a turn attacking the other person.");
             System.out.println();
 
             // Player Chooses Number
@@ -529,20 +529,28 @@ public class GameController {
             System.out.println(ANSI_GREEN + "The correct number is " + randomNumber + ANSI_RESET);
             System.out.println();
 
-            // Battle
-            System.out.println(ANSI_YELLOW + "Your current health: " + player.getHealth() + ANSI_RESET);
-            System.out.println(ANSI_RED + "The enemy's current health " + npcHealth + ANSI_RESET);
-            System.out.println();
+
 
             if (playerChoiceDifference < enemyChoiceDifference) {
-                System.out.println(ANSI_GREEN + "Player attacks enemy!" + ANSI_RESET);
+                System.out.println(ANSI_GREEN + "Player wins and gets to attacks enemy!" + ANSI_RESET);
                 npcHealth -= playerAttacksEnemy(npcHealth);
             } else if (enemyChoiceDifference < playerChoiceDifference) {
-                System.out.println(ANSI_RED + "Enemy attacks player!" + ANSI_RESET);
                 player.receiveDamage(npcStrength);
+                System.out.println(ANSI_RED + "Enemy wins and gets to attacks player!" + ANSI_RESET);
+                System.out.println(ANSI_RED + "You have lost " + npcStrength + " health. " +
+                        "Your new health is " + player.getHealth() + ANSI_RESET);
+                System.out.println();
+
             } else {
                 System.out.println(ANSI_BLUE + "Draw! You both guessed equally!" + ANSI_RESET);
+                System.out.println("No damage will be caused anywhere");
             }
+
+            // Battle
+            System.out.println(ANSI_YELLOW + "Your current health: " + player.getHealth() + ANSI_RESET);
+            System.out.println(ANSI_RED + "The enemy's current health:" + npcHealth + ANSI_RESET);
+            System.out.println(ANSI_RED + "The enemy can cause " + npcStrength + " damage." + ANSI_RESET);
+            System.out.println();
         }
 
         // Announce Results
