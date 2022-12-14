@@ -3,6 +3,9 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import static controller.GameController.ANSI_RED;
+import static controller.GameController.ANSI_RESET;
+
 public class TextParser {
 
     /*
@@ -141,7 +144,7 @@ public class TextParser {
 
     private void printCommands() {
         System.out.println();
-        System.out.println("~~~~~~~~~ INSTRUCTIONS ~~~~~~~~~ ");
+        System.out.println(ANSI_RED + "~~~~~~~~~ INSTRUCTIONS ~~~~~~~~~ " + ANSI_RESET);
         System.out.println("To provide instructions to the game you must provide an acceptable verb and noun. \n" +
                 "Characters only understand a limited amount of verbs. These must be inserted into the same entry. \n" +
                 "When you are specifying a noun, you do not have to spell it correctly. The game will do its best \n" +
@@ -152,7 +155,7 @@ public class TextParser {
                 "the interpreted 'buriito' as burrito. \n" +
                 "\n" + "Entering 'quit' will abruptly end the game. Your progress will not be saved"
         );
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ");
+        System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " + ANSI_RESET);
         System.out.println();
     }
 
