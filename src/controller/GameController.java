@@ -261,9 +261,9 @@ public class GameController {
 
         // Print available commands
         System.out.println(ANSI_CYAN + "~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~" + ANSI_RESET);
-        for (int i = 0; i < npc.get("tourGuide").getCommands().size(); i++) {
-            System.out.print(npc.get("tourGuide").getCommands().get(i));
-            if (i < npc.get("tourGuide").getCommands().size() - 1) {
+        for (int i = 0; i < npc.get("waiter").getCommands().size(); i++) {
+            System.out.print(npc.get("waiter").getCommands().get(i));
+            if (i < npc.get("waiter").getCommands().size() - 1) {
                 System.out.print(", ");
             }
         }
@@ -338,9 +338,9 @@ public class GameController {
 
         // Print available commands
         System.out.println(ANSI_CYAN + "~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~" + ANSI_RESET);
-        for (int i = 0; i < npc.get("tourGuide").getCommands().size(); i++) {
-            System.out.print(npc.get("tourGuide").getCommands().get(i));
-            if (i < npc.get("tourGuide").getCommands().size() - 1) {
+        for (int i = 0; i < npc.get("weaponSalesRep").getCommands().size(); i++) {
+            System.out.print(npc.get("weaponSalesRep").getCommands().get(i));
+            if (i < npc.get("weaponSalesRep").getCommands().size() - 1) {
                 System.out.print(", ");
             }
         }
