@@ -92,9 +92,10 @@
   },
   {"npcType": "villains",
     "commands": [
-      "talk",
-      "converse",
-      "chat"
+      "attack",
+      "beat",
+      "use",
+      "confront"
     ],
     "responses": [
       "I'm about to take everything that you have.",
@@ -105,12 +106,12 @@
       "I never lose! I'll be coming back for revenge!"
     ],
     "values": [
-      -5,
-      -10,
-      -15,
-      -20,
-      -35,
-      -65
+      5,
+      10,
+      15,
+      20,
+      35,
+      65
     ]
   },
   {"npcType": "allies",

@@ -49,6 +49,7 @@ public class GameController {
         }
         else if(newGamePrompt.toLowerCase().contains("n")){
             endQuest();
+            System.exit(0);
         }
         else {
             System.out.println("Please enter yes or no!");
@@ -71,9 +72,22 @@ public class GameController {
             System.out.println("Remaining Health: " + player.getHealth());
             System.out.println("Remaining Cash " + player.getAmountOfCash());
             System.out.print("Collected Treasures: ");
+            for (int i = 0; i < player.getTreasures().size(); i++) {
+                System.out.print(player.getTreasures().get(i).getName());
+                if (i < player.getTreasures().size() - 1) {
+                    System.out.println(" - ");
+                }
+            }
             for (WorldMap.Countries.Attraction.Treasures treasure : player.getTreasures()) {
                 System.out.print(treasure.getName() + " ");
             }
+        }
+
+        // Ask if user wants to play new game
+        String newGame = prompter.prompt("Would you like to play again? (Enter 'yes' to play again)");
+
+        if ("yes".equalsIgnoreCase(newGame)) {
+            run();
         }
     }
 
@@ -94,9 +108,11 @@ public class GameController {
                 break;
             case "attraction":
                 playerVisitsAttraction();
+                break;
             default: // error has occurred
                 System.out.println("An application error has occurred. The player is set at an attraction" +
                         " that is not detected by the system. Investigate Player.play() for debugging");
+                System.out.println(player.getCurrentAttraction());
                 System.exit(0);
         }
 
@@ -112,9 +128,10 @@ public class GameController {
 
             // Game decides if player encounters an ally/villain
             if (( (int) (Math.random() * 100) ) % 2 != 0) {
-                System.out.println("A random stranger has stopped us! They may be friendly" +
+                System.out.println("A random stranger has stopped us! They may be friendly " +
                         "or may be looking to cause harm! Should we talk to them?");
                 userInput = prompter.prompt("Enter 'talk' to engage. All other responses will be ignored.");
+                System.out.println();
                 if (userInput.toLowerCase().contains("talk")) {
                     playerInteractsWithRandomNPC();
                 }
@@ -423,7 +440,6 @@ public class GameController {
 
             // Inform player they answered correctly
             System.out.println("~~~~~~ CORRECT! ~~~~~~");
-            System.out.println();
             System.out.println("You have been rewarded: " + treasure.getName() + " and $" + cashPrize);
 
             // Pay out winnings
@@ -431,12 +447,10 @@ public class GameController {
             player.gainMoney(cashPrize);
         } else {
             System.out.println("~~~~~~ Incorrect! ~~~~~~");
-            System.out.println();
             System.out.println("Sorry, your answer " + attractionChoice + " is incorrect.");
         }
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println();
-        System.out.println("The correct answer is: " + attractionMap.get(attractionChoice));
     }
 
     // Helper Methods
@@ -470,33 +484,109 @@ public class GameController {
         int enemyChoiceDifference;
         int playerChoice;
         int playerChoiceDifference;
+        int cashPrize = 150;
 
-        System.out.println("You have ran into an enemy who looks to harm you! Use your weapon to " +
+        // Randomly decide how strong enemyNPC is
+        int npcHealth =  npc.get("villains").getValues().get((int) (Math.random() * npc.get("villains").getValues().size()));
+        int npcStrength = enemyNPC.getValues().get( (int) (Math.random() * enemyNPC.getValues().size()) );
+
+        // Begin Battle
+        System.out.println("~~~~~~~~ BEGIN BATTLE ~~~~~~~~");
+        System.out.println("You have run into an enemy who looks to harm you! Use your weapon to " +
                 "defeat them!");
-        System.out.println("You and the enemy will guess a number between " + minNumber +
-                " and " + maxNumber + "(non-inclusive)");
 
-        // Player Chooses
-        // TODO: Add error catching here for when user enters non-number
-        playerChoice = Integer.parseInt(prompter.prompt("Enter a number"));
-        playerChoiceDifference = Math.abs(randomNumber - playerChoice);
+        while (player.getHealth() > 0 && npcHealth > 0) {
+            System.out.println("A random number has been chosen. You and the enemy will guess a number between "
+                    + minNumber + " and " + maxNumber + "(non-inclusive). Whoever guesses closest to the random " +
+                    "number takes a turn attacking the other person.");
+            System.out.println();
 
-        // Enemy Chooses
-        enemyChoice = (int) (Math.random() * maxNumber);
-        enemyChoiceDifference = Math.abs(randomNumber - enemyChoice);
+            // Player Chooses Number
+            // TODO: Add error catching here for when user enters non-number
+            playerChoice = Integer.parseInt(prompter.prompt("Enter a number"));
+            playerChoiceDifference = Math.abs(randomNumber - playerChoice);
 
-        System.out.println("Enemy chose " + enemyChoice);
-        System.out.println();
-        System.out.println("The correct number is " + randomNumber);
+            // Enemy Chooses Number
+            enemyChoice = (int) (Math.random() * maxNumber);
+            enemyChoiceDifference = Math.abs(randomNumber - enemyChoice);
 
-        // TODO: Add battle functionality
-        if (playerChoiceDifference < enemyChoiceDifference) {
-            System.out.println("Player attacks enemy!");
-        } else if (enemyChoiceDifference < playerChoiceDifference) {
-            System.out.println("Enemy attacks player!");
-        } else {
-            System.out.println("Draw! You both guessed equally!");
+            System.out.println("Enemy chose " + enemyChoice);
+            System.out.println();
+            System.out.println("The correct number is " + randomNumber);
+            System.out.println();
+
+            // Battle
+            System.out.println("Your current health: " + player.getHealth());
+            System.out.println("The enemy's current health " + npcHealth);
+            System.out.println();
+
+            if (playerChoiceDifference < enemyChoiceDifference) {
+                System.out.println("Player attacks enemy!");
+                npcHealth -= playerAttacksEnemy(npcHealth);
+            } else if (enemyChoiceDifference < playerChoiceDifference) {
+                System.out.println("Enemy attacks player!");
+                player.receiveDamage(npcStrength);
+            } else {
+                System.out.println("Draw! You both guessed equally!");
+            }
         }
+
+        // Announce Results
+        if (player.getHealth() == 0) {
+            System.out.println("~~~~~~~ THE ENEMY DEFEATED YOU ~~~~~~~");
+            endQuest();
+        } else {
+            System.out.println("~~~~~~~ YOU DEFEATED THE ENEMY ~~~~~~~");
+            System.out.println("You earned $" + cashPrize);
+        }
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    private int playerAttacksEnemy(int npcHealth) {
+        Map<String, WorldMap.Countries.WeaponStore.Weapons> weaponsMap = new HashMap<>();
+        int damage = 0;
+        parsedUserInput = null;
+
+        // Print list of available weapons
+        System.out.println("~~~~~~~~ YOUR WEAPON INVENTORY ~~~~~~~~");
+        for (WorldMap.Countries.WeaponStore.Weapons weapon : player.getWeaponInventory()) {
+            weaponsMap.put(weapon.getName(), weapon);
+            System.out.println("Name: " + weapon.getName() + " | Power: " + weapon.getDamage());
+        }
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println();
+
+        // Player chooses weapon if they have inventory
+        while (null == parsedUserInput) {
+            if (weaponsMap.keySet().size() != 0) {
+                // Print acceptable commands
+                System.out.println("~~~~~~~~~ ACCEPTABLE COMMANDS ~~~~~~~~~");
+                for (String command : npc.get("villains").getCommands()) {
+                    System.out.println(command);
+                }
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.println();
+
+                // Attempt to get user input
+                System.out.println("The enemy's remaining health is " + npcHealth);
+                userInput = prompter.prompt("Enter command and weapon (Enter 'quit' to quit game - 'help' for instruction)");
+                parsedUserInput =
+                        textParser.parse(userInput, npc.get("villains").getCommands(), List.of(weaponsMap.keySet().toArray(new String[0])));
+                System.out.println();
+                // Validate
+                if (parsedUserInput.toLowerCase().contains("error") || parsedUserInput.toLowerCase().contains("instructions")) {
+                    System.out.println(parsedUserInput);
+                    parsedUserInput = null;
+                }
+            }
+        }
+
+        // Remove weapon from inventory
+        player.removeWeapon(weaponsMap.get(parsedUserInput));
+
+        damage = weaponsMap.get(parsedUserInput).getDamage();
+
+        return damage;
     }
 
     private String getRandomNPCResponse(List<String> responses) {
@@ -525,7 +615,11 @@ public class GameController {
         userInput = prompter.prompt("What is the answer to the question?");
         parsedUserInput = textParser.parse(userInput, riddle.getOptions());
 
+        System.out.println();
+
         solvedRiddle = riddle.getAnswer().equalsIgnoreCase(parsedUserInput);
+
+        System.out.println("The correct answer is: " + riddle.getAnswer());
 
         return solvedRiddle;
     }
@@ -597,7 +691,7 @@ public class GameController {
         System.out.println();
         System.out.println("---------- WEAPON INVENTORY ----------");
         for (WorldMap.Countries.WeaponStore.Weapons weapon : player.getWeaponInventory()) {
-            System.out.println("Name:" + weapon.getName() + " | Damage: " + weapon.getDamage());
+            System.out.println("Name: " + weapon.getName() + " | Damage: " + weapon.getDamage());
         }
 
         // Cash
