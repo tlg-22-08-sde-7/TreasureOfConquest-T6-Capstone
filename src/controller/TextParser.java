@@ -14,30 +14,48 @@ public class TextParser {
     private TextParser() {};
 
     public String parse(String userInput, List<String> listOfVerbs, List<String> listOfNouns) {
+        String resultOfStringParsing = null;
+
         // Quit game
         if ("quit".equals(userInput.toLowerCase())) {
             System.exit(0);
-        }
-
-        String resultOfStringParsing;
-
-        if (userInputFoundInListOfVerbs(userInput, listOfVerbs)) {
-            // return the closest word matching an entry in listOfNouns
-            resultOfStringParsing = findClosestMatchingNoun(userInput, listOfNouns);
-        }
-        else {
-            resultOfStringParsing = "ERROR - Invalid command. Verb was not found in the list of acceptable verbs.";
+        } else if ("help".equalsIgnoreCase(userInput.toLowerCase())) {
+            printCommands();
+            resultOfStringParsing = "Instructions printed";
+        } else {
+            if (userInputFoundInListOfVerbs(userInput, listOfVerbs)) {
+                // return the closest word matching an entry in listOfNouns
+                resultOfStringParsing = findClosestMatchingNoun(userInput, listOfNouns);
+            }
+            else {
+                resultOfStringParsing = "ERROR - Invalid command. Verb was not found in the list of acceptable verbs.";
+            }
         }
 
         return resultOfStringParsing;
     }
 
     public String parse(String userInput, List<String> lisfOfNouns) {
-        if ("quit".equals(userInput.toLowerCase())) {
+        String resultOfStringParsing = null;
+
+        if ("quit".equalsIgnoreCase(userInput.toLowerCase())) {
             System.exit(0);
+        } else if ("help".equalsIgnoreCase(userInput.toLowerCase())) {
+            printCommands();
+            resultOfStringParsing = "Instructions printed";
+        } else {
+            resultOfStringParsing = findClosestMatchingNoun(userInput, lisfOfNouns);
         }
 
-        return findClosestMatchingNoun(userInput, lisfOfNouns);
+        return resultOfStringParsing;
+    }
+
+    public static TextParser getInstance() {
+        if (textParser == null) {
+            textParser = new TextParser();
+        }
+
+        return textParser;
     }
     
     private boolean userInputFoundInListOfVerbs(String userInput, List<String> listOfVerbs) {
@@ -121,11 +139,21 @@ public class TextParser {
         return matchingSubstringLen;
     }
 
-    public static TextParser getInstance() {
-        if (textParser == null) {
-            textParser = new TextParser();
-        }
-
-        return textParser;
+    private void printCommands() {
+        System.out.println();
+        System.out.println("~~~~~~~~~ INSTRUCTIONS ~~~~~~~~~ ");
+        System.out.println("To provide instructions to the game you must provide an acceptable verb and noun. \n" +
+                "Characters only understand a limited amount of verbs. These must be inserted into the same entry. \n" +
+                "When you are specifying a noun, you do not have to spell it correctly. The game will do its best \n" +
+                "to interpret what you are asking for. \n" +
+                "Here is an example of asking a waiter for a burrito: \n" +
+                "When you enter 'I want to eat a buriito', the system captures the acceptable verb 'eat' and \n" +
+                "returns 'burrito' as it is the closest matching noun in your sentence. Notice the system understood \n" +
+                "the interpreted 'buriito' as burrito. \n" +
+                "\n" + "Entering 'quit' will abruptly end the game. Your progress will not be saved"
+        );
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ");
+        System.out.println();
     }
+
 }
