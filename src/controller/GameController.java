@@ -29,15 +29,12 @@ public class GameController {
     private String userInput;
     private String parsedUserInput;
 
+    // Constructor
     public GameController() {
         setupGame();
     }
 
-    public void welcomeScreen(){
-        gameView.showSplashScreen();
-        gameView.showInstructions();
-    }
-
+    // Business Methods
     public void run() {
         // Introduction
         welcomeScreen();
@@ -97,12 +94,14 @@ public class GameController {
                 break;
             case "attraction":
                 playerVisitsAttraction();
-            default:
-                break;
+            default: // error has occurred
+                System.out.println("An application error has occurred. The player is set at an attraction" +
+                        " that is not detected by the system. Investigate Player.play() for debugging");
+                System.exit(0);
         }
 
         // Check if user has returned home
-        if (player.getHomeCountry().equals(player.getCurrentCountry())) {
+        if (player.getHomeCountry().equalsIgnoreCase(player.getCurrentCountry())) {
             endQuest();
         } else {
             // Print out information about current game
@@ -115,7 +114,7 @@ public class GameController {
             if (( (int) (Math.random() * 100) ) % 2 != 0) {
                 System.out.println("A random stranger has stopped us! They may be friendly" +
                         "or may be looking to cause harm! Should we talk to them?");
-                userInput = prompter.prompt("Enter 'talk' to engage. All other responses will ignore.");
+                userInput = prompter.prompt("Enter 'talk' to engage. All other responses will be ignored.");
                 if (userInput.toLowerCase().contains("talk")) {
                     playerInteractsWithRandomNPC();
                 }
@@ -148,7 +147,7 @@ public class GameController {
 
             parsedUserInput = textParser.parse(userInput, npc.get("tourGuide").getCommands(), options);
 
-            if (parsedUserInput.toLowerCase().contains("error")) {
+            if (parsedUserInput.toLowerCase().contains("error") || parsedUserInput.toLowerCase().contains("instructions")) {
                 // TODO: add better error message providing specific instructions to user
                 System.out.println(parsedUserInput);
                 parsedUserInput = null;
@@ -185,7 +184,7 @@ public class GameController {
 
             // Print list of available countries
             for (WorldMap.Countries country : worldMap.getCountries()) {
-                if (!country.getName().equals(player.getCurrentCountry())) {
+                if (!country.getName().equalsIgnoreCase(player.getCurrentCountry())) {
                     System.out.print("Country: " + country.getName());
                     System.out.println(" Price of ticket: " + calculateFlightCost(country));
                     System.out.println();
@@ -440,76 +439,18 @@ public class GameController {
         System.out.println("The correct answer is: " + attractionMap.get(attractionChoice));
     }
 
+    // Helper Methods
     private void playerInteractsWithRandomNPC() {
         NPC currNPC = (( (int) (Math.random() * 100) ) % 2 == 0) ? npc.get("allies") : npc.get("villains");
         int responsesSize = currNPC.getResponses().size();
 
         System.out.println(currNPC.getResponses().get((int) (Math.random() * responsesSize)));
 
-        if (currNPC.getNpcType().equals("allies")) {
+        if (currNPC.getNpcType().equalsIgnoreCase("allies")) {
             playerInteractsWithAlly(currNPC);
         }
         else {
             playerBattlesEnemy(currNPC);
-        }
-    }
-
-    private void setupGame() {
-        gameView = new GameView();
-        splashScreen = new SplashScreen();
-        player = new Player();
-        prompter = new Prompter(new Scanner(System.in));
-        textParser = TextParser.getInstance();
-        player.setCurrentAttraction("airport");
-
-
-        try {
-            createWorld();
-        } catch (FileNotFoundException e){
-            e.printStackTrace();
-            endQuest();
-        }
-    }
-
-    private void endQuest(){
-        setGameOver(true);
-    }
-
-    private static boolean isGameOver() {
-        return gameOver;
-    }
-
-    private static void setGameOver(boolean status) {
-        gameOver = status;
-    }
-
-    private void createWorld() throws FileNotFoundException {
-        try {
-            fillCountryMap();
-            fillNPCMap();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            // end game
-        }
-
-    }
-
-    private void fillCountryMap() throws FileNotFoundException {
-        // deserialize json
-        Gson gson = new Gson();
-        worldMap = gson.fromJson(new InputStreamReader(TestGSON.getFileFromResourceAsStream("assets/json-files/worldMap.json")), WorldMap.class);
-
-        for (WorldMap.Countries country : worldMap.getCountries()) {
-            countries.put(country.getName().toLowerCase(), country);
-        }
-
-    }
-
-    private void fillNPCMap() {
-        List<NPC> npcList = new NPC().getNpcList();
-
-        for (NPC item : npcList) {
-            npc.put(item.getNpcType(), item);
         }
     }
 
@@ -598,6 +539,54 @@ public class GameController {
         return cost;
     }
 
+    private void setupGame() {
+        gameView = new GameView();
+        splashScreen = new SplashScreen();
+        player = new Player();
+        prompter = new Prompter(new Scanner(System.in));
+        textParser = TextParser.getInstance();
+        player.setCurrentAttraction("airport");
+
+        try {
+            createWorld();
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+            System.exit(0);
+        }
+    }
+
+    private void endQuest(){
+        setGameOver(true);
+    }
+
+    private void createWorld() throws FileNotFoundException {
+        try {
+            fillCountryMap();
+            fillNPCMap();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+    }
+
+    private void fillCountryMap() throws FileNotFoundException {
+        // deserialize json
+        Gson gson = new Gson();
+        worldMap = gson.fromJson(new InputStreamReader(TestGSON.getFileFromResourceAsStream("assets/json-files/worldMap.json")), WorldMap.class);
+
+        for (WorldMap.Countries country : worldMap.getCountries()) {
+            countries.put(country.getName().toLowerCase(), country);
+        }
+    }
+
+    private void fillNPCMap() {
+        List<NPC> npcList = new NPC().getNpcList();
+
+        for (NPC item : npcList) {
+            npc.put(item.getNpcType(), item);
+        }
+    }
+
     private void printGameStatus() {
         // Current Country
         System.out.println();
@@ -628,5 +617,19 @@ public class GameController {
             System.out.println("Name: " + treasure.getName() + " | " + "Value: " + treasure.getValue());
         }
         System.out.println();
+    }
+
+    public void welcomeScreen() {
+        gameView.showSplashScreen();
+        gameView.showInstructions();
+    }
+
+    // Getters and Setters
+    private static boolean isGameOver() {
+        return gameOver;
+    }
+
+    private static void setGameOver(boolean status) {
+        gameOver = status;
     }
 }
