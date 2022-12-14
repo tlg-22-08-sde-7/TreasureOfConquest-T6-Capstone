@@ -47,11 +47,11 @@ public class GameController {
         // Choose whether to start new game
         String newGamePrompt = prompter.prompt("Would you like to start a new game?");
 
-        if(newGamePrompt.equalsIgnoreCase("yes")){
+        if(newGamePrompt.toLowerCase().contains("y")){
             player.playerSetup();
         }
-        else if(newGamePrompt.equalsIgnoreCase("no")){
-            System.out.println("Welcome back " + player.getName());
+        else if(newGamePrompt.toLowerCase().contains("n")){
+            endQuest();
         }
         else {
             System.out.println("Please enter yes or no!");
@@ -84,6 +84,7 @@ public class GameController {
         // Print out information about current game
         printGameStatus();
 
+        // Explore world
         switch (player.getCurrentAttraction()) {
             case "airport":
                 playerVisitsAirport();
@@ -107,6 +108,7 @@ public class GameController {
             // Print out information about current game
             printGameStatus();
 
+            // Choose where to go next
             playerSpeaksWithTourGuide();
 
             // Game decides if player encounters an ally/villain
@@ -122,7 +124,6 @@ public class GameController {
     }
 
     private void playerSpeaksWithTourGuide() {
-        // TOUR GUIDE GREETS PLAYER AND ASKS FOR COMMAND
         String userInput;
         String parsedUserInput = null;
         ArrayList<String> options = new ArrayList<>(Arrays.asList("attraction", "restaurant", "weapon store", "airport"));
@@ -143,7 +144,7 @@ public class GameController {
         while (null == parsedUserInput) {
             userInput = prompter.prompt("Hi, I am the tour guide. Would " +
                     "you like to visit an attraction, airport, restaurant, or weapon store? " +
-                    "(Enter 'help' for instructions)");
+                    "(Enter 'help' for instructions or 'quit' to end game)");
 
             parsedUserInput = textParser.parse(userInput, npc.get("tourGuide").getCommands(), options);
 
@@ -153,6 +154,7 @@ public class GameController {
                 parsedUserInput = null;
             }
         }
+
         // Set player attraction
         player.setCurrentAttraction(parsedUserInput);
     }
@@ -189,10 +191,11 @@ public class GameController {
                     System.out.println();
                 }
             }
-            userInput = prompter.prompt("Where would you like to go? (Enter 'help' for instructions)");
+            userInput = prompter.prompt("Where would you like to go? (Enter 'help' for instructions " +
+                    "or 'quit' to end game)");
             parsedUserInput = textParser.parse(userInput, acceptableCommands, availableFlights).toLowerCase();
 
-            // Check for error
+            // Check for error or call for help
             if (parsedUserInput.toLowerCase().contains("error") || parsedUserInput.toLowerCase().contains("instructions")) {
                 System.out.println(parsedUserInput);
                 parsedUserInput = null;
@@ -248,7 +251,8 @@ public class GameController {
             }
             System.out.println();
 
-            userInput = prompter.prompt("Which restaurant would you like to visit? (Enter 'help' for instructions)");
+            userInput = prompter.prompt("Which restaurant would you like to visit? (Enter 'help' for instructions)" +
+                    " or 'quit' to end game");
             parsedUserInput = textParser.parse(userInput, restaurants).toLowerCase();
 
             if (!parsedUserInput.contains("error") && !parsedUserInput.toLowerCase().contains("instructions")) {
@@ -272,7 +276,8 @@ public class GameController {
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
             System.out.println();
-            userInput = prompter.prompt("Which dish would you like to order? (Enter 'help' for instructions)");
+            userInput = prompter.prompt("Which dish would you like to order? (Enter 'help' for instructions" +
+                    " or 'quit' to end game)");
             parsedUserInput = textParser.parse(userInput, npc.get("waiter").getCommands(), dishes).toLowerCase();
 
             if (!parsedUserInput.contains("error") && !parsedUserInput.toLowerCase().contains("instructions")) {
@@ -322,7 +327,8 @@ public class GameController {
             }
             System.out.println();
 
-            userInput = prompter.prompt("Which weapons store would you like to visit? (Enter 'help' for instructions)");
+            userInput = prompter.prompt("Which weapons store would you like to visit? (Enter 'help' for instructions)" +
+                    " or 'quit' to end game");
             parsedUserInput = textParser.parse(userInput, List.of(weaponStoreMap.keySet().toArray(new String[0])));
 
             if (!parsedUserInput.toLowerCase().contains("error") && !parsedUserInput.toLowerCase().contains("instructions")) {
@@ -346,7 +352,8 @@ public class GameController {
             }
             System.out.println();
 
-            userInput = prompter.prompt("Which weapon would you like to purchase? (Enter 'help' for instructions)");
+            userInput = prompter.prompt("Which weapon would you like to purchase? (Enter 'help' for instructions)" +
+                    " or 'quit' to end game");
             parsedUserInput = textParser.parse(userInput, npc.get("weaponSalesRep").getCommands(),
                     List.of(weaponsMap.keySet().toArray(new String[0])));
 
@@ -370,6 +377,7 @@ public class GameController {
         String attractionChoice = null;
         Map<String, WorldMap.Countries.Attraction> attractionMap = new HashMap<>();
         WorldMap.Countries.Attraction.Treasures treasure;
+        int cashPrize = 500;
 
         // Print available commands
         System.out.println("~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~");
@@ -393,7 +401,8 @@ public class GameController {
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.println();
 
-            userInput = prompter.prompt("Which attraction would you like to visit? (Enter 'help' for instructions)");
+            userInput = prompter.prompt("Which attraction would you like to visit? (Enter 'help' for instructions" +
+                    " or 'quit' to end game)");
             parsedUserInput = textParser.parse(userInput, npc.get("tourGuide").getCommands(),
                     List.of(attractionMap.keySet().toArray(new String[0])));
 
@@ -401,6 +410,7 @@ public class GameController {
 
             if (!parsedUserInput.toLowerCase().contains("error") && !parsedUserInput.toLowerCase().contains("instructions")) {
                 attractionChoice = parsedUserInput;
+                System.out.println("You have chosen: " + attractionChoice);
             } else {
                 System.out.println(parsedUserInput);
             }
@@ -412,8 +422,22 @@ public class GameController {
             int treasuresSize = attractionMap.get(attractionChoice).getTreasures().size();
             treasure = attractionMap.get(attractionChoice).getTreasures().get( (int) (Math.random() * treasuresSize) );
 
+            // Inform player they answered correctly
+            System.out.println("~~~~~~ CORRECT! ~~~~~~");
+            System.out.println();
+            System.out.println("You have been rewarded: " + treasure.getName() + " and $" + cashPrize);
+
+            // Pay out winnings
             player.addTreasure(treasure);
+            player.gainMoney(cashPrize);
+        } else {
+            System.out.println("~~~~~~ Incorrect! ~~~~~~");
+            System.out.println();
+            System.out.println("Sorry, your answer " + attractionChoice + " is incorrect.");
         }
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println();
+        System.out.println("The correct answer is: " + attractionMap.get(attractionChoice));
     }
 
     private void playerInteractsWithRandomNPC() {
@@ -460,7 +484,6 @@ public class GameController {
     }
 
     private void createWorld() throws FileNotFoundException {
-
         try {
             fillCountryMap();
             fillNPCMap();
@@ -561,7 +584,7 @@ public class GameController {
         userInput = prompter.prompt("What is the answer to the question?");
         parsedUserInput = textParser.parse(userInput, riddle.getOptions());
 
-        solvedRiddle = riddle.getAnswer().equals(parsedUserInput);
+        solvedRiddle = riddle.getAnswer().equalsIgnoreCase(parsedUserInput);
 
         return solvedRiddle;
     }
