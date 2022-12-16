@@ -1,5 +1,6 @@
-package controller;
+package com.treasuresconquests.controller;
 
+import com.treasuresconquests.engine.TextParser;
 import org.junit.Test;
 
 import java.util.ArrayList;

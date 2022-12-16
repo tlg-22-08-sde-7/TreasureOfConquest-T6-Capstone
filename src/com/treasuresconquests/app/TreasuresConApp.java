@@ -1,4 +1,4 @@
-package controller;
+package com.treasuresconquests.app;
 
 
 import com.apps.util.Console;
@@ -9,14 +9,9 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 import com.google.gson.Gson;
-import model.NPC;
-import model.Player;
-import model.SplashScreen;
-import model.WorldMap;
-import test.TestGSON;
-import view.GameView;
+import com.treasuresconquests.engine.*;
 
-public class GameController {
+public class TreasuresConApp {
     private GameView gameView;
     private SplashScreen splashScreen;
     private Player player;
@@ -38,12 +33,12 @@ public class GameController {
     public static final String ANSI_YELLOW = "\u001B[33m";
 
     // Constructor
-    public GameController() {
+    public TreasuresConApp() {
         setupGame();
     }
 
     // Business Methods
-    public void run() {
+    public void start() {
         // Introduction
         welcomeScreen();
         Console.pause(2000L);
@@ -61,7 +56,7 @@ public class GameController {
         }
         else {
             System.out.println("Please enter yes or no!");
-            run();
+            start();
         }
 
         // Play game
@@ -97,7 +92,7 @@ public class GameController {
         String newGame = prompter.prompt("Would you like to play again? (Enter 'yes' to play again)");
 
         if ("yes".equalsIgnoreCase(newGame)) {
-            run();
+            start();
         }
     }
 

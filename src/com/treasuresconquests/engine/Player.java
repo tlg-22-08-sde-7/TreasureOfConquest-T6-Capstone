@@ -1,4 +1,4 @@
-package model;
+package com.treasuresconquests.engine;
 
 import com.apps.util.Prompter;
 
