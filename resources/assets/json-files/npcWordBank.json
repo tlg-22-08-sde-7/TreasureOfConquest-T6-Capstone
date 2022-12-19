@@ -1,5 +1,6 @@
 [
-  {"npcType": "tourGuide",
+  {
+    "npcType": "tourGuide",
   "commands": [
     "go",
     "advance",
@@ -20,7 +21,9 @@
   ],
   "values": []
 },
-  {"npcType": "waiter",
+
+  {
+    "npcType": "waiter",
   "commands": [
     "order",
     "eat",
@@ -39,7 +42,9 @@
   ],
   "values": []
 },
-  {"npcType": "airportAgent",
+
+  {
+    "npcType": "airportAgent",
   "commands": [
     "fly",
     "travel",
@@ -59,7 +64,9 @@
   ],
   "values": []
 },
-  {"npcType": "weaponSalesRep",
+
+  {
+    "npcType": "weaponSalesRep",
   "commands": [
     "go",
     "buy",
@@ -75,7 +82,9 @@
   ],
   "values": []
 },
-  {"npcType": "treasuresRep",
+
+  {
+    "npcType": "treasuresRep",
   "commands": [
     "go",
     "buy",
@@ -91,7 +100,9 @@
   ],
   "values": []
   },
-  {"npcType": "villains",
+
+  {
+    "npcType": "villains",
     "commands": [
       "attack",
       "beat",
@@ -115,7 +126,9 @@
       65
     ]
   },
-  {"npcType": "allies",
+
+  {
+    "npcType": "allies",
     "commands": [
       "talk",
       "converse",
@@ -136,6 +149,7 @@
       65
     ]
   }
+
 ]
 
 
