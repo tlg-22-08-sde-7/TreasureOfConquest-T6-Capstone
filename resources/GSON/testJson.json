@@ -1,4 +1,5 @@
-{"npcType": "tourGuide",
+{
+  "npcType": "tourGuide",
   "commands": [
     "go",
     "advance",

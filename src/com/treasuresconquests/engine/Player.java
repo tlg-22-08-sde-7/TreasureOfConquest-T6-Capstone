@@ -7,18 +7,19 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Player {
-    //Variables
+    // Variables
     private String name;
     private String homeCountry;
     private String currentCountry;
     private String currentAttraction;
-    private final List<WorldMap.Countries.WeaponStore.Weapons> weaponInventory = new ArrayList<>();
     private final int maxHealth = 100;
     private int health = maxHealth;
-    private int amountOfCash = 2000;
     private List<WorldMap.Countries.Attraction.Treasures> treasures = new ArrayList<>();
 
     Prompter playerInput = new Prompter(new Scanner(System.in));
+    private PlayerArmory playerArmory;
+    private PlayerWallet playerWallet;
+    private PlayerHealthBank playerHealthBank;
 
     public void Player() {
 
@@ -32,9 +33,13 @@ public class Player {
         setName(name);
 
         // Player starts the game with a slingshot, knife, and gun
-        addWeapon( new WorldMap.Countries.WeaponStore.Weapons("slingshot", 5, 10) );
-        addWeapon( new WorldMap.Countries.WeaponStore.Weapons("knife", 15, 25) );
-        addWeapon( new WorldMap.Countries.WeaponStore.Weapons("gun", 35, 50) );
+        playerArmory = new PlayerArmory();
+
+        // Initialize Player's money
+        playerWallet = new PlayerWallet();
+
+        // Initialize Player's health
+        playerHealthBank = new PlayerHealthBank();
     }
 
     public void eat(WorldMap.Countries.Restaurant.Items dish) {
@@ -43,38 +48,49 @@ public class Player {
         decreaseCashBalance(dish.getCost());
     }
 
+    // not Setter / Getter.  Consider remove
+    // Consider putting in Wallet class.
     public void gainMoney(int money) {
-        setAmountOfCash(getAmountOfCash() + money);
+        playerWallet.gainMoney(money);
     }
 
+    // not Setter / Getter.  Consider remove
+    // Consider putting in armory class.
     public void addWeapon(WorldMap.Countries.WeaponStore.Weapons weapon) {
-        weaponInventory.add(weapon);
+        playerArmory.addWeapon(weapon);
     }
 
+    // not Setter / Getter.  Consider remove
+    // Consider putting in armory class.
     public void removeWeapon(WorldMap.Countries.WeaponStore.Weapons weapon) {
-        getWeaponInventory().remove(weapon);
-
+        playerArmory.removeWeapon(weapon);
     }
 
+    // not Setter / Getter.  Consider remove.
+    // Put in health class ?
     public void receiveDamage(int damage) {
         setHealth(getHealth() - damage);
     }
 
+    // not Setter / Getter.  Consider remove
     public void addTreasure(WorldMap.Countries.Attraction.Treasures treasure) {
         setTreasures(treasure);
     }
 
+    // not Setter / Getter.  Consider remove
     public void makePurchase(int amountOfCash) {
-        this.amountOfCash -= amountOfCash;
+        playerWallet.makePurchase(amountOfCash);
     }
 
+    // not Setter / Getter.  Consider remove
     // Helper Methods
     private void increaseHealth(int addedHealth) {
-        setHealth(Math.min(getHealth() + addedHealth, maxHealth));
+        playerHealthBank.increaseHealth(addedHealth);
     }
 
+    // not Setter / Getter.  Consider remove
     private void decreaseCashBalance(int cost) {
-        setAmountOfCash(getAmountOfCash() - cost);
+        playerWallet.decreaseCashBalance(cost);
     }
 
     //Getter and Setter
@@ -110,30 +126,32 @@ public class Player {
         this.currentAttraction = currentAttraction;
     }
 
+    // not Setter / Getter
     public List<WorldMap.Countries.WeaponStore.Weapons> getWeaponInventory() {
-        return weaponInventory;
+        return playerArmory.getWeaponInventory();
     }
 
     public void addWeaponToInventory(WorldMap.Countries.WeaponStore.Weapons weapon) {
-        weaponInventory.add(weapon);
+        playerArmory.addWeaponToInventory(weapon);
     }
 
     public int getHealth() {
-        return health;
+        return playerHealthBank.getHealth();
     }
 
     public void setHealth(int health) {
-        this.health = health;
+        playerHealthBank.setHealth(health);
     }
 
     public int getAmountOfCash() {
-        return amountOfCash;
+        return playerWallet.getAmountOfCash();
     }
 
     public void setAmountOfCash(int amountOfCash) {
-        this.amountOfCash = amountOfCash;
+        playerWallet.setAmountOfCash(amountOfCash);
     }
 
+    // not Setter / Getter
     public List<WorldMap.Countries.Attraction.Treasures> getTreasures() {
         return treasures;
     }
