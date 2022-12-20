@@ -1,14 +1,9 @@
-package view;
+package com.treasuresconquests.engine;
 
-import com.apps.util.Prompter;
-import model.SplashScreen;
+//import com.apps.util.Prompter;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import static controller.GameController.ANSI_CYAN;
-import static controller.GameController.ANSI_RESET;
+import static com.treasuresconquests.app.TreasuresConApp.ANSI_CYAN;
+import static com.treasuresconquests.app.TreasuresConApp.ANSI_RESET;
 
 public class GameView {
 

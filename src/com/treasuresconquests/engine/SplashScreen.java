@@ -1,4 +1,4 @@
-package model;
+package com.treasuresconquests.engine;
 
 import java.io.IOException;
 import java.nio.file.Files;

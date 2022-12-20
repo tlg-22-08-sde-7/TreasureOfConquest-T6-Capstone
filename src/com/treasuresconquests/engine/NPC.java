@@ -1,13 +1,8 @@
-package model;
+package com.treasuresconquests.engine;
 
 import com.google.gson.Gson;
-import test.TestGSON;
 
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 

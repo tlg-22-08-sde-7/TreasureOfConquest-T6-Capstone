@@ -1,4 +1,4 @@
-package model;
+package com.treasuresconquests.engine;
 
 import java.util.List;
 

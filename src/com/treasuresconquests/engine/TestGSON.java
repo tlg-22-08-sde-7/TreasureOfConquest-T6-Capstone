@@ -1,4 +1,4 @@
-package test;
+package com.treasuresconquests.engine;
 
 import com.google.gson.Gson;
 

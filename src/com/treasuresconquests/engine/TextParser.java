@@ -1,10 +1,9 @@
-package controller;
+package com.treasuresconquests.engine;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static controller.GameController.ANSI_RED;
-import static controller.GameController.ANSI_RESET;
+import static com.treasuresconquests.app.TreasuresConApp.ANSI_RED;
+import static com.treasuresconquests.app.TreasuresConApp.ANSI_RESET;
 
 public class TextParser {
 

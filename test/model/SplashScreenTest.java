@@ -1,6 +1,6 @@
 package model;
 
-import junit.framework.TestCase;
+import com.treasuresconquests.engine.SplashScreen;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

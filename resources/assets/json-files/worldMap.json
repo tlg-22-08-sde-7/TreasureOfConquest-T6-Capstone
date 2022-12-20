@@ -110,6 +110,7 @@
         }
       ]
     },
+
     {
       "name": "Japan",
       "zone": 4,
@@ -213,6 +214,7 @@
         }
       ]
     },
+
     {
       "name": "Nigeria",
       "zone": 3,
@@ -316,6 +318,7 @@
         }
       ]
     },
+
     {
       "name": "France",
       "zone": 4,
@@ -419,6 +422,7 @@
         }
       ]
     },
+
     {
       "name": "United States",
       "zone": 1,
