@@ -3,10 +3,7 @@ package com.treasuresconquests.engine;
 import com.apps.util.Prompter;
 import com.treasuresconquests.app.TreasuresConApp;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PlayerVisits {
 
@@ -40,23 +37,33 @@ public class PlayerVisits {
     public void playerVisitsAirport() {
         List<String> availableFlights = List.of(countries.keySet().toArray(new String[0]));
         List<String> acceptableCommands = npc.get("airportAgent").getCommands();
+        Session.setCurrentNPC("airportAgent");
         int flightCost = 0;
+
+        boolean instructionsPrinted = false;
 
         while (parsedUserInput == null) {
 
-            // Print available commands
-            System.out.println(TreasuresConApp.ANSI_CYAN + "~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~" + TreasuresConApp.ANSI_RESET);
-            for (int i = 0; i < npc.get("airportAgent").getCommands().size(); i++) {
-                System.out.print(npc.get("airportAgent").getCommands().get(i));
-                if (i < npc.get("airportAgent").getCommands().size() - 1) {
-                    System.out.print(", ");
+            // will prevent instructions from being printed twice (and in "country")
+            if(!instructionsPrinted) {
+                // Print available commands
+                System.out.println(TreasuresConApp.ANSI_CYAN + "~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~" + TreasuresConApp.ANSI_RESET);
+                for (int i = 0; i < npc.get("airportAgent").getCommands().size(); i++) {
+                    System.out.print(npc.get("airportAgent").getCommands().get(i));
+                    if (i < npc.get("airportAgent").getCommands().size() - 1) {
+                        System.out.print(", ");
+                    }
                 }
+                System.out.println();
+                System.out.println(TreasuresConApp.ANSI_CYAN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + TreasuresConApp.ANSI_RESET);
+                System.out.println();
             }
-            System.out.println();
-            System.out.println(TreasuresConApp.ANSI_CYAN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + TreasuresConApp.ANSI_RESET);
-            System.out.println();
+            // Was cut and now placed in line 60-62
+//            System.out.println();
+//            System.out.println(TreasuresConApp.ANSI_CYAN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + TreasuresConApp.ANSI_RESET);
+//            System.out.println();
 
-            System.out.println(TreasuresConApp.ANSI_PURPLE + "Hi! Welcome to Single Airport of " + player.getCurrentCountry() +
+            System.out.println(TreasuresConApp.ANSI_PURPLE + "Hi! Welcome to Single Airport of " + player.getCurrentCountry().toUpperCase() +
                     "! Where would you like to visit?" + TreasuresConApp.ANSI_RESET);
 
             System.out.println();
@@ -74,7 +81,12 @@ public class PlayerVisits {
             parsedUserInput = textParser.parse(userInput, acceptableCommands, availableFlights).toLowerCase();
 
             // Check for error or call for help
-            if (parsedUserInput.toLowerCase().contains("error") || parsedUserInput.toLowerCase().contains("instructions")) {
+            if(parsedUserInput.toLowerCase().contains("instructions")) {
+                parsedUserInput = null;
+                instructionsPrinted = true;
+                continue;
+            }
+            if (parsedUserInput.toLowerCase().contains("error")) {
                 System.out.println(parsedUserInput);
                 parsedUserInput = null;
                 continue;
@@ -104,6 +116,7 @@ public class PlayerVisits {
         List<String> dishes = new ArrayList<>();
         String restaurantChoice = null;
         String dishChoice = null;
+        Session.setCurrentNPC("waiter");
 
         // Print available commands
         System.out.println(TreasuresConApp.ANSI_CYAN + "~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~" + TreasuresConApp.ANSI_RESET);
@@ -156,7 +169,10 @@ public class PlayerVisits {
                     " or 'quit' to end game)");
             parsedUserInput = textParser.parse(userInput, npc.get("waiter").getCommands(), dishes).toLowerCase();
 
-            if (!parsedUserInput.contains("error") && !parsedUserInput.toLowerCase().contains("instructions")) {
+            if (parsedUserInput.contains("error") && !parsedUserInput.toLowerCase().contains("instructions")) {
+                System.out.println(parsedUserInput);
+            }
+            else if (!parsedUserInput.contains("error") && !parsedUserInput.toLowerCase().contains("instructions")) {
                 System.out.println("You have selected: " + parsedUserInput + "! Your total cost is: " +
                         dishesMap.get(parsedUserInput).getCost());
                 System.out.println("This dish will give up to " + dishesMap.get(parsedUserInput).getValue() +
@@ -179,6 +195,7 @@ public class PlayerVisits {
         Map<String, WorldMap.Countries.WeaponStore.Weapons> weaponsMap = new HashMap<>();
         String weaponStoreChoice = null;
         String weaponChoice = null;
+        Session.setCurrentNPC("weaponSalesRep");
 
         // Print available commands
         System.out.println(TreasuresConApp.ANSI_CYAN + "~~~~~~ LIST OF ACCEPTABLE COMMANDS ~~~~~~" + TreasuresConApp.ANSI_RESET);
@@ -252,6 +269,7 @@ public class PlayerVisits {
         Map<String, WorldMap.Countries.Attraction> attractionMap = new HashMap<>();
         WorldMap.Countries.Attraction.Treasures treasure;
         int cashPrize = 500;
+        Session.setCurrentNPC("tourGuide");
 
         String userInput = "";
         String parsedUserInput = "";
