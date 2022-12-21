@@ -178,13 +178,13 @@ public class TreasuresConApp {
         playerDialog.playerInteractsWithRandomNPC();
     }
 
-    private void playerInteractsWithAlly(NPC ally) {
-        playerDialog.playerInteractsWithAlly(ally);
-    }
+//    private void playerInteractsWithAlly(NPC ally) {
+//        playerDialog.playerInteractsWithAlly(ally);
+//    }
 
-    private void playerBattlesEnemy(NPC enemyNPC) {
-        playerDialog.playerBattlesEnemy(enemyNPC);
-    }
+//    private void playerBattlesEnemy(NPC enemyNPC) {
+//        playerDialog.playerBattlesEnemy(enemyNPC);
+//    }
 
     private int playerAttacksEnemy(int npcHealth) {
         return playerDialog.playerAttacksEnemy(npcHealth);
@@ -206,6 +206,7 @@ public class TreasuresConApp {
         player = new Player();
         prompter = new Prompter(new Scanner(System.in));
         textParser = TextParser.getInstance();
+        textParser.setNPC(npc);
         player.setCurrentAttraction("airport");
 
         try {
