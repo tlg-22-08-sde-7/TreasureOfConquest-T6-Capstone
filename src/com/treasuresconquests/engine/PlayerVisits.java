@@ -40,6 +40,9 @@ public class PlayerVisits {
         Session.setCurrentNPC("airportAgent");
         int flightCost = 0;
 
+        // set to null to force while loop entry.
+        parsedUserInput = null;
+
         boolean instructionsPrinted = false;
 
         while (parsedUserInput == null) {
@@ -101,7 +104,8 @@ public class PlayerVisits {
                 System.out.println();
                 parsedUserInput = null;
             }
-        }
+        }  // End of while loop.
+
         // Player is not charged for choosing a flight destination that they're currently visiting
         if (!player.getCurrentCountry().equalsIgnoreCase(parsedUserInput)) {
             player.makePurchase(flightCost);
@@ -169,7 +173,8 @@ public class PlayerVisits {
                     " or 'quit' to end game)");
             parsedUserInput = textParser.parse(userInput, npc.get("waiter").getCommands(), dishes).toLowerCase();
 
-            if (parsedUserInput.contains("error") && !parsedUserInput.toLowerCase().contains("instructions")) {
+            // NPE was caused by the "and".  Changed to or.
+            if (parsedUserInput.contains("error") || parsedUserInput.toLowerCase().contains("instructions")) {
                 System.out.println(parsedUserInput);
             }
             else if (!parsedUserInput.contains("error") && !parsedUserInput.toLowerCase().contains("instructions")) {
