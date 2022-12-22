@@ -53,6 +53,7 @@ public class TreasuresConApp {
         String newGamePrompt = prompter.prompt("Would you like to start a new game?");
 
         if(newGamePrompt.toLowerCase().contains("y")){
+            setGameOver(false);
             player.playerSetup();
         }
         else if(newGamePrompt.toLowerCase().contains("n")){
@@ -97,13 +98,14 @@ public class TreasuresConApp {
         String newGame = prompter.prompt("Would you like to play again? (Enter 'yes' to play again)");
 
         if ("yes".equalsIgnoreCase(newGame)) {
+            //player.playerSetup();
             start();
         }
     }
 
     private void play(){
         // Print out information about current game
-        printGameStatus();
+        // printGameStatus();
 
         // Explore world
         switch (player.getCurrentAttraction()) {
