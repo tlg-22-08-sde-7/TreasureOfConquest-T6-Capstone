@@ -1,4 +1,6 @@
-package com.treasuresconquests.gui;
+package com.treasuresconquests.guiclient;
+
+import com.treasuresconquests.guiapp.TcGuiApp;
 
 public class TcGuiMain {
 

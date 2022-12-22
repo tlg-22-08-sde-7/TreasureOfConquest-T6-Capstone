@@ -1,4 +1,4 @@
-package com.treasuresconquests.gui;
+package com.treasuresconquests.guiengine.other;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,7 +17,7 @@ public class Login implements ActionListener {
     private static JLabel successLabel;
 
     // constructor
-    Login() {
+    public Login() {
         loginFrame = new JFrame();
         loginFrame.setSize(450, 300);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
