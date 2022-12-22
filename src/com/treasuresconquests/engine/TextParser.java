@@ -1,6 +1,9 @@
 package com.treasuresconquests.engine;
 
+import com.treasuresconquests.app.TreasuresConApp;
+
 import java.util.List;
+import java.util.Map;
 
 import static com.treasuresconquests.app.TreasuresConApp.ANSI_RED;
 import static com.treasuresconquests.app.TreasuresConApp.ANSI_RESET;
@@ -12,6 +15,7 @@ public class TextParser {
      */
 
     private static TextParser textParser = null;
+    private Map<String, NPC> npc;
 
     private TextParser() {};
 
@@ -24,10 +28,14 @@ public class TextParser {
         } else if ("help".equalsIgnoreCase(userInput.toLowerCase())) {
             printCommands();
             resultOfStringParsing = "Instructions printed";
-        } else {
+        }
+        else {
             if (userInputFoundInListOfVerbs(userInput, listOfVerbs)) {
                 // return the closest word matching an entry in listOfNouns
-                resultOfStringParsing = findClosestMatchingNoun(userInput, listOfNouns);
+                // Extract noun from userInput and pass to findClosestMatchingNoun
+
+                String extractedNoun = extractNoun(userInput, listOfVerbs);
+                resultOfStringParsing = findClosestMatchingNoun(extractedNoun, listOfNouns);
             }
             else {
                 resultOfStringParsing = "ERROR - Invalid command. Verb was not found in the list of acceptable verbs.";
@@ -35,6 +43,20 @@ public class TextParser {
         }
 
         return resultOfStringParsing;
+    }
+    //                              "fly"        want, fly, flight, purchase
+    private String extractNoun(String userInput, List<String> listOfVerbs) {
+        // loop through the list of verbs,
+        // if the userInput starts with any verb,
+            // extract the rest of the string that is not the verb
+            // return that String
+        // return empty string
+        for(String verb: listOfVerbs){
+            if(userInput.startsWith(verb)){
+                return userInput.substring(verb.length());// "fly".substring(3) => ""
+            }
+        }
+        return "";
     }
 
     public String parse(String userInput, List<String> lisfOfNouns) {
@@ -73,7 +95,7 @@ public class TextParser {
 
         return inputFound;
     }
-
+                                            // ""
     private String findClosestMatchingNoun(String userInput, List<String> listOfNouns) {
         int longestSubstringLen = 0;
         String closestMatchingNoun = null;
@@ -156,6 +178,10 @@ public class TextParser {
         );
         System.out.println(ANSI_RED + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " + ANSI_RESET);
         System.out.println();
+        Session.showRelevantCommands(npc);
     }
 
+    public void setNPC(Map<String, NPC> npc) {
+        this.npc = npc;
+    }
 }

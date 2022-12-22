@@ -1,4 +1,4 @@
-package com.treasuresconquests.gui;
+package com.treasuresconquests.guiengine.other;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ public class ClickCount implements ActionListener {
     private JPanel panelClick;
 
     // constructor
-    ClickCount() {
+    public ClickCount() {
         frameClick = new JFrame();
         frameClick.setSize(350, 250);
         frameClick.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

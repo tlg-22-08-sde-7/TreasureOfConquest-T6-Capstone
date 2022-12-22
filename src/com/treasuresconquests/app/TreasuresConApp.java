@@ -53,6 +53,7 @@ public class TreasuresConApp {
         String newGamePrompt = prompter.prompt("Would you like to start a new game?");
 
         if(newGamePrompt.toLowerCase().contains("y")){
+            setGameOver(false);
             player.playerSetup();
         }
         else if(newGamePrompt.toLowerCase().contains("n")){
@@ -97,13 +98,14 @@ public class TreasuresConApp {
         String newGame = prompter.prompt("Would you like to play again? (Enter 'yes' to play again)");
 
         if ("yes".equalsIgnoreCase(newGame)) {
+            //player.playerSetup();
             start();
         }
     }
 
     private void play(){
         // Print out information about current game
-        printGameStatus();
+        // printGameStatus();
 
         // Explore world
         switch (player.getCurrentAttraction()) {
@@ -178,13 +180,13 @@ public class TreasuresConApp {
         playerDialog.playerInteractsWithRandomNPC();
     }
 
-    private void playerInteractsWithAlly(NPC ally) {
-        playerDialog.playerInteractsWithAlly(ally);
-    }
+//    private void playerInteractsWithAlly(NPC ally) {
+//        playerDialog.playerInteractsWithAlly(ally);
+//    }
 
-    private void playerBattlesEnemy(NPC enemyNPC) {
-        playerDialog.playerBattlesEnemy(enemyNPC);
-    }
+//    private void playerBattlesEnemy(NPC enemyNPC) {
+//        playerDialog.playerBattlesEnemy(enemyNPC);
+//    }
 
     private int playerAttacksEnemy(int npcHealth) {
         return playerDialog.playerAttacksEnemy(npcHealth);
@@ -206,6 +208,7 @@ public class TreasuresConApp {
         player = new Player();
         prompter = new Prompter(new Scanner(System.in));
         textParser = TextParser.getInstance();
+        textParser.setNPC(npc);
         player.setCurrentAttraction("airport");
 
         try {
