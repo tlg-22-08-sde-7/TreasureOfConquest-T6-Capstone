@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TreasuresConquests-v2.1a:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TreasuresConquests_v2_1a_jar</output-path>
+    <root id="archive" name="TreasuresConquests.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/com/treasuresconquests/guiclient/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="TreasuresConquests" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/resources/lib/hamcrest-core-1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/resources/lib/gson-2.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/resources/lib/junit-4.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/resources/lib/app-utils-1.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
