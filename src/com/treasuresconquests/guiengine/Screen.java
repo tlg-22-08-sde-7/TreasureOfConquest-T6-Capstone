@@ -131,7 +131,6 @@ public class Screen {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
         }
     }
 
