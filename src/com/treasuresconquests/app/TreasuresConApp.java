@@ -81,17 +81,27 @@ public class TreasuresConApp {
             System.out.println(ANSI_PURPLE + "~~~~~~~ HERE ARE YOUR STATS ~~~~~~~ " + ANSI_RESET);
             System.out.println(ANSI_RED + "Remaining Health: " + player.getHealth() + ANSI_RESET);
             System.out.println(ANSI_GREEN + "Remaining Cash " + player.getAmountOfCash() + ANSI_RESET);
-            System.out.print(ANSI_CYAN + "Collected Treasures: " + ANSI_RESET);
+            System.out.print(ANSI_CYAN + "Collected Treasures: " + player.getTreasures().size() + ANSI_RESET);
+            System.out.println();
             for (int i = 0; i < player.getTreasures().size(); i++) {
                 System.out.print(player.getTreasures().get(i).getName());
                 if (i < player.getTreasures().size() - 1) {
-                    System.out.println(" - ");
+                    System.out.print(" - ");
                 }
             }
+            System.out.println();
 
-            for (WorldMap.Countries.Attraction.Treasures treasure : player.getTreasures()) {
-                System.out.print(treasure.getName() + " ");
-            }
+            // The below was commented to make room for the Collected Treasures "for loop"
+//            for (int i = 0; i < player.getTreasures().size(); i++) {
+//                System.out.print(player.getTreasures().get(i).getName());
+//                if (i < player.getTreasures().size() - 1) {
+//                    System.out.println(" - ");
+//                }
+//            }
+//
+//            for (WorldMap.Countries.Attraction.Treasures treasure : player.getTreasures()) {
+//                System.out.print(treasure.getName() + " ");
+//            }
         }
 
         // Ask if user wants to play new game
