@@ -26,8 +26,12 @@ public class Player {
     }
 
     //Methods
-    public void playerSetup() {
-        String name = playerInput.prompt("Enter player name: ");
+
+    public void playerSetupGUI() {
+       setup();
+    }
+
+    private void setup() {
         setHomeCountry("united states");
         setCurrentCountry("united states");
         setName(name);
@@ -40,6 +44,11 @@ public class Player {
 
         // Initialize Player's health
         playerHealthBank = new PlayerHealthBank();
+    }
+
+    public void playerSetup() {
+        String name = playerInput.prompt("Enter player name: ");
+        setup();
     }
 
     public void eat(WorldMap.Countries.Restaurant.Items dish) {
@@ -159,4 +168,5 @@ public class Player {
     private void setTreasures(WorldMap.Countries.Attraction.Treasures treasure) {
         treasures.add(treasure);
     }
+
 }

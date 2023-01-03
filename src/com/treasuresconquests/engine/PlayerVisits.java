@@ -137,7 +137,8 @@ public class PlayerVisits {
         // Choose Restaurant
         while (null == restaurantChoice) {
             System.out.println(TreasuresConApp.ANSI_PURPLE + "Here are a list of restaurants. Which would you like to visit?" + TreasuresConApp.ANSI_RESET);
-            for (WorldMap.Countries.Restaurant restaurant : countries.get(player.getCurrentCountry()).getRestaurants()) {
+            for (WorldMap.Countries.Restaurant restaurant :
+                    countries.get(player.getCurrentCountry()).getRestaurants()) {
                 restaurantsMap.put(restaurant.getName().toLowerCase(), restaurant);
                 restaurants.add(restaurant.getName());
                 System.out.println(restaurant.getName());
