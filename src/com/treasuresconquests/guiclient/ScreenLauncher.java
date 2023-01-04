@@ -21,12 +21,15 @@ public class ScreenLauncher {
     final static String NIGERIALANDINGPAGE = "NigeriaLandingPage";
     final static String FRANCELANDINGPAGE = "FranceLandingPage";
     final static String JAPANRESTAURANTPAGE = "JapanRestaurantPage";
+    final static String JAPANATTRACTIONPAGE = "JapanAttractionPage";
+
     private static StartScreen startScreen;
     private static GameScreen gameScreen;
     private static HelpScreen helpScreen;
     private static MainLandingPageScreen mainLandingScreen;
     private static JapanLandingPage japanLandingScreen;
     private static JapanRestaurantScreen japanRestaurantScreen;
+    private static JapanAttractionScreen japanAttractionScreen;
 
     public static void main(String[] args) {
         /* Use an appropriate Look and Feel */
@@ -57,7 +60,8 @@ public class ScreenLauncher {
     private static void createAndShowGUI() {
         //Create and set up the window / JFrame.
         JFrame frame = new JFrame("Treasures of Conquests");
-        frame.setSize(900, 700);
+        // was ->> frame.setSize(900, 700);
+        frame.setSize(1100, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
@@ -81,6 +85,7 @@ public class ScreenLauncher {
         mainLandingScreen = new MainLandingPageScreen(guiController); // this screen has access to the data
         japanLandingScreen = new JapanLandingPage(guiController);
         japanRestaurantScreen = new JapanRestaurantScreen(guiController);
+        japanAttractionScreen = new JapanAttractionScreen(guiController);
         // MexicoLandingPage card6 = new MexicoLandingPage(guiController);
 
         // Create the panel that contains the "cards".
@@ -94,6 +99,7 @@ public class ScreenLauncher {
         cards.add(mainLandingScreen, MAINLANDINGPAGESCREEN);
         cards.add(japanLandingScreen, JAPANLANDINGPAGE);
         cards.add(japanRestaurantScreen, JAPANRESTAURANTPAGE);
+        cards.add(japanAttractionScreen, JAPANATTRACTIONPAGE);
 
         // parent added to window.
         // contentPane is the Bigger JPanel (JFrame) that holds cards,
@@ -114,9 +120,9 @@ public class ScreenLauncher {
         cl.show(cards, STARTSCREEN);
     }
 
-    public static void showJapanRestaurantScreen() {
+    public static void showJapanRestaurantScreen(String restaurant) {
         CardLayout cl = (CardLayout) (cards.getLayout());
-        japanRestaurantScreen.init("");
+        japanRestaurantScreen.init(restaurant);
         cl.show(cards, JAPANRESTAURANTPAGE);
     }
 
@@ -127,7 +133,6 @@ public class ScreenLauncher {
 
     public static void mainLandingPageScreen() {
         CardLayout cl = (CardLayout) cards.getLayout();
-
         cl.show(cards, MAINLANDINGPAGESCREEN);
     }
 
@@ -135,6 +140,18 @@ public class ScreenLauncher {
         CardLayout cl = (CardLayout) cards.getLayout();
         japanLandingScreen.visaOffice();
         cl.show(cards, JAPANLANDINGPAGE);
+    }
+
+    public static void japanLandingPageLocal() {
+        CardLayout cl = (CardLayout) cards.getLayout();
+        japanLandingScreen.localTransit();
+        cl.show(cards, JAPANLANDINGPAGE);
+    }
+
+    public static void japanAttractionPage(String selectedAttraction) {
+        CardLayout cl = (CardLayout) cards.getLayout();
+        japanAttractionScreen.init(selectedAttraction);
+        cl.show(cards, JAPANATTRACTIONPAGE);
     }
 
     private static void center(JFrame frame) {
@@ -162,4 +179,5 @@ public class ScreenLauncher {
         mainLandingScreen.setController(controller);
         japanLandingScreen.setController(controller);
     }
+
 }

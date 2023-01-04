@@ -35,10 +35,13 @@ public class MainLandingPageScreen extends JPanel {
         lblAccountBalance = new JLabel("Money $" + guiController.getPlayer().getAmountOfCash());
         lblAccountBalance.setBounds(350, 45, 150, 50);
         lblAccountBalance.setForeground(Color.white);
+
         btnTreasures = new JButton("Treasures");
         btnTreasures.setBounds(525, 45, 150, 50);
+
         btnXP = new JButton("XP");
         btnXP.setBounds(700, 45, 150, 50);
+
         question = new JLabel("Where would you like to visit ?");
         question.setBounds(300, 150, 400, 50);
         question.setForeground(Color.white);
@@ -71,7 +74,8 @@ public class MainLandingPageScreen extends JPanel {
 
 add(lblAccountBalance); add(btnTreasures); add(btnXP); add(question);
 add(btnFrance); add(btnJapan); add(btnMexico); add(btnNigeria);
-add(btnBack); add(btnExitCurrentGame); add(btnQuit); add(btnHelp);
+//add(btnBack);
+add(btnExitCurrentGame); add(btnQuit); add(btnHelp);
 add(lblCurrentCountry);
 
     }

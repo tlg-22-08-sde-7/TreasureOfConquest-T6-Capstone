@@ -5,10 +5,7 @@ import com.treasuresconquests.engine.*;
 
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GUIController {
     private WorldMap worldMap;
@@ -72,4 +69,46 @@ public class GUIController {
         return null;
     }
 
+    public Vector<String> loadFoodItems(
+            String restaurantName, String country
+    ){
+        List<WorldMap.Countries.Restaurant> restaurants
+                = getRestaurantsForCountry(country);
+        // 2. get the restaurant object for the restaurant name given
+        WorldMap.Countries.Restaurant restaurant = null;
+        Vector<String> itemsList = new Vector<>();
+        for (WorldMap.Countries.Restaurant restaurantObj: restaurants
+        ) {
+            if(restaurantObj.getName().
+                    equalsIgnoreCase(restaurantName)){
+                restaurant = restaurantObj;
+                break;
+            }
+        }
+        if(restaurant != null){
+            for (WorldMap.Countries.Restaurant.Items item: restaurant.getItems()
+                 ) {
+                itemsList.add(item.getName());
+            }
+        }
+        return itemsList;
+    }
+
+    public static void main(String[] args) {
+        GUIController controller = new GUIController();
+        List<WorldMap.Countries.Restaurant> rests = controller
+                .getRestaurantsForCountry("japan");
+        System.out.println(rests);
+    }
+
+    public List<WorldMap.Countries.Attraction> getAttractionsForCountry(String countryName) {
+
+        WorldMap.Countries country = countries.get(countryName);
+
+        if(country != null){
+            return (List<WorldMap.Countries.Attraction>) country.getAttractions();
+        }
+        return null;
+
+    }
 }
