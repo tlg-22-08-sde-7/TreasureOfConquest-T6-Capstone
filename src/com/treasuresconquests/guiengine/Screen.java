@@ -16,8 +16,9 @@ public class Screen {
     JLabel titleLabelTreasures, titleLabelConquests;
     Font titleFont = new Font("Times New Roman", Font.PLAIN, 76);
 
-    JButton btnStart, btnLoad, btnInstructions, btnQuit
+    JButton btnStart, btnInstructions, btnQuit
             , btnHelp, btnExitCurrentGame;
+    // JButton btnLoad;
     Font btnFont = new Font("Times New Roman", Font.PLAIN, 18);
 
     JTextArea mainTextArea;
@@ -25,7 +26,7 @@ public class Screen {
 
     // handlers - TitleScreen
     StartHandler handlerStart = new StartHandler();
-    LoadHandler handlerLoad = new LoadHandler();
+    // LoadHandler handlerLoad = new LoadHandler();
     InstructionsHandler handlerInstructions = new InstructionsHandler();
     QuitHandler handlerQuit = new QuitHandler();
 
@@ -88,11 +89,11 @@ public class Screen {
         btnStart.setFont(btnFont);
         btnStart.addActionListener(handlerStart);
 
-        btnLoad = new JButton("Load Game");
-        btnLoad.setBackground(Color.darkGray);
-        btnLoad.setForeground(Color.white);
-        btnLoad.setFont(btnFont);
-        btnLoad.addActionListener(handlerLoad);
+//        btnLoad = new JButton("Load Game");
+//        btnLoad.setBackground(Color.darkGray);
+//        btnLoad.setForeground(Color.white);
+//        btnLoad.setFont(btnFont);
+//        btnLoad.addActionListener(handlerLoad);
 
         btnInstructions = new JButton("Read Instructions");
         btnInstructions.setBackground(Color.darkGray);
@@ -108,7 +109,7 @@ public class Screen {
 
         // fill button panel
         titlePanelButtons.add(btnStart);
-        titlePanelButtons.add(btnLoad);
+        // titlePanelButtons.add(btnLoad);
         titlePanelButtons.add(btnInstructions);
         titlePanelButtons.add(btnQuit);
 
@@ -127,12 +128,12 @@ public class Screen {
         }
     }
 
-    public class LoadHandler implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-        }
-    }
+//    public class LoadHandler implements ActionListener {
+//
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//        }
+//    }
 
     public class InstructionsHandler implements ActionListener {
 
