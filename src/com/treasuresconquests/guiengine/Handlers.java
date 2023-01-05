@@ -3,8 +3,14 @@ package com.treasuresconquests.guiengine;
 import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.engine.WorldMap;
 import com.treasuresconquests.guiclient.ScreenLauncher;
+import com.treasuresconquests.guiengine.callbacks.ComboCallback;
+import com.treasuresconquests.guiengine.callbacks.Navigable;
+import com.treasuresconquests.guiengine.other.Combo;
 import com.treasuresconquests.guiengine.other.Country;
 import com.treasuresconquests.guiengine.other.PurchaseData;
+import com.treasuresconquests.guiengine.other.Quiz;
+import com.treasuresconquests.playground.BottomRightPanel;
+import com.treasuresconquests.playground.CenterPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,23 +28,8 @@ public class Handlers {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            ScreenLauncher.showGameScreen();
-        }
-    }
-
-    public static class LoadHandler implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-    }
-
-    public static class InstructionsHandler implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            ScreenLauncher.showHelpScreen();
+            //ScreenLauncher.showGameScreen();
+            CenterPanel.mainLandingPageScreen();
         }
     }
 
@@ -56,7 +47,7 @@ public class Handlers {
         // prints help with commands / option for instructions(?)
         @Override
         public void actionPerformed(ActionEvent e) {
-            ScreenLauncher.showHelpScreen();
+            CenterPanel.showHelpScreen();
         }
     }
 
@@ -65,9 +56,8 @@ public class Handlers {
         // exits to the title/start screen
         @Override
         public void actionPerformed(ActionEvent e) {
-            //launchTitleScreen();
-            ScreenLauncher.restartSession();
-            ScreenLauncher.showStartScreen();
+
+            CenterPanel.showStartScreen();
         }
     }
 
@@ -80,13 +70,16 @@ public class Handlers {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (guiController.getPlayer().getAmountOfCash() >= 1000) {
-                ScreenLauncher.japanLandingPage();
+                CenterPanel.japanLandingPage();
+            }
+            else {
+                BottomRightPanel.showInformationPanel("You do not have enough funds for this trip.");
             }
         }
     }
 
     public static class RestaurantChoiceHandler implements
-            ActionListener{
+            ActionListener, ComboCallback {
         private GUIController guiController;
         private String country;
 
@@ -111,34 +104,39 @@ public class Handlers {
                 items.add(restaurant.getName());
             }
 
-            //Object[] sports = { "Football", "Cricket", "Squash", "Baseball", "Fencing", "Volleyball", "Basketball" };
-            JComboBox comboBox = new JComboBox(items);
+            JComboBox<String> comboBox = new JComboBox<>(items);
             comboBox.setSelectedIndex(0);
-            JOptionPane.showMessageDialog(null, comboBox, "Choose a restaurant:",
-                    JOptionPane.QUESTION_MESSAGE);
-            String selectedRestaurant = (String) comboBox.getSelectedItem();
+            JOptionPane.showMessageDialog(null, comboBox,
+                    "Choose a restaurant: ", JOptionPane.QUESTION_MESSAGE);
+            String selected = (String) comboBox.getSelectedItem();
+            itemSelected(selected, "", "");
 
-            // 3. Take that choice and pass to the ScreenLauncher method
-            // call ScreenLauncher showRestaurant method
-            // passing it the country and
-            // restaurant name
-            // Inside the show method
-            ScreenLauncher.showJapanRestaurantScreen(selectedRestaurant);
+        }
+
+        @Override
+        public void itemSelected(String restaurantChoice, String section, String country) {
+            CenterPanel.showJapanRestaurantScreen(restaurantChoice);
+
         }
     }
 
     public static class BackHandler implements ActionListener{
-        private String preferredDestination;
-
-        public BackHandler(String preferredDestination){
-            this.preferredDestination = preferredDestination;
-        }
+        private Navigable currentPage;
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(preferredDestination.equalsIgnoreCase("JapanLandingPage")){
-                ScreenLauncher.japanLandingPageLocal();
+            if(currentPage != null){
+                currentPage.printSelf();
+                currentPage.navigateBack();
             }
+        }
+
+        public void setCurrentPage(Navigable currentPage) {
+            this.currentPage = currentPage;
+        }
+
+        public Navigable getCurrentPage() {
+            return currentPage;
         }
     }
 
@@ -195,7 +193,7 @@ public class Handlers {
 
             // check if wallet is funded
             if(guiController.getPlayer().getAmountOfCash() < cost){
-                JOptionPane.showMessageDialog(null,
+                BottomRightPanel.showInformationPanel(
                         "You haven't got enough funds to purchase this food");
                 return;
             }
@@ -209,7 +207,8 @@ public class Handlers {
             guiController.getPlayer().setHealth(newHealth);
 
             // show the updated balance
-            ScreenLauncher.japanLandingPageLocal();
+            ScreenLauncher.updateTopRightPanel();
+            CenterPanel.japanLandingPageLocal();
         }
     }
 
@@ -230,7 +229,7 @@ public class Handlers {
     }
 
     public static class AttractionChoiceHandler implements
-            ActionListener{
+            ActionListener, ComboCallback{
         private GUIController guiController;
         private String country;
 
@@ -255,19 +254,88 @@ public class Handlers {
                 items.add(attraction.getName());
             }
 
-            //Object[] sports = { "Football", "Cricket", "Squash", "Baseball", "Fencing", "Volleyball", "Basketball" };
-            JComboBox comboBox = new JComboBox(items);
+            JComboBox<String> comboBox = new JComboBox<>(items);
             comboBox.setSelectedIndex(0);
-            JOptionPane.showMessageDialog(null, comboBox, "Choose an attraction",
-                    JOptionPane.QUESTION_MESSAGE);
-            String selectedAttraction = (String) comboBox.getSelectedItem();
+            JOptionPane.showMessageDialog(null, comboBox,
+                    "Choose an attraction: ", JOptionPane.QUESTION_MESSAGE);
+            String selected = (String) comboBox.getSelectedItem();
+            itemSelected(selected, "", "");
 
-            // 3. Take that choice and pass to the ScreenLauncher method
-            // call ScreenLauncher showRestaurant method
-            // passing it the country and
-            // restaurant name
-            // Inside the show method
-            ScreenLauncher.japanAttractionPage(selectedAttraction);
+            //Combo combo = new Combo("Choose an attraction:", items);
+
+            //BottomRightPanel.showComboMenuPanel(combo, this);
+
+
+
+        }
+
+        // 3. Take that choice and pass to the CenterPanel method
+        // passing it the country and
+        // restaurant name
+        // Inside the show method
+        @Override
+        public void itemSelected(String selectedAttraction, String section, String country) {
+            CenterPanel.japanAttractionPage(selectedAttraction);
+        }
+    }
+
+    public static class QuizHandler implements ActionListener{
+        private ButtonGroup buttonGroup;
+        private Quiz quiz;
+        private GUIController guiController;
+
+        public QuizHandler(ButtonGroup buttonGroup, Quiz quiz,
+                           GUIController guiController) {
+            this.buttonGroup = buttonGroup;
+            this.quiz = quiz;
+            this.guiController = guiController;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String chosenAnswer = buttonGroup.
+                    getSelection().getActionCommand();
+            if(chosenAnswer.
+                    equalsIgnoreCase(quiz.getAnswer())){
+                guiController.getPlayer().setAmountOfCash(
+                        guiController.getPlayer().getAmountOfCash() + quiz.getMoneyValue()
+                );
+                guiController.getPlayer().getTreasures().add(quiz.getTreasureValue());
+                ScreenLauncher.updateTopRightPanel();
+                BottomRightPanel.showInformationPanel("That was the correct answer!\n"+
+                        "You have been credited with $" + quiz.getMoneyValue() +
+                        "\n and with treasure named "+ quiz.getTreasureValue().getName());
+            }
+            else{
+                BottomRightPanel.showInformationPanel("That was the wrong answer!\n"+
+                        "The correct answer is " + quiz.getAnswer());
+            }
+        }
+    }
+
+    public static class ComboHandler implements ActionListener{
+
+        private JComboBox<String> combo;
+        private ComboCallback callback;
+
+        public ComboHandler(JComboBox<String> combo){
+            this.combo = combo;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String choice = (String) combo.getSelectedItem();
+            if(callback != null){
+                callback.itemSelected(choice,"", "");
+            }
+        }
+
+        public ComboCallback getCallback() {
+            return callback;
+        }
+
+        public void setCallback(ComboCallback callback) {
+            this.callback = callback;
         }
     }
 

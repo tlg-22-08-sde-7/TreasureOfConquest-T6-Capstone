@@ -1,30 +1,29 @@
-package com.treasuresconquests.guiengine.screens;
+package com.treasuresconquests.playground.centercards;
 
 import com.treasuresconquests.app.GUIController;
-import com.treasuresconquests.engine.WorldMap;
 import com.treasuresconquests.guiclient.ScreenLauncher;
 import com.treasuresconquests.guiengine.Handlers;
+import com.treasuresconquests.guiengine.Screen;
+import com.treasuresconquests.guiengine.callbacks.Navigable;
 import com.treasuresconquests.guiengine.other.PurchaseData;
+import com.treasuresconquests.playground.CenterPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
 
-public class JapanRestaurantScreen extends JPanel {
+public class JapanAttractionScreen extends JPanel implements Navigable {
 
-    private String restaurantName = "";
+    private String attractionName = "";
     private PurchaseData chosenFood = new PurchaseData();
 
     private JLabel lblAccountBalance, lblCurrentCountry;
     private JButton btnTreasures, btnXP;
     // private JButton btnAttraction, btnAirport, btnRestaurant, btnConquest;
-    private JLabel restaurant;
-    private JButton btnBack, btnExitCurrentGame, btnQuit, btnHelp;
+    private JLabel attraction;
     private JLabel question;
     private JComboBox foodMenu;
     private JButton confirmFoodChoiceButton;
@@ -32,14 +31,13 @@ public class JapanRestaurantScreen extends JPanel {
     Handlers.QuitHandler handlerQuit = new Handlers.QuitHandler();
     Handlers.HelpHandler handlerHelp = new Handlers.HelpHandler();
     Handlers.ExitCurrentGameHandler handlerExitCurrentGame = new Handlers.ExitCurrentGameHandler();
-    Handlers.BackHandler backHandler
-            = new Handlers.BackHandler("JapanLandingPage");
+
     Handlers.FoodHandler foodHandler;
     Handlers.FoodSelectionHandler foodSelectionHandler =
             new Handlers.FoodSelectionHandler(chosenFood);
     private GUIController guiController;
 
-    public JapanRestaurantScreen(GUIController guiController) {
+    public JapanAttractionScreen(GUIController guiController) {
         setLayout(null);    // set to 'null' because we need full control of the Swing layout.
         this.guiController = guiController;     // this Screen now has data, and can access methods.
 
@@ -59,35 +57,8 @@ public class JapanRestaurantScreen extends JPanel {
         question.setBounds(300, 150, 400, 50);
         question.setForeground(Color.white);
 
-//        btnAttraction = new JButton("Attractions");
-//        btnAttraction.setBounds(150, 250, 175, 50);
-//        btnAirport = new JButton("Airport");
-//        btnAirport.setBounds(425, 250, 175, 50);
-//        btnRestaurant = new JButton("Restaurant");
-//        btnRestaurant.setBounds(150, 375, 175, 50);
-//        btnConquest = new JButton("Conquest");
-//        btnConquest.setBounds(425, 375, 175, 50);
-
-        restaurant = new JLabel("");
-        restaurant.setBounds(120, 120, 650, 400);
-
-
-        btnBack = new JButton("Return to Previous \nLocation");
-        btnBack.setBounds(300, 550, 200, 50);
-        btnBack.addActionListener(backHandler);
-
-        btnExitCurrentGame = new JButton("Exit current game");
-        btnExitCurrentGame.setBounds(525, 550, 150, 50);
-        btnExitCurrentGame.addActionListener(handlerExitCurrentGame);
-
-        btnQuit = new JButton("Quit");
-        btnQuit.setBounds(700, 550, 150, 50);
-        btnQuit.addActionListener(handlerQuit);
-
-        btnHelp = new JButton("Help");
-        btnHelp.setBounds(50, 550, 150, 50);
-        btnHelp.addActionListener(handlerHelp);
-
+        attraction = new JLabel("");
+        attraction.setBounds(120, 120, 650, 400);
 
         // Position combobox
         foodMenu = new JComboBox();
@@ -98,22 +69,17 @@ public class JapanRestaurantScreen extends JPanel {
         // Add a confirm button
         confirmFoodChoiceButton = new JButton("Confirm");
         confirmFoodChoiceButton.setBounds(790, 250, 100, 50);
-        // When confirm button is clicked,
-        //  calls FoodHandler
+        // when confirm button is clicked,
+        // calls FoodHandler
         //confirmFoodChoiceButton.addActionListener(foodHandler);
 
         add(lblAccountBalance);
         add(btnTreasures);
         add(btnXP);
         add(question);
-        add(restaurant);
+        add(attraction);
         add(foodMenu);
         add(confirmFoodChoiceButton);
-
-        add(btnBack);
-        add(btnExitCurrentGame);
-        add(btnQuit);
-        add(btnHelp);
         add(lblCurrentCountry);
 
     }
@@ -147,7 +113,7 @@ public class JapanRestaurantScreen extends JPanel {
 
     public void init(String currentRestaurantName) {
         System.out.println("Restaurant chosen: " + currentRestaurantName);
-        this.restaurantName = currentRestaurantName;
+        this.attractionName = currentRestaurantName;
 
         confirmFoodChoiceButton.removeActionListener(foodHandler);
         foodHandler = new Handlers.FoodHandler(
@@ -157,7 +123,7 @@ public class JapanRestaurantScreen extends JPanel {
 
         // load the food items for the selected Restaurant
         Vector<String> items =
-                guiController.loadFoodItems(this.restaurantName,
+                guiController.loadFoodItems(this.attractionName,
                         "japan");
         // Put items into the JComboBox
         foodMenu.setModel(new DefaultComboBoxModel(items));
@@ -169,24 +135,24 @@ public class JapanRestaurantScreen extends JPanel {
         lblCurrentCountry.setText("Current Country: " +
                 guiController.getPlayer().getCurrentCountry());
         lblAccountBalance.setText("Money $" + guiController.getPlayer().getAmountOfCash());
-        question.setText(restaurantName);
+        question.setText(attractionName);
         String pathname = "";
-        if (restaurantName.equalsIgnoreCase("Ise Sueyoshi")) {
-            pathname = "resources/assets/images/japaneseRestaurant.jpg";
-        }
-        else if (restaurantName.equalsIgnoreCase("Sushisho Masa")) {
-            pathname = "resources/assets/images/japaneseRestaurant2.png";
+        if (attractionName.equalsIgnoreCase("mt fuji")) {
+            pathname = "resources/assets/images/mtFujiPicture.jpg";
         }
         Image image = null;
         // use the restaurant name given to choose the right restaurant image to show
         try {
             image = ImageIO.read(new File(pathname));
             Icon eateryIcon = new ImageIcon(image);
-            restaurant.setIcon(eateryIcon);
+            attraction.setIcon(eateryIcon);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+        guiController.getPlayer().setCurrentFeature("Attraction");
+        guiController.getPlayer().setCurrentAttraction(attractionName);
+        ScreenLauncher.updateTopRightPanel();
         repaint();
     }
 
@@ -195,4 +161,13 @@ public class JapanRestaurantScreen extends JPanel {
 
     }
 
+    @Override
+    public void navigateBack() {
+        CenterPanel.japanLandingPageLocal();
+    }
+
+    @Override
+    public void printSelf() {
+        System.out.println("Japan attraction screen");
+    }
 }

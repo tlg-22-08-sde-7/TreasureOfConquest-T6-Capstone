@@ -1,23 +1,23 @@
-package com.treasuresconquests.guiengine.screens;
+package com.treasuresconquests.playground.centercards;
 
 import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiclient.ScreenLauncher;
 import com.treasuresconquests.guiengine.Handlers;
+import com.treasuresconquests.guiengine.callbacks.Navigable;
+import com.treasuresconquests.playground.BottomRightPanel;
+import com.treasuresconquests.playground.TopRightPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-public class JapanLandingPage extends JPanel {
+public class JapanLandingPage extends JPanel implements Navigable {
 
     private JLabel lblAccountBalance, lblCurrentCountry;
     private JButton btnTreasures, btnXP;
     private JButton btnAttraction, btnAirport, btnRestaurant, btnConquest;
-    private JButton btnBack, btnExitCurrentGame,  btnQuit, btnHelp;
     private JLabel question;
 
     Handlers.QuitHandler handlerQuit = new Handlers.QuitHandler();
@@ -54,35 +54,23 @@ public class JapanLandingPage extends JPanel {
         question.setForeground(Color.white);
 
         btnAttraction = new JButton("Go to Attraction");
-        btnAttraction.setBounds(150, 250, 175, 50);
+        btnAttraction.setBounds(660, 625, 125, 50);
         btnAttraction.addActionListener(attractionChoiceHandler);
+
         btnAirport = new JButton("Explore Airport");
-        btnAirport.setBounds(425, 250, 175, 50);
+        btnAirport.setBounds(60, 625, 125, 50);
+
         btnRestaurant = new JButton("Go to Restaurant");
-        btnRestaurant.setBounds(150, 375, 175, 50);
+        btnRestaurant.setBounds(460, 625, 125, 50);
         btnRestaurant.addActionListener(restaurantChoiceHandler);
+
         btnConquest = new JButton("Go to Hotel");
-        btnConquest.setBounds(425, 375, 175, 50);
-
-        btnBack = new JButton("Return to Previous \nLocation");
-        btnBack.setBounds(300, 550, 200, 50);
-
-        btnExitCurrentGame = new JButton("Exit current game");
-        btnExitCurrentGame.setBounds(525, 550, 150, 50);
-        btnExitCurrentGame.addActionListener(handlerExitCurrentGame);
-
-        btnQuit = new JButton("Quit");
-        btnQuit.setBounds(700, 550, 150, 50);
-        btnQuit.addActionListener(handlerQuit);
-
-        btnHelp = new JButton("Help");
-        btnHelp.setBounds(50, 550, 150, 50);
-        btnHelp.addActionListener(handlerHelp);
+        btnConquest.setBounds(260, 625, 125, 50);
 
         add(lblAccountBalance); add(btnTreasures); add(btnXP); add(question);
         add(btnAttraction); add(btnAirport); add(btnRestaurant); add(btnConquest);
-        add(btnBack); add(btnExitCurrentGame); add(btnQuit); add(btnHelp);
         add(lblCurrentCountry);
+
 
     }
 
@@ -119,6 +107,10 @@ public class JapanLandingPage extends JPanel {
                 guiController.getPlayer().getCurrentCountry());
         guiController.getPlayer().setAmountOfCash(guiController.getPlayer().getAmountOfCash() - 1000 );
         lblAccountBalance.setText("Money $" + guiController.getPlayer().getAmountOfCash());
+        BottomRightPanel.showInformationPanel("Hi, I am the tour guide. \n" +
+                "Would you like to visit an attraction, airport, restaurant, or hotel? ");
+        guiController.getPlayer().setCurrentFeature("Airport");
+        ScreenLauncher.updateTopRightPanel();
 
     }
     public void setController(GUIController controller) {
@@ -131,6 +123,19 @@ public class JapanLandingPage extends JPanel {
         lblCurrentCountry.setText("Current Country: " +
                 guiController.getPlayer().getCurrentCountry());
         lblAccountBalance.setText("Money $" + guiController.getPlayer().getAmountOfCash());
+        guiController.getPlayer().setCurrentFeature("Airport");
+        guiController.getPlayer().setCurrentAttraction("Tokyo Airport");
 
+        ScreenLauncher.updateTopRightPanel();
+    }
+
+    @Override
+    public void navigateBack() {
+
+    }
+
+    @Override
+    public void printSelf() {
+        System.out.println("Japan landing page");
     }
 }
