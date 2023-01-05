@@ -1,8 +1,11 @@
 package com.treasuresconquests.guiclient;
 
 import com.treasuresconquests.app.GUIController;
-import com.treasuresconquests.guiengine.other.Country;
-import com.treasuresconquests.guiengine.screens.*;
+import com.treasuresconquests.playground.BottomPanel;
+import com.treasuresconquests.playground.BottomRightPanel;
+import com.treasuresconquests.playground.CenterPanel;
+import com.treasuresconquests.playground.TopRightPanel;
+import com.treasuresconquests.playground.centercards.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,25 +14,10 @@ public class ScreenLauncher {
 
     // tagNames for various screens
     // tagNames declared once to be used anywhere
-    static JPanel cards; //a panel that uses CardLayout
-    final static String STARTSCREEN = "StartScreen";
-    final static String GAMESCREEN = "GameScreen";
-    final static String HELPSCREEN = "HelpScreen";
-    final static String MAINLANDINGPAGESCREEN = "MainLandingPageScreen";
-    final static String JAPANLANDINGPAGE = "JapanLandingPage";
-    final static String MEXICOLANDINGPAGE = "MexicoLandingPage";
-    final static String NIGERIALANDINGPAGE = "NigeriaLandingPage";
-    final static String FRANCELANDINGPAGE = "FranceLandingPage";
-    final static String JAPANRESTAURANTPAGE = "JapanRestaurantPage";
-    final static String JAPANATTRACTIONPAGE = "JapanAttractionPage";
-
-    private static StartScreen startScreen;
-    private static GameScreen gameScreen;
-    private static HelpScreen helpScreen;
-    private static MainLandingPageScreen mainLandingScreen;
-    private static JapanLandingPage japanLandingScreen;
-    private static JapanRestaurantScreen japanRestaurantScreen;
-    private static JapanAttractionScreen japanAttractionScreen;
+    private static BottomPanel bottomPanel;
+    private static BottomRightPanel bottomRightPanel;
+    private static CenterPanel centerPanel;
+    private static TopRightPanel topRightPanel;
 
     public static void main(String[] args) {
         /* Use an appropriate Look and Feel */
@@ -60,8 +48,9 @@ public class ScreenLauncher {
     private static void createAndShowGUI() {
         //Create and set up the window / JFrame.
         JFrame frame = new JFrame("Treasures of Conquests");
+        frame.setLayout(null);
         // was ->> frame.setSize(900, 700);
-        frame.setSize(1100, 800);
+        frame.setSize(1200, 850);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
@@ -79,80 +68,27 @@ public class ScreenLauncher {
         // Create the "cards".
         // creating a new JPanel object, and initializing the screens.
         GUIController guiController = new GUIController();
-        startScreen = new StartScreen();
-        gameScreen = new GameScreen();
-        helpScreen = new HelpScreen();
-        mainLandingScreen = new MainLandingPageScreen(guiController); // this screen has access to the data
-        japanLandingScreen = new JapanLandingPage(guiController);
-        japanRestaurantScreen = new JapanRestaurantScreen(guiController);
-        japanAttractionScreen = new JapanAttractionScreen(guiController);
-        // MexicoLandingPage card6 = new MexicoLandingPage(guiController);
+        centerPanel = new CenterPanel(guiController);
+        bottomPanel = new BottomPanel();
+        topRightPanel = new TopRightPanel(guiController);
+        bottomRightPanel = new BottomRightPanel(guiController);
 
-        // Create the panel that contains the "cards".
-        // CardLayout is a class in Swing that manages the display of each card, and
-        // JPanel uses CardLayout to manage the display of its children.
-        cards = new JPanel(new CardLayout());   // 'cards' are aka parent JPanel.
-        // cards.setSize(900, 700);
-        cards.add(startScreen, STARTSCREEN);  // associating the tagNames to cards JPanel
-        cards.add(gameScreen, GAMESCREEN);
-        cards.add(helpScreen, HELPSCREEN);
-        cards.add(mainLandingScreen, MAINLANDINGPAGESCREEN);
-        cards.add(japanLandingScreen, JAPANLANDINGPAGE);
-        cards.add(japanRestaurantScreen, JAPANRESTAURANTPAGE);
-        cards.add(japanAttractionScreen, JAPANATTRACTIONPAGE);
+        centerPanel.setBounds(0,0,900,700);
+        bottomPanel.setBounds(0,701, 900,150);
+        topRightPanel.setBounds(901, 0, 300, 350);
+        bottomRightPanel.setBounds(901, 351, 300, 500);
+
 
         // parent added to window.
         // contentPane is the Bigger JPanel (JFrame) that holds cards,
         // and centers the children
-        contentPane.add(cards, BorderLayout.CENTER);
+        contentPane.add(centerPanel);
+        contentPane.add(bottomPanel);
+        contentPane.add(topRightPanel);
+        contentPane.add(bottomRightPanel);
     }
 
-    public static void showGameScreen() {
-        // to show new screen, CardLayout is fetched 1st,
-        // then told to show a new screen using the tagName
-        CardLayout cl = (CardLayout) (cards.getLayout()); // cast give ou the type you want.
-        // was ->> cl.show(cards, GAMESCREEN);
-        cl.show(cards, MAINLANDINGPAGESCREEN);
-    }
 
-    public static void showStartScreen() {
-        CardLayout cl = (CardLayout) (cards.getLayout());
-        cl.show(cards, STARTSCREEN);
-    }
-
-    public static void showJapanRestaurantScreen(String restaurant) {
-        CardLayout cl = (CardLayout) (cards.getLayout());
-        japanRestaurantScreen.init(restaurant);
-        cl.show(cards, JAPANRESTAURANTPAGE);
-    }
-
-    public static void showHelpScreen() {
-        CardLayout cl = (CardLayout) (cards.getLayout());
-        cl.show(cards, HELPSCREEN);
-    }
-
-    public static void mainLandingPageScreen() {
-        CardLayout cl = (CardLayout) cards.getLayout();
-        cl.show(cards, MAINLANDINGPAGESCREEN);
-    }
-
-    public static void japanLandingPage() {
-        CardLayout cl = (CardLayout) cards.getLayout();
-        japanLandingScreen.visaOffice();
-        cl.show(cards, JAPANLANDINGPAGE);
-    }
-
-    public static void japanLandingPageLocal() {
-        CardLayout cl = (CardLayout) cards.getLayout();
-        japanLandingScreen.localTransit();
-        cl.show(cards, JAPANLANDINGPAGE);
-    }
-
-    public static void japanAttractionPage(String selectedAttraction) {
-        CardLayout cl = (CardLayout) cards.getLayout();
-        japanAttractionScreen.init(selectedAttraction);
-        cl.show(cards, JAPANATTRACTIONPAGE);
-    }
 
     private static void center(JFrame frame) {
 
@@ -173,11 +109,7 @@ public class ScreenLauncher {
         frame.setLocation(x, 15);
     }
 
-
-    public static void restartSession() {
-        GUIController controller = new GUIController();
-        mainLandingScreen.setController(controller);
-        japanLandingScreen.setController(controller);
+    public static void updateTopRightPanel() {
+        topRightPanel.updateValues();
     }
-
 }
