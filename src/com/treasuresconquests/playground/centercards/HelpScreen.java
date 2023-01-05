@@ -1,13 +1,17 @@
-package com.treasuresconquests.guiengine.screens;
+package com.treasuresconquests.playground.centercards;
 
 import com.treasuresconquests.guiengine.Handlers;
+import com.treasuresconquests.guiengine.callbacks.Navigable;
+import com.treasuresconquests.guiengine.callbacks.NavigbleSubscriber;
+import com.treasuresconquests.playground.CenterPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 
 // extends and has all methods of JPanel
-public class HelpScreen extends JPanel {
+public class HelpScreen extends JPanel
+        implements Navigable, NavigbleSubscriber {
 
     private JTextArea instructionArea;
     private JButton backButton;
@@ -16,7 +20,7 @@ public class HelpScreen extends JPanel {
     private final String instructionsFileName = "instructions.txt";
     private Font txtFont = new Font("Times New Roman", Font.PLAIN, 30);
     Handlers.StartHandler handlerStart = new Handlers.StartHandler();
-
+    private Navigable currentScreen;
     // ctor
     public HelpScreen(){
         setLayout(null);    // set to 'null' because we need full control of the Swing layout.
@@ -36,6 +40,7 @@ public class HelpScreen extends JPanel {
         add(scrollPane);
         add(backButton);
         add(otherUse);
+        CenterPanel.subscribe(this);
     }
 
     private String readFileContents() {
@@ -53,5 +58,24 @@ public class HelpScreen extends JPanel {
             e.printStackTrace();
         }
         return contents;
+    }
+
+    @Override
+    public void currentPage(Navigable screen) {
+        if(screen instanceof HelpScreen) {
+            return;
+        }
+        this.currentScreen = screen;
+    }
+
+    @Override
+    public void navigateBack() {
+        String tagName = CenterPanel.findTagName(this.currentScreen);
+        CenterPanel.showPage(tagName);
+    }
+
+    @Override
+    public void printSelf() {
+        System.out.println("Help screen");
     }
 }

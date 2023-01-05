@@ -1,17 +1,17 @@
-package com.treasuresconquests.guiengine.screens;
+package com.treasuresconquests.playground.centercards;
 
 import com.treasuresconquests.guiengine.Handlers;
+import com.treasuresconquests.guiengine.callbacks.Navigable;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class StartScreen extends JPanel {
+public class StartScreen extends JPanel implements Navigable {
 
     // initializing objects of the Event Handlers
     Handlers.StartHandler handlerStart = new Handlers.StartHandler();
-    Handlers.LoadHandler handlerLoad = new Handlers.LoadHandler();
-    Handlers.InstructionsHandler handlerInstructions = new Handlers.InstructionsHandler();
     Handlers.QuitHandler handlerQuit = new Handlers.QuitHandler();
+    Handlers.HelpHandler helpHandler = new Handlers.HelpHandler();
 
     JPanel titlePanelTreasures, titlePanelConquests, titlePanelButtons
             , mainTextPanel, persistPanelButtons;
@@ -19,7 +19,7 @@ public class StartScreen extends JPanel {
     JLabel titleLabelTreasures, titleLabelConquests;
     Font titleFont = new Font("Times New Roman", Font.PLAIN, 76);
 
-    JButton btnStart, btnLoad, btnInstructions, btnQuit
+    JButton btnStart, btnInstructions, btnQuit
             , btnHelp, btnExitCurrentGame;
     Font btnFont = new Font("Times New Roman", Font.PLAIN, 18);
 
@@ -67,17 +67,17 @@ public class StartScreen extends JPanel {
         btnStart.setFont(btnFont);
         btnStart.addActionListener(handlerStart);
 
-        btnLoad = new JButton("Load Game");
-        btnLoad.setBackground(Color.darkGray);
-        btnLoad.setForeground(Color.white);
-        btnLoad.setFont(btnFont);
-        btnLoad.addActionListener(handlerLoad);
+//        btnLoad = new JButton("Load Game");
+//        btnLoad.setBackground(Color.darkGray);
+//        btnLoad.setForeground(Color.white);
+//        btnLoad.setFont(btnFont);
+//        btnLoad.addActionListener(handlerLoad);
 
         btnInstructions = new JButton("Read Instructions");
         btnInstructions.setBackground(Color.darkGray);
         btnInstructions.setForeground(Color.white);
         btnInstructions.setFont(btnFont);
-        btnInstructions.addActionListener(handlerInstructions);
+        btnInstructions.addActionListener(helpHandler);
 
         btnQuit = new JButton("Quit ToC");
         btnQuit.setBackground(Color.black);
@@ -87,7 +87,6 @@ public class StartScreen extends JPanel {
 
         // fill button panel
         titlePanelButtons.add(btnStart);
-        titlePanelButtons.add(btnLoad);
         titlePanelButtons.add(btnInstructions);
         titlePanelButtons.add(btnQuit);
 
@@ -100,4 +99,13 @@ public class StartScreen extends JPanel {
         setBackground(Color.black);
     }
 
+    @Override
+    public void navigateBack() {
+
+    }
+
+    @Override
+    public void printSelf() {
+        System.out.println("Start screen");
+    }
 }

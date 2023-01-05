@@ -1,4 +1,4 @@
-package com.treasuresconquests.guiengine.screens;
+package com.treasuresconquests.playground.centercards;
 
 import com.treasuresconquests.guiengine.Handlers;
 
