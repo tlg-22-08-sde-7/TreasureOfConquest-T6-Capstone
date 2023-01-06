@@ -1,10 +1,14 @@
 package com.treasuresconquests.playground.centercards;
 
+import com.treasuresconquests.guiclient.ScreenLauncher;
 import com.treasuresconquests.guiengine.Handlers;
 import com.treasuresconquests.guiengine.callbacks.Navigable;
+import com.treasuresconquests.guiengine.other.Music;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class StartScreen extends JPanel implements Navigable {
 
@@ -14,13 +18,13 @@ public class StartScreen extends JPanel implements Navigable {
     Handlers.HelpHandler helpHandler = new Handlers.HelpHandler();
 
     JPanel titlePanelTreasures, titlePanelConquests, titlePanelButtons
-            , mainTextPanel, persistPanelButtons;
+            , mainTextPanel, persistPanelButtons, mutePanel;
 
     JLabel titleLabelTreasures, titleLabelConquests;
     Font titleFont = new Font("Times New Roman", Font.PLAIN, 76);
 
     JButton btnStart, btnInstructions, btnQuit
-            , btnHelp, btnExitCurrentGame;
+            , btnHelp, btnExitCurrentGame, btnMute;
     Font btnFont = new Font("Times New Roman", Font.PLAIN, 18);
 
     JTextArea mainTextArea;
@@ -35,6 +39,8 @@ public class StartScreen extends JPanel implements Navigable {
 
         titlePanelTreasures.setBackground(Color.black);
         titlePanelTreasures.setLayout(new FlowLayout());
+
+
 
         titleLabelTreasures = new JLabel("TREASURES of...");
         titleLabelTreasures.setForeground(Color.yellow);
@@ -54,6 +60,7 @@ public class StartScreen extends JPanel implements Navigable {
 
         titlePanelConquests.add(titleLabelConquests);
 
+
         //buttons panel
         titlePanelButtons = new JPanel();
         titlePanelButtons.setBounds(150, 450, 600, 100);
@@ -66,6 +73,9 @@ public class StartScreen extends JPanel implements Navigable {
         btnStart.setForeground(Color.white);
         btnStart.setFont(btnFont);
         btnStart.addActionListener(handlerStart);
+        ScreenLauncher.frameState = 1;
+
+
 
 //        btnLoad = new JButton("Load Game");
 //        btnLoad.setBackground(Color.darkGray);
@@ -78,6 +88,7 @@ public class StartScreen extends JPanel implements Navigable {
         btnInstructions.setForeground(Color.white);
         btnInstructions.setFont(btnFont);
         btnInstructions.addActionListener(helpHandler);
+
 
         btnQuit = new JButton("Quit ToC");
         btnQuit.setBackground(Color.black);
@@ -97,6 +108,9 @@ public class StartScreen extends JPanel implements Navigable {
         add(titlePanelConquests);
         add(titlePanelButtons);
         setBackground(Color.black);
+
+
+
     }
 
     @Override

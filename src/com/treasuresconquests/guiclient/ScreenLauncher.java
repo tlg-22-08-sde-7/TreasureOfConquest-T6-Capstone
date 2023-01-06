@@ -18,6 +18,7 @@ public class ScreenLauncher {
     private static BottomRightPanel bottomRightPanel;
     private static CenterPanel centerPanel;
     private static TopRightPanel topRightPanel;
+    public static int frameState = 1;
 
     public static void main(String[] args) {
         /* Use an appropriate Look and Feel */

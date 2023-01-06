@@ -98,6 +98,7 @@ public class JapanLandingPage extends JPanel implements Navigable {
         jFrame.getContentPane().add(jlp);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setVisible(true);
+
     }
 
     public void visaOffice() {

@@ -92,6 +92,7 @@ public class CenterPanel extends JPanel {
             CardLayout cl = (CardLayout) (cards.getLayout());
             cl.show(cards, STARTSCREEN);
             notifySubscribers(startScreen);
+
         }
     }
 
