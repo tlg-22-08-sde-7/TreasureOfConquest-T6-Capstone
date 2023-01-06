@@ -5,10 +5,7 @@ import com.treasuresconquests.engine.WorldMap;
 import com.treasuresconquests.guiclient.ScreenLauncher;
 import com.treasuresconquests.guiengine.callbacks.ComboCallback;
 import com.treasuresconquests.guiengine.callbacks.Navigable;
-import com.treasuresconquests.guiengine.other.Combo;
-import com.treasuresconquests.guiengine.other.Country;
-import com.treasuresconquests.guiengine.other.PurchaseData;
-import com.treasuresconquests.guiengine.other.Quiz;
+import com.treasuresconquests.guiengine.other.*;
 import com.treasuresconquests.playground.BottomRightPanel;
 import com.treasuresconquests.playground.CenterPanel;
 
@@ -21,13 +18,24 @@ import java.util.List;
 import java.util.Vector;
 
 public class Handlers {
+    public static Music music = new Music();
 
 
     // Static method that can be called from outside
     public static class StartHandler implements ActionListener {
 
+
         @Override
         public void actionPerformed(ActionEvent e) {
+
+            ScreenLauncher.frameState = 2;
+            //sound
+
+            if (Music.musicOn == true){
+                Music.stopMusic();
+                Music.playMusic("com/treasuresconquests/guiengine/Songs/nyc.wav", -1);
+            }
+
             //ScreenLauncher.showGameScreen();
             CenterPanel.mainLandingPageScreen();
         }
@@ -51,6 +59,15 @@ public class Handlers {
         }
     }
 
+    public static class MuteHandler implements ActionListener {
+
+        // prints help with commands / option for instructions(?)
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            CenterPanel.showHelpScreen();
+        }
+    }
+
     public static class ExitCurrentGameHandler implements ActionListener {
 
         // exits to the title/start screen
@@ -66,11 +83,19 @@ public class Handlers {
 
         public JapanVisitHandler(GUIController guiController){
             this.guiController = guiController;
+
         }
         @Override
         public void actionPerformed(ActionEvent e) {
+            ScreenLauncher.frameState = 3;
             if (guiController.getPlayer().getAmountOfCash() >= 1000) {
                 CenterPanel.japanLandingPage();
+                if (Music.musicClip.isActive()){
+                    Music.stopMusic();
+                    Music.playMusic("com/treasuresconquests/guiengine/Songs/Tokyo.wav",-1);
+                }
+            /*    music.stopMusic();
+                Music.playMusic("com/treasuresconquests/guiengine/Songs/Tokyo.wav", -1);*/
             }
             else {
                 BottomRightPanel.showInformationPanel("You do not have enough funds for this trip.");
@@ -98,6 +123,7 @@ public class Handlers {
                     = guiController.getRestaurantsForCountry(country);
             // 2. show a JOptionPane with combo box of
             // restaurant choices
+
             Vector<String> items = new Vector<>();
             for (WorldMap.Countries.Restaurant restaurant: restaurants
                  ) {

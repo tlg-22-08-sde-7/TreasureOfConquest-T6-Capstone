@@ -1,5 +1,7 @@
 package com.treasuresconquests.guiengine;
 
+import com.treasuresconquests.guiengine.other.Music;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -124,6 +126,8 @@ public class Screen {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            Music.stopMusic();
+            Music.playMusic("com/treasuresconquests/guiengine/Songs/example.wav", -1);
             launchGameScreen();
         }
     }

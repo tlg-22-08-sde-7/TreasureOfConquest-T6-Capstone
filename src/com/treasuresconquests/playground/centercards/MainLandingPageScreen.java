@@ -29,7 +29,6 @@ public class MainLandingPageScreen extends JPanel implements Navigable {
     public MainLandingPageScreen(GUIController guiController) {
         setLayout(null);    // set to 'null' because we need full control of the Swing layout.
         this.guiController = guiController;     // this Screen now has data, and can access methods.
-
         japanVisitHandler = new Handlers.JapanVisitHandler(guiController);
         lblCurrentCountry = new JLabel("Current Country: " + guiController.getPlayer().getCurrentCountry());
         lblCurrentCountry.setBounds(25, 45, 200, 50);
