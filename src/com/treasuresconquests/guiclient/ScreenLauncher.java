@@ -79,7 +79,6 @@ public class ScreenLauncher {
         topRightPanel.setBounds(901, 0, 300, 350);
         bottomRightPanel.setBounds(901, 351, 300, 500);
 
-
         // parent added to window.
         // contentPane is the Bigger JPanel (JFrame) that holds cards,
         // and centers the children
@@ -88,8 +87,6 @@ public class ScreenLauncher {
         contentPane.add(topRightPanel);
         contentPane.add(bottomRightPanel);
     }
-
-
 
     private static void center(JFrame frame) {
 

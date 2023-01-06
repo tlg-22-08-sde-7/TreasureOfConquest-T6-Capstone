@@ -27,10 +27,15 @@ public class JapanAttractionScreen extends JPanel implements Navigable {
     private JLabel question;
     private JComboBox foodMenu;
     private JButton confirmFoodChoiceButton;
+    private JButton btnAttraction, btnAirport, btnRestaurant, btnConquest;
+
+    private  String pathname = "";
 
     Handlers.QuitHandler handlerQuit = new Handlers.QuitHandler();
     Handlers.HelpHandler handlerHelp = new Handlers.HelpHandler();
     Handlers.ExitCurrentGameHandler handlerExitCurrentGame = new Handlers.ExitCurrentGameHandler();
+    Handlers.AttractionChoiceHandler attractionChoiceHandler;
+    Handlers.RestaurantChoiceHandler restaurantChoiceHandler;
 
     Handlers.FoodHandler foodHandler;
     Handlers.FoodSelectionHandler foodSelectionHandler =
@@ -41,24 +46,46 @@ public class JapanAttractionScreen extends JPanel implements Navigable {
         setLayout(null);    // set to 'null' because we need full control of the Swing layout.
         this.guiController = guiController;     // this Screen now has data, and can access methods.
 
-        lblCurrentCountry = new JLabel("Current Country: " + guiController.getPlayer().getCurrentCountry());
-        lblCurrentCountry.setBounds(25, 45, 200, 50);
-        lblCurrentCountry.setForeground(Color.white);
+        restaurantChoiceHandler =
+                new Handlers.RestaurantChoiceHandler(guiController, "japan");
+//        attractionChoiceHandler =
+//                new Handlers.AttractionChoiceHandler(guiController, "japan");
 
-        lblAccountBalance = new JLabel("Money $" + guiController.getPlayer().getAmountOfCash());
-        lblAccountBalance.setBounds(350, 45, 150, 50);
-        lblAccountBalance.setForeground(Color.white);
+//        lblCurrentCountry = new JLabel("Current Country: " + guiController.getPlayer().getCurrentCountry());
+//        lblCurrentCountry.setBounds(25, 45, 200, 50);
+//        lblCurrentCountry.setForeground(Color.white);
+//
+//        lblAccountBalance = new JLabel("Money $" + guiController.getPlayer().getAmountOfCash());
+//        lblAccountBalance.setBounds(350, 45, 150, 50);
+//        lblAccountBalance.setForeground(Color.white);
+//
+//        btnTreasures = new JButton("Treasures");
+//        btnTreasures.setBounds(525, 45, 150, 50);
+//        btnXP = new JButton("XP");
+//        btnXP.setBounds(700, 45, 150, 50);
+//        question = new JLabel("");
+//        question.setBounds(300, 150, 400, 50);
+//        question.setForeground(Color.white);
 
-        btnTreasures = new JButton("Treasures");
-        btnTreasures.setBounds(525, 45, 150, 50);
-        btnXP = new JButton("XP");
-        btnXP.setBounds(700, 45, 150, 50);
-        question = new JLabel("");
-        question.setBounds(300, 150, 400, 50);
-        question.setForeground(Color.white);
+//        btnAttraction = new JButton("Go to Attraction");
+//        btnAttraction.setBounds(660, 625, 125, 50);
+//        btnAttraction.addActionListener(attractionChoiceHandler);
+
+        btnAirport = new JButton("Explore Airport");
+        btnAirport.setBounds(60, 625, 125, 50);
+
+        btnRestaurant = new JButton("Go to Restaurant");
+        btnRestaurant.setBounds(460, 625, 125, 50);
+        btnRestaurant.addActionListener(restaurantChoiceHandler);
+
+        btnConquest = new JButton("Go to Hotel");
+        btnConquest.setBounds(260, 625, 125, 50);
 
         attraction = new JLabel("");
         attraction.setBounds(120, 120, 650, 400);
+
+        // add(btnAttraction);
+        add(btnAirport); add(btnRestaurant); add(btnConquest);
 
         // Position combobox
         foodMenu = new JComboBox();
@@ -73,14 +100,14 @@ public class JapanAttractionScreen extends JPanel implements Navigable {
         // calls FoodHandler
         //confirmFoodChoiceButton.addActionListener(foodHandler);
 
-        add(lblAccountBalance);
-        add(btnTreasures);
-        add(btnXP);
-        add(question);
-        add(attraction);
-        add(foodMenu);
-        add(confirmFoodChoiceButton);
-        add(lblCurrentCountry);
+//        add(lblAccountBalance);
+//        add(btnTreasures);
+//        add(btnXP);
+//        add(question);
+//        add(attraction);
+//        add(foodMenu);
+//        add(confirmFoodChoiceButton);
+//        add(lblCurrentCountry);
 
     }
 
@@ -91,7 +118,7 @@ public class JapanAttractionScreen extends JPanel implements Navigable {
         super.paintComponent(g);
         Image image = null;
         try {
-            image = ImageIO.read(new File("resources/assets/images/japanLanding.jpg"));
+            image = ImageIO.read(new File(pathname));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -116,9 +143,9 @@ public class JapanAttractionScreen extends JPanel implements Navigable {
         this.attractionName = currentRestaurantName;
 
         confirmFoodChoiceButton.removeActionListener(foodHandler);
-        foodHandler = new Handlers.FoodHandler(
-                guiController, "japan",
-                currentRestaurantName, this.chosenFood);
+//        foodHandler = new Handlers.FoodHandler(
+//                guiController, "japan",
+//                currentRestaurantName, this.chosenFood);
         confirmFoodChoiceButton.addActionListener(foodHandler);
 
         // load the food items for the selected Restaurant
@@ -132,24 +159,24 @@ public class JapanAttractionScreen extends JPanel implements Navigable {
         }
 
         guiController.getPlayer().setCurrentCountry("Japan");
-        lblCurrentCountry.setText("Current Country: " +
-                guiController.getPlayer().getCurrentCountry());
-        lblAccountBalance.setText("Money $" + guiController.getPlayer().getAmountOfCash());
-        question.setText(attractionName);
-        String pathname = "";
+//        lblCurrentCountry.setText("Current Country: " +
+//                guiController.getPlayer().getCurrentCountry());
+//        lblAccountBalance.setText("Money $" + guiController.getPlayer().getAmountOfCash());
+        //question.setText(attractionName);
+
         if (attractionName.equalsIgnoreCase("mt fuji")) {
             pathname = "resources/assets/images/mtFujiPicture.jpg";
         }
-        Image image = null;
-        // use the restaurant name given to choose the right restaurant image to show
-        try {
-            image = ImageIO.read(new File(pathname));
-            Icon eateryIcon = new ImageIcon(image);
-            attraction.setIcon(eateryIcon);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        Image image = null;
+//        // use the restaurant name given to choose the right restaurant image to show
+//        try {
+//            image = ImageIO.read(new File(pathname));
+//            Icon eateryIcon = new ImageIcon(image);
+//            attraction.setIcon(eateryIcon);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         guiController.getPlayer().setCurrentFeature("Attraction");
         guiController.getPlayer().setCurrentAttraction(attractionName);
         ScreenLauncher.updateTopRightPanel();

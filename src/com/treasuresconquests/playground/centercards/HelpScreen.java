@@ -19,8 +19,8 @@ public class HelpScreen extends JPanel
     private JScrollPane scrollPane;
     private final String instructionsFileName = "instructions.txt";
     private Font txtFont = new Font("Times New Roman", Font.PLAIN, 30);
-    Handlers.StartHandler handlerStart = new Handlers.StartHandler();
     private Navigable currentScreen;
+    private Navigable previousScreen;
     // ctor
     public HelpScreen(){
         setLayout(null);    // set to 'null' because we need full control of the Swing layout.
@@ -30,16 +30,9 @@ public class HelpScreen extends JPanel
         instructionArea.setFont(txtFont);
         scrollPane = new JScrollPane(instructionArea); // enables JText area to be scrollable
         scrollPane.setBounds(100, 100, 600, 400); // x is horizontal alignment, y is vertical.
-        backButton = new JButton("Back to Current Game");
-        backButton.setBounds(200, 550, 300, 50);
-        backButton.addActionListener(handlerStart);
-        otherUse = new JButton("Other Use");
-        otherUse.setBounds(550, 550, 100, 50);
 
         //  JPanel has a 'add' method.  HelpScreen ctor components were initialized and added to JPanel.
         add(scrollPane);
-        add(backButton);
-        add(otherUse);
         CenterPanel.subscribe(this);
     }
 
@@ -63,14 +56,14 @@ public class HelpScreen extends JPanel
     @Override
     public void currentPage(Navigable screen) {
         if(screen instanceof HelpScreen) {
-            return;
+            this.previousScreen = currentScreen;
         }
         this.currentScreen = screen;
     }
 
     @Override
     public void navigateBack() {
-        String tagName = CenterPanel.findTagName(this.currentScreen);
+        String tagName = CenterPanel.findTagName(this.previousScreen);
         CenterPanel.showPage(tagName);
     }
 

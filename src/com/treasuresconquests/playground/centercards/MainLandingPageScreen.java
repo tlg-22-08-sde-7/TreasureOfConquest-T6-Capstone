@@ -30,23 +30,23 @@ public class MainLandingPageScreen extends JPanel implements Navigable {
         setLayout(null);    // set to 'null' because we need full control of the Swing layout.
         this.guiController = guiController;     // this Screen now has data, and can access methods.
         japanVisitHandler = new Handlers.JapanVisitHandler(guiController);
-        lblCurrentCountry = new JLabel("Current Country: " + guiController.getPlayer().getCurrentCountry());
-        lblCurrentCountry.setBounds(25, 45, 200, 50);
-        lblCurrentCountry.setForeground(Color.white);
-
-        lblAccountBalance = new JLabel("Money $" + guiController.getPlayer().getAmountOfCash());
-        lblAccountBalance.setBounds(350, 45, 150, 50);
-        lblAccountBalance.setForeground(Color.white);
-
-        btnTreasures = new JButton("Treasures");
-        btnTreasures.setBounds(525, 45, 150, 50);
-
-        btnXP = new JButton("XP");
-        btnXP.setBounds(700, 45, 150, 50);
-
-        question = new JLabel("Where would you like to visit ?");
-        question.setBounds(300, 550, 400, 50);
-        question.setForeground(Color.white);
+//        lblCurrentCountry = new JLabel("Current Country: " + guiController.getPlayer().getCurrentCountry());
+//        lblCurrentCountry.setBounds(25, 45, 200, 50);
+//        lblCurrentCountry.setForeground(Color.white);
+//
+//        lblAccountBalance = new JLabel("Money $" + guiController.getPlayer().getAmountOfCash());
+//        lblAccountBalance.setBounds(350, 45, 150, 50);
+//        lblAccountBalance.setForeground(Color.white);
+//
+//        btnTreasures = new JButton("Treasures");
+//        btnTreasures.setBounds(525, 45, 150, 50);
+//
+//        btnXP = new JButton("XP");
+//        btnXP.setBounds(700, 45, 150, 50);
+//
+//        question = new JLabel("Where would you like to visit ?");
+//        question.setBounds(300, 550, 400, 50);
+//        question.setForeground(Color.white);
 
         btnFrance = new JButton("France");
         btnFrance.setBounds(60, 625, 125, 50);
@@ -62,13 +62,10 @@ public class MainLandingPageScreen extends JPanel implements Navigable {
         btnNigeria.setBounds(260, 625, 125, 50);
 
 
-add(lblAccountBalance); add(btnTreasures); add(btnXP); add(question);
+//add(lblAccountBalance); add(btnTreasures); add(btnXP); add(question);
 add(btnFrance); add(btnJapan); add(btnMexico); add(btnNigeria);
 
-add(lblCurrentCountry);
-
-
-
+//add(lblCurrentCountry);
     }
 
     @Override

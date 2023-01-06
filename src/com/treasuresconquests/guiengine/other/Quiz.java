@@ -18,6 +18,14 @@ public class Quiz extends Data{
         this.treasureValue = treasureValue;
     }
 
+    public Quiz(RiddlesTreasures riddles) {
+        super(riddles.getRiddle().getText(),
+                Utilities.convertListToVector(riddles.getRiddle().getOptions()));
+        this.answer = riddles.getRiddle().getAnswer();
+        this.moneyValue = riddles.getTreasure().getValue();
+        this.treasureValue = riddles.getTreasure();
+    }
+
     public int getMoneyValue() {
         return moneyValue;
     }
@@ -40,5 +48,15 @@ public class Quiz extends Data{
 
     public void setTreasureValue(WorldMap.Countries.Attraction.Treasures treasureValue) {
         this.treasureValue = treasureValue;
+    }
+
+    @Override
+    public String toString() {
+        return "Quiz{" +
+                "question='" + getQuestion() + '\'' +
+                ", answer=" + getAnswer() +
+                ", moneyValue=" + moneyValue +
+                ", treasureValue=" + treasureValue.getName() +
+                '}';
     }
 }

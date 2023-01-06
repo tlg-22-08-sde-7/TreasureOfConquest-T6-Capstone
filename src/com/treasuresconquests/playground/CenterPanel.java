@@ -31,7 +31,7 @@ public class CenterPanel extends JPanel {
 
     private static CardLayout cardLayout;
 
-    private GUIController controller;
+    private static  GUIController controller;
 
     private static CenterPanel cards;
 
@@ -42,12 +42,12 @@ public class CenterPanel extends JPanel {
     }
 
     public CenterPanel(GUIController controller){
-        this.controller = controller;
+        controller = controller;
         cardLayout = new CardLayout();
         setLayout(cardLayout);
         cards = this;
 
-        startScreen = new StartScreen();
+        startScreen = new StartScreen(controller);
         gameScreen = new GameScreen();
         helpScreen = new HelpScreen();
         mainLandingScreen = new MainLandingPageScreen(controller); // this screen has access to the data
@@ -106,7 +106,7 @@ public class CenterPanel extends JPanel {
     public static void showHelpScreen() {
         CardLayout cl = (CardLayout) (cards.getLayout());
         cl.show(cards, HELPSCREEN);
-        //notifySubscribers(helpScreen);
+        notifySubscribers(helpScreen);
     }
 
     public static void mainLandingPageScreen() {
@@ -161,6 +161,23 @@ public class CenterPanel extends JPanel {
 
     public static void showPage(String tagName){
         cardLayout.show(cards, tagName);
+
+        if(tagName.equalsIgnoreCase(STARTSCREEN)){
+            notifySubscribers(startScreen);
+        }
+        else if(tagName.equalsIgnoreCase(MAINLANDINGPAGESCREEN) ){
+            notifySubscribers(mainLandingScreen);
+        }
+        else if(tagName.equalsIgnoreCase(JAPANLANDINGPAGE) ){
+            notifySubscribers(japanLandingScreen);
+        }
+        else if(tagName.equalsIgnoreCase(JAPANRESTAURANTPAGE) ){
+            notifySubscribers(japanRestaurantScreen);
+        }
+        else if(tagName.equalsIgnoreCase(JAPANATTRACTIONPAGE) ){
+            notifySubscribers(japanAttractionScreen);
+        }
+
     }
 
 }
