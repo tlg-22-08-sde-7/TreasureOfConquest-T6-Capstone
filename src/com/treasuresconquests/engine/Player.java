@@ -12,9 +12,11 @@ public class Player {
     private String homeCountry;
     private String currentCountry;
     private String currentAttraction;
+    private String currentFeature;
     private final int maxHealth = 100;
     private int health = maxHealth;
-    private List<WorldMap.Countries.Attraction.Treasures> treasures = new ArrayList<>();
+    private List<WorldMap.Countries.Attraction.Treasures> treasures
+            = new ArrayList<>();
 
     Prompter playerInput = new Prompter(new Scanner(System.in));
     private PlayerArmory playerArmory;
@@ -26,10 +28,15 @@ public class Player {
     }
 
     //Methods
-    public void playerSetup() {
-        String name = playerInput.prompt("Enter player name: ");
+
+    public void playerSetupGUI() {
+       setup();
+    }
+
+    private void setup() {
         setHomeCountry("united states");
         setCurrentCountry("united states");
+        setCurrentFeature("Airport");
         setName(name);
 
         // Player starts the game with a slingshot, knife, and gun
@@ -40,6 +47,11 @@ public class Player {
 
         // Initialize Player's health
         playerHealthBank = new PlayerHealthBank();
+    }
+
+    public void playerSetup() {
+        String name = playerInput.prompt("Enter player name: ");
+        setup();
     }
 
     public void eat(WorldMap.Countries.Restaurant.Items dish) {
@@ -158,5 +170,13 @@ public class Player {
 
     private void setTreasures(WorldMap.Countries.Attraction.Treasures treasure) {
         treasures.add(treasure);
+    }
+
+    public String getCurrentFeature() {
+        return currentFeature;
+    }
+
+    public void setCurrentFeature(String currentFeature) {
+        this.currentFeature = currentFeature;
     }
 }
