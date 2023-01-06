@@ -1,6 +1,7 @@
 package com.treasuresconquests.playground.centercards;
 
 import com.treasuresconquests.guiclient.ScreenLauncher;
+import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiengine.Handlers;
 import com.treasuresconquests.guiengine.callbacks.Navigable;
 import com.treasuresconquests.guiengine.other.Music;
@@ -13,7 +14,7 @@ import java.awt.event.MouseListener;
 public class StartScreen extends JPanel implements Navigable {
 
     // initializing objects of the Event Handlers
-    Handlers.StartHandler handlerStart = new Handlers.StartHandler();
+    Handlers.StartHandler handlerStart ;
     Handlers.QuitHandler handlerQuit = new Handlers.QuitHandler();
     Handlers.HelpHandler helpHandler = new Handlers.HelpHandler();
 
@@ -29,10 +30,12 @@ public class StartScreen extends JPanel implements Navigable {
 
     JTextArea mainTextArea;
     Font textFont = new Font("Times New Roman", Font.PLAIN, 24);
-
-    public StartScreen(){
+    private GUIController guiController;
+    public StartScreen(GUIController guiController){
         setLayout(null);
         // setSize(900, 700);
+        this.guiController = guiController;
+        handlerStart = new Handlers.StartHandler(guiController);
 
         // treasures panel
         titlePanelTreasures = new JPanel();

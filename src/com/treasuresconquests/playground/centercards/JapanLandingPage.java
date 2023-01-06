@@ -35,23 +35,23 @@ public class JapanLandingPage extends JPanel implements Navigable {
                 new Handlers.RestaurantChoiceHandler(guiController, "japan");
         attractionChoiceHandler =
                 new Handlers.AttractionChoiceHandler(guiController, "japan");
-        lblCurrentCountry = new JLabel("Current Country: " + guiController.getPlayer().getCurrentCountry());
-        lblCurrentCountry.setBounds(25, 45, 200, 50);
-        lblCurrentCountry.setForeground(Color.white);
-
-        lblAccountBalance = new JLabel("Money $" + guiController.getPlayer().getAmountOfCash());
-        lblAccountBalance.setBounds(350, 45, 150, 50);
-        lblAccountBalance.setForeground(Color.white);
-
-        btnTreasures = new JButton("Treasures");
-        btnTreasures.setBounds(525, 45, 150, 50);
-
-        btnXP = new JButton("XP");
-        btnXP.setBounds(700, 45, 150, 50);
-
-        question = new JLabel("What would you like to do ?");
-        question.setBounds(300, 150, 400, 50);
-        question.setForeground(Color.white);
+//        lblCurrentCountry = new JLabel("Current Country: " + guiController.getPlayer().getCurrentCountry());
+//        lblCurrentCountry.setBounds(25, 45, 200, 50);
+//        lblCurrentCountry.setForeground(Color.white);
+//
+//        lblAccountBalance = new JLabel("Money $" + guiController.getPlayer().getAmountOfCash());
+//        lblAccountBalance.setBounds(350, 45, 150, 50);
+//        lblAccountBalance.setForeground(Color.white);
+//
+//        btnTreasures = new JButton("Treasures");
+//        btnTreasures.setBounds(525, 45, 150, 50);
+//
+//        btnXP = new JButton("XP");
+//        btnXP.setBounds(700, 45, 150, 50);
+//
+//        question = new JLabel("What would you like to do ?");
+//        question.setBounds(300, 150, 400, 50);
+//        question.setForeground(Color.white);
 
         btnAttraction = new JButton("Go to Attraction");
         btnAttraction.setBounds(660, 625, 125, 50);
@@ -67,10 +67,10 @@ public class JapanLandingPage extends JPanel implements Navigable {
         btnConquest = new JButton("Go to Hotel");
         btnConquest.setBounds(260, 625, 125, 50);
 
-        add(lblAccountBalance); add(btnTreasures); add(btnXP); add(question);
+        // add(lblAccountBalance); add(btnTreasures); add(btnXP);
         add(btnAttraction); add(btnAirport); add(btnRestaurant); add(btnConquest);
-        add(lblCurrentCountry);
-
+        // add(lblCurrentCountry);
+        //add(question);
 
     }
 
@@ -104,10 +104,10 @@ public class JapanLandingPage extends JPanel implements Navigable {
     public void visaOffice() {
         // your passport is stamped with Japan
         guiController.getPlayer().setCurrentCountry("Japan");
-        lblCurrentCountry.setText("Current Country: " +
-                guiController.getPlayer().getCurrentCountry());
+//        lblCurrentCountry.setText("Current Country: " +
+//                guiController.getPlayer().getCurrentCountry());
         guiController.getPlayer().setAmountOfCash(guiController.getPlayer().getAmountOfCash() - 1000 );
-        lblAccountBalance.setText("Money $" + guiController.getPlayer().getAmountOfCash());
+//        lblAccountBalance.setText("Money $" + guiController.getPlayer().getAmountOfCash());
         BottomRightPanel.showInformationPanel("Hi, I am the tour guide. \n" +
                 "Would you like to visit an attraction, airport, restaurant, or hotel? ");
         guiController.getPlayer().setCurrentFeature("Airport");
@@ -121,11 +121,13 @@ public class JapanLandingPage extends JPanel implements Navigable {
 
     public void localTransit() {
         guiController.getPlayer().setCurrentCountry("Japan");
-        lblCurrentCountry.setText("Current Country: " +
-                guiController.getPlayer().getCurrentCountry());
-        lblAccountBalance.setText("Money $" + guiController.getPlayer().getAmountOfCash());
+//        lblCurrentCountry.setText("Current Country: " +
+//                guiController.getPlayer().getCurrentCountry());
+//        lblAccountBalance.setText("Money $" + guiController.getPlayer().getAmountOfCash());
         guiController.getPlayer().setCurrentFeature("Airport");
         guiController.getPlayer().setCurrentAttraction("Tokyo Airport");
+        BottomRightPanel.showInformationPanel("Hi, I am the tour guide. \n" +
+                "Would you like to visit an attraction, airport, restaurant, or hotel? ");
 
         ScreenLauncher.updateTopRightPanel();
     }

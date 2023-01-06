@@ -28,6 +28,8 @@ public class BottomPanel extends JPanel implements NavigbleSubscriber {
     public BottomPanel(){
         music.playMusic("com/treasuresconquests/guiengine/Songs/example.wav",-1);
         setLayout(null);
+        setBackground(Color.blue);
+
         btnBack = new JButton("Return to Previous");
         btnBack.setBounds(200, 40, 150, 50);
         btnBack.addActionListener(backHandler);
@@ -113,9 +115,6 @@ public class BottomPanel extends JPanel implements NavigbleSubscriber {
 
     @Override
     public void currentPage(Navigable screen) {
-        if(screen instanceof HelpScreen) {
-            return;
-        }
         backHandler.setCurrentPage(screen);
     }
 

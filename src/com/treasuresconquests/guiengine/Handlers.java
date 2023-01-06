@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
+import java.util.Random;
 import java.util.Vector;
 
 public class Handlers {
@@ -23,6 +24,11 @@ public class Handlers {
 
     // Static method that can be called from outside
     public static class StartHandler implements ActionListener {
+        private GUIController guiController;
+
+        public StartHandler(GUIController guiController){
+            this.guiController = guiController;
+        }
 
 
         @Override
@@ -37,6 +43,7 @@ public class Handlers {
             }
 
             //ScreenLauncher.showGameScreen();
+            guiController.resetPlayer();
             CenterPanel.mainLandingPageScreen();
         }
     }
@@ -125,10 +132,15 @@ public class Handlers {
             // restaurant choices
 
             Vector<String> items = new Vector<>();
+            String restaurantNames = "\n";
             for (WorldMap.Countries.Restaurant restaurant: restaurants
                  ) {
                 items.add(restaurant.getName());
+                restaurantNames = restaurantNames.concat(restaurant.getName() + "\n");
             }
+            BottomRightPanel.showInformationPanel("Here are a list of restaurants. Which would you like to visit?"
+                + restaurantNames + "Which restaurant would you like to visit?");
+
 
             JComboBox<String> comboBox = new JComboBox<>(items);
             comboBox.setSelectedIndex(0);
@@ -175,8 +187,7 @@ public class Handlers {
 
         public FoodHandler(
                 GUIController guiController,
-                String country, String restaurantName,
-                PurchaseData foodItemSelected){
+                String country){
             this.guiController = guiController;
             this.country = country;
             this.restaurantName = restaurantName;
@@ -185,6 +196,20 @@ public class Handlers {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
+            // load the food items for the selected Restaurant
+            Vector<String> foodItems =
+                    guiController.loadFoodItems(this.restaurantName,
+                            "japan");
+            // Put items into the JComboBox
+            System.out.println("Number of foods for " + restaurantName +
+                    " is " + foodItems.size());
+
+            JComboBox<String> comboBox = new JComboBox<>(foodItems);
+            comboBox.setSelectedIndex(0);
+            JOptionPane.showMessageDialog(null, comboBox,
+                    "Choose your food: ", JOptionPane.QUESTION_MESSAGE);
+            String selected = (String) comboBox.getSelectedItem();
             // 1. load restaurant choices for country from
             // GUIController
             List<WorldMap.Countries.Restaurant> restaurants
@@ -203,12 +228,12 @@ public class Handlers {
             // food selected
             int cost = 0;
             int healthGain = 0;
-            System.out.println("Food item selected " + foodItemSelected);
+            System.out.println("Food item selected " + selected);
             if(restaurant != null){
-                List<WorldMap.Countries.Restaurant.Items> items =
+                List<WorldMap.Countries.Restaurant.Items> itemList =
                         restaurant.getItems();
-                for (WorldMap.Countries.Restaurant.Items item : items) {
-                    if(item.getName().equalsIgnoreCase(foodItemSelected.getItem())){
+                for (WorldMap.Countries.Restaurant.Items item : itemList) {
+                    if(item.getName().equalsIgnoreCase(selected)){
                         cost = item.getCost();
                         healthGain = item.getValue();
                         break;
@@ -236,6 +261,10 @@ public class Handlers {
             ScreenLauncher.updateTopRightPanel();
             CenterPanel.japanLandingPageLocal();
         }
+
+        public void setRestaurantName(String currentRestaurantName) {
+            this.restaurantName = currentRestaurantName;
+        }
     }
 
     public static class FoodSelectionHandler implements ItemListener{
@@ -258,6 +287,7 @@ public class Handlers {
             ActionListener, ComboCallback{
         private GUIController guiController;
         private String country;
+
 
         public AttractionChoiceHandler(
                 GUIController guiController,
@@ -285,7 +315,7 @@ public class Handlers {
             JOptionPane.showMessageDialog(null, comboBox,
                     "Choose an attraction: ", JOptionPane.QUESTION_MESSAGE);
             String selected = (String) comboBox.getSelectedItem();
-            itemSelected(selected, "", "");
+            itemSelected(selected, "", country);
 
             //Combo combo = new Combo("Choose an attraction:", items);
 
@@ -302,6 +332,14 @@ public class Handlers {
         @Override
         public void itemSelected(String selectedAttraction, String section, String country) {
             CenterPanel.japanAttractionPage(selectedAttraction);
+            RiddlesTreasures riddles
+                    = guiController.loadAQuiz(selectedAttraction, country);
+            if(riddles != null){
+                Quiz quiz = new Quiz(riddles );
+
+                BottomRightPanel.showQuizPanel(quiz);
+            }
+
         }
     }
 
@@ -309,6 +347,7 @@ public class Handlers {
         private ButtonGroup buttonGroup;
         private Quiz quiz;
         private GUIController guiController;
+        private JDialog dialog;
 
         public QuizHandler(ButtonGroup buttonGroup, Quiz quiz,
                            GUIController guiController) {
@@ -319,8 +358,12 @@ public class Handlers {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            if(dialog != null){
+                dialog.dispose();
+            }
             String chosenAnswer = buttonGroup.
                     getSelection().getActionCommand();
+            System.out.println(chosenAnswer);
             if(chosenAnswer.
                     equalsIgnoreCase(quiz.getAnswer())){
                 guiController.getPlayer().setAmountOfCash(
@@ -336,6 +379,15 @@ public class Handlers {
                 BottomRightPanel.showInformationPanel("That was the wrong answer!\n"+
                         "The correct answer is " + quiz.getAnswer());
             }
+        }
+
+        public void setQuiz(Quiz nextQuiz) {
+            this.quiz = nextQuiz;
+            System.out.println("Next quiz has been set");
+        }
+
+        public void setDialog(JDialog dialog) {
+            this.dialog = dialog;
         }
     }
 

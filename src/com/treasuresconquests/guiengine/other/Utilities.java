@@ -16,4 +16,14 @@ public class Utilities {
         }
         return data;
     }
+
+    public static Vector<String> convertListToVector(
+            List<String> items) {
+        Vector<String> data = new Vector<>();
+        for (String str :
+                items) {
+            data.add(str);
+        }
+        return data;
+    }
 }
