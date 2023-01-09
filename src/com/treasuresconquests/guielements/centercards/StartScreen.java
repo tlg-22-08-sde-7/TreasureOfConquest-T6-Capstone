@@ -81,12 +81,11 @@ public class StartScreen extends JPanel implements Navigable {
 //        btnLoad.setFont(btnFont);
 //        btnLoad.addActionListener(handlerLoad);
 
-        btnInstructions = new JButton("Read Instructions");
-        btnInstructions.setBackground(Color.darkGray);
+        btnInstructions = new JButton("Read instructions");
+        btnInstructions.setBackground(Color.black);
         btnInstructions.setForeground(Color.white);
         btnInstructions.setFont(btnFont);
         btnInstructions.addActionListener(helpHandler);
-
 
         btnQuit = new JButton("Quit ToC");
         btnQuit.setBackground(Color.black);
