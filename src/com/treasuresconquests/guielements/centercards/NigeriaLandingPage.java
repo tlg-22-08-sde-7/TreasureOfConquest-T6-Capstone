@@ -1,14 +1,14 @@
-package com.treasuresconquests.playground.centercards;
+package com.treasuresconquests.guielements.centercards;
 
 import javax.swing.*;
 
-public class FranceLandingPage extends JPanel {
+public class NigeriaLandingPage extends JPanel {
 
     private JButton btnAccountBalance;
     private JButton btnTreasures;
     private JButton btnXP;
     private JButton btnAttraction;
-    private JButton btnAirport; // Do we now fly into the airport ? And will need a airport Screen ?
+    private JButton btnAirport;
     private JButton btnRestaurant;
     private JButton btnConquest;
     private JButton btnBack;  // do I need a Back button if I have a exitGame button ?

@@ -9,8 +9,6 @@ public class Music {
     public static Clip musicClip;
     public static boolean musicOn = true;
 
-
-
     public Music() {
 
     }
@@ -31,8 +29,6 @@ public class Music {
         }
     }
 
-
-
     public static void stopMusic() {
         musicClip.stop();
         musicClip.close();
@@ -47,7 +43,5 @@ public class Music {
     public void setMusicOn(boolean musicOn) {
         this.musicOn = musicOn;
     }
-
-
 
 }

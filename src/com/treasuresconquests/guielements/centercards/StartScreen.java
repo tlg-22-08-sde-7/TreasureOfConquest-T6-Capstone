@@ -1,15 +1,12 @@
-package com.treasuresconquests.playground.centercards;
+package com.treasuresconquests.guielements.centercards;
 
 import com.treasuresconquests.guiclient.ScreenLauncher;
 import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiengine.Handlers;
 import com.treasuresconquests.guiengine.callbacks.Navigable;
-import com.treasuresconquests.guiengine.other.Music;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class StartScreen extends JPanel implements Navigable {
 

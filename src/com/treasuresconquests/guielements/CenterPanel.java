@@ -1,9 +1,9 @@
-package com.treasuresconquests.playground;
+package com.treasuresconquests.guielements;
 
 import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiengine.callbacks.Navigable;
 import com.treasuresconquests.guiengine.callbacks.NavigbleSubscriber;
-import com.treasuresconquests.playground.centercards.*;
+import com.treasuresconquests.guielements.centercards.*;
 
 import javax.swing.*;
 import java.awt.*;
