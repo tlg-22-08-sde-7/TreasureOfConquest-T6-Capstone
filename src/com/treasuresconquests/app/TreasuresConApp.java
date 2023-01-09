@@ -249,7 +249,7 @@ public class TreasuresConApp {
     private void fillCountryMap() throws FileNotFoundException {
         // deserialize json
         Gson gson = new Gson();
-        worldMap = gson.fromJson(new InputStreamReader(TestGSON.getFileFromResourceAsStream("assets/json-files/worldMap.json")), WorldMap.class);
+        worldMap = gson.fromJson(new InputStreamReader(TestGSON.getFileFromResourceAsStream("resources/assets/json-files/worldMap.json")), WorldMap.class);
 
         for (WorldMap.Countries country : worldMap.getCountries()) {
             countries.put(country.getName().toLowerCase(), country);
