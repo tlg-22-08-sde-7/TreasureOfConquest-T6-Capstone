@@ -1,11 +1,10 @@
-package com.treasuresconquests.playground.centercards;
+package com.treasuresconquests.guielements.centercards;
 
 import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiclient.ScreenLauncher;
 import com.treasuresconquests.guiengine.Handlers;
 import com.treasuresconquests.guiengine.callbacks.Navigable;
-import com.treasuresconquests.playground.BottomRightPanel;
-import com.treasuresconquests.playground.TopRightPanel;
+import com.treasuresconquests.guielements.BottomRightPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -61,7 +60,7 @@ public class JapanLandingPage extends JPanel implements Navigable {
         btnAirport.setBounds(60, 625, 125, 50);
 
         btnRestaurant = new JButton("Go to Restaurant");
-        btnRestaurant.setBounds(460, 625, 125, 50);
+        btnRestaurant.setBounds(460, 625, 150, 50);
         btnRestaurant.addActionListener(restaurantChoiceHandler);
 
         btnConquest = new JButton("Go to Hotel");
@@ -109,7 +108,7 @@ public class JapanLandingPage extends JPanel implements Navigable {
         guiController.getPlayer().setAmountOfCash(guiController.getPlayer().getAmountOfCash() - 1000 );
 //        lblAccountBalance.setText("Money $" + guiController.getPlayer().getAmountOfCash());
         BottomRightPanel.showInformationPanel("Hi, I am the tour guide. \n" +
-                "Would you like to visit an attraction, airport, restaurant, or hotel? ");
+                "Would you like to visit an attraction, explore airport, restaurant, or hotel? ");
         guiController.getPlayer().setCurrentFeature("Airport");
         ScreenLauncher.updateTopRightPanel();
 
@@ -127,7 +126,7 @@ public class JapanLandingPage extends JPanel implements Navigable {
         guiController.getPlayer().setCurrentFeature("Airport");
         guiController.getPlayer().setCurrentAttraction("Tokyo Airport");
         BottomRightPanel.showInformationPanel("Hi, I am the tour guide. \n" +
-                "Would you like to visit an attraction, airport, restaurant, or hotel? ");
+                "Would you like to visit an attraction, explore airport, restaurant, or hotel? ");
 
         ScreenLauncher.updateTopRightPanel();
     }

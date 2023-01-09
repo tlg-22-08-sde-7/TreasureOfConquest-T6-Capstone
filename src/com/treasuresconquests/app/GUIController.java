@@ -102,7 +102,7 @@ public class GUIController {
         return itemsList;
     }
 
-    public RiddlesTreasures loadAQuiz(String attractionName, String country){
+    public List<RiddlesTreasures> loadQuizzes(String attractionName, String country){
         List<WorldMap.Countries.Attraction> attractions =
                 getAttractionsForCountry(country);
         for (WorldMap.Countries.Attraction attraction: attractions) {
@@ -113,22 +113,63 @@ public class GUIController {
         return null;
     }
 
-    private RiddlesTreasures extractRiddleTreasure(
+    private List<RiddlesTreasures> extractRiddleTreasure(
             WorldMap.Countries.Attraction attraction) {
         // choose  random riddle to show the user
+
+        List<RiddlesTreasures> multipleRiddles = new ArrayList<>();
+
         List<? extends WorldMap.Countries.Attraction.Riddles> riddles
                 = attraction.getRiddles();
         List<? extends WorldMap.Countries.Attraction.Treasures> treasures
                 = attraction.getTreasures();
-        int randomIndexR = random.nextInt(riddles.size());
-        WorldMap.Countries.Attraction.Riddles chosenRiddle
-                = riddles.get(randomIndexR);
 
-        int randomIndexT = random.nextInt(treasures.size());
-        WorldMap.Countries.Attraction.Treasures chosenTreasure
-                = treasures.get(randomIndexT);
+        // load in three different riddles
+        for (int i = 0; i < 3; i++) {
+            WorldMap.Countries.Attraction.Riddles chosenRiddle = null;
+            do {
+                int randomIndexR = random.nextInt(riddles.size());
+                chosenRiddle
+                        = riddles.get(randomIndexR);
+            } while(multipleRiddlesContainsRiddle(chosenRiddle, multipleRiddles));
 
-        return new RiddlesTreasures(chosenRiddle, chosenTreasure);
+            WorldMap.Countries.Attraction.Treasures chosenTreasure = null;
+            do {
+                int randomIndexT = random.nextInt(treasures.size());
+                chosenTreasure = treasures.get(randomIndexT);
+            } while(multipleRiddlesContainsTreasure(chosenTreasure, multipleRiddles));
+
+            RiddlesTreasures rt = new RiddlesTreasures(chosenRiddle, chosenTreasure);
+            multipleRiddles.add(rt);
+        }
+        return multipleRiddles;
+
+    }
+
+    private boolean multipleRiddlesContainsTreasure(
+            WorldMap.Countries.Attraction.Treasures chosenTreasure,
+            List<RiddlesTreasures> multipleRiddles) {
+        for (RiddlesTreasures riddleTreasure: multipleRiddles) {
+            if(riddleTreasure.getTreasure().getName().equalsIgnoreCase(
+                    chosenTreasure.getName())) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private boolean multipleRiddlesContainsRiddle(
+            WorldMap.Countries.Attraction.Riddles chosenRiddle,
+            List<RiddlesTreasures> multipleRiddles) {
+        for (RiddlesTreasures riddleTreasure: multipleRiddles) {
+            if(riddleTreasure.getRiddle().getText().equalsIgnoreCase(chosenRiddle.getText())) {
+                return true;
+
+            }
+
+        }
+        return false;
     }
 
     public static void main(String[] args) {

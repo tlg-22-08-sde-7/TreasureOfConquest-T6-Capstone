@@ -1,6 +1,5 @@
-package com.treasuresconquests.playground.bottomrightcards;
+package com.treasuresconquests.guielements.bottomrightcards;
 
-import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiengine.Handlers;
 import com.treasuresconquests.guiengine.callbacks.ComboCallback;
 import com.treasuresconquests.guiengine.other.Combo;

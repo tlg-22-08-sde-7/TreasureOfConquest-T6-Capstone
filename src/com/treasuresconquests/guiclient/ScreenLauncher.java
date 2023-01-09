@@ -1,11 +1,7 @@
 package com.treasuresconquests.guiclient;
 
 import com.treasuresconquests.app.GUIController;
-import com.treasuresconquests.playground.BottomPanel;
-import com.treasuresconquests.playground.BottomRightPanel;
-import com.treasuresconquests.playground.CenterPanel;
-import com.treasuresconquests.playground.TopRightPanel;
-import com.treasuresconquests.playground.centercards.*;
+import com.treasuresconquests.guielements.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +14,7 @@ public class ScreenLauncher {
     private static BottomRightPanel bottomRightPanel;
     private static CenterPanel centerPanel;
     private static TopRightPanel topRightPanel;
+    //private static SplashScreen splashScreen;
     public static int frameState = 1;
 
     public static void main(String[] args) {
@@ -73,6 +70,7 @@ public class ScreenLauncher {
         bottomPanel = new BottomPanel();
         topRightPanel = new TopRightPanel(guiController);
         bottomRightPanel = new BottomRightPanel(guiController);
+        //splashScreen = new SplashScreen();
 
         centerPanel.setBounds(0,0,900,700);
         bottomPanel.setBounds(0,701, 900,150);
@@ -109,5 +107,20 @@ public class ScreenLauncher {
 
     public static void updateTopRightPanel() {
         topRightPanel.updateValues();
+    }
+
+    public static void showSplashScreenAndExitGame(){
+        SwingUtilities.invokeLater(() -> {
+            FinalScreen splash = new FinalScreen();
+            try {
+                // Make JWindow appear for 10 seconds before disappear
+                Thread.sleep(3000);
+                splash.dispose();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+            CenterPanel.showStartScreenWithoutPrompt();
+        });
+
     }
 }

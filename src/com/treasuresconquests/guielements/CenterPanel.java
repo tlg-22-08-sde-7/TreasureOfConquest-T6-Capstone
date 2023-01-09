@@ -1,9 +1,9 @@
-package com.treasuresconquests.playground;
+package com.treasuresconquests.guielements;
 
 import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiengine.callbacks.Navigable;
 import com.treasuresconquests.guiengine.callbacks.NavigbleSubscriber;
-import com.treasuresconquests.playground.centercards.*;
+import com.treasuresconquests.guielements.centercards.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -177,7 +177,11 @@ public class CenterPanel extends JPanel {
         else if(tagName.equalsIgnoreCase(JAPANATTRACTIONPAGE) ){
             notifySubscribers(japanAttractionScreen);
         }
-
     }
 
+    public static void showStartScreenWithoutPrompt() {
+        CardLayout cl = (CardLayout) (cards.getLayout());
+        cl.show(cards, STARTSCREEN);
+        notifySubscribers(startScreen);
+    }
 }

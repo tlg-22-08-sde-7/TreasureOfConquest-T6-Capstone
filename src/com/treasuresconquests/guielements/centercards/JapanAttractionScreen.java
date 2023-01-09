@@ -1,12 +1,11 @@
-package com.treasuresconquests.playground.centercards;
+package com.treasuresconquests.guielements.centercards;
 
 import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiclient.ScreenLauncher;
 import com.treasuresconquests.guiengine.Handlers;
-import com.treasuresconquests.guiengine.Screen;
 import com.treasuresconquests.guiengine.callbacks.Navigable;
 import com.treasuresconquests.guiengine.other.PurchaseData;
-import com.treasuresconquests.playground.CenterPanel;
+import com.treasuresconquests.guielements.CenterPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -27,7 +26,7 @@ public class JapanAttractionScreen extends JPanel implements Navigable {
     private JLabel question;
     private JComboBox foodMenu;
     private JButton confirmFoodChoiceButton;
-    private JButton btnAttraction, btnAirport, btnRestaurant, btnConquest;
+    private JButton btnAttraction, btnAirport, btnRestaurant, btnConquest, btnRiddles;
 
     private  String pathname = "";
 
@@ -40,6 +39,7 @@ public class JapanAttractionScreen extends JPanel implements Navigable {
     Handlers.FoodHandler foodHandler;
     Handlers.FoodSelectionHandler foodSelectionHandler =
             new Handlers.FoodSelectionHandler(chosenFood);
+    Handlers.InitializeQuizPanel initializeQuizPanel;
     private GUIController guiController;
 
     public JapanAttractionScreen(GUIController guiController) {
@@ -48,8 +48,10 @@ public class JapanAttractionScreen extends JPanel implements Navigable {
 
         restaurantChoiceHandler =
                 new Handlers.RestaurantChoiceHandler(guiController, "japan");
-//        attractionChoiceHandler =
-//                new Handlers.AttractionChoiceHandler(guiController, "japan");
+        attractionChoiceHandler =
+                new Handlers.AttractionChoiceHandler(guiController, "japan");
+        initializeQuizPanel =
+                new Handlers.InitializeQuizPanel(guiController, "japan");
 
 //        lblCurrentCountry = new JLabel("Current Country: " + guiController.getPlayer().getCurrentCountry());
 //        lblCurrentCountry.setBounds(25, 45, 200, 50);
@@ -75,7 +77,7 @@ public class JapanAttractionScreen extends JPanel implements Navigable {
         btnAirport.setBounds(60, 625, 125, 50);
 
         btnRestaurant = new JButton("Go to Restaurant");
-        btnRestaurant.setBounds(460, 625, 125, 50);
+        btnRestaurant.setBounds(460, 625, 150, 50);
         btnRestaurant.addActionListener(restaurantChoiceHandler);
 
         btnConquest = new JButton("Go to Hotel");
@@ -84,8 +86,14 @@ public class JapanAttractionScreen extends JPanel implements Navigable {
         attraction = new JLabel("");
         attraction.setBounds(120, 120, 650, 400);
 
+        btnRiddles = new JButton("Play Riddles");
+        btnRiddles.setBounds(660, 625, 150, 50);
+        btnRiddles.addActionListener(initializeQuizPanel);
+        // i need to call initialize quiz panel here
+
         // add(btnAttraction);
         add(btnAirport); add(btnRestaurant); add(btnConquest);
+        add(btnRiddles);
 
         // Position combobox
         foodMenu = new JComboBox();
@@ -108,7 +116,6 @@ public class JapanAttractionScreen extends JPanel implements Navigable {
 //        add(foodMenu);
 //        add(confirmFoodChoiceButton);
 //        add(lblCurrentCountry);
-
     }
 
     // for background
@@ -141,6 +148,7 @@ public class JapanAttractionScreen extends JPanel implements Navigable {
     public void init(String currentRestaurantName) {
         System.out.println("Restaurant chosen: " + currentRestaurantName);
         this.attractionName = currentRestaurantName;
+        initializeQuizPanel.setSelectedAttraction(currentRestaurantName);
 
         confirmFoodChoiceButton.removeActionListener(foodHandler);
 //        foodHandler = new Handlers.FoodHandler(

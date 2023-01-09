@@ -1,12 +1,12 @@
-package com.treasuresconquests.playground.bottomrightcards;
+package com.treasuresconquests.guielements.bottomrightcards;
 
 import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiengine.Handlers;
 import com.treasuresconquests.guiengine.other.Quiz;
+import com.treasuresconquests.guielements.BottomRightPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 import java.util.Vector;
 
 public class QuizPanel extends JPanel{
@@ -112,7 +112,9 @@ public class QuizPanel extends JPanel{
     }
 
 
-    public void closeWhenDone(JDialog dialog) {
+    public void closeWhenDone(JDialog dialog,
+                              BottomRightPanel subscriber) {
         quizHandler.setDialog(dialog);
+        quizHandler.setSubscriber(subscriber);
     }
 }

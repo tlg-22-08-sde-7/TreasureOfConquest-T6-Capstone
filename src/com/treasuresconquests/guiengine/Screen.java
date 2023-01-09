@@ -127,7 +127,7 @@ public class Screen {
         @Override
         public void actionPerformed(ActionEvent e) {
             Music.stopMusic();
-            Music.playMusic("com/treasuresconquests/guiengine/Songs/example.wav", -1);
+            Music.playMusic("assets/songs/example.wav", -1);
             launchGameScreen();
         }
     }

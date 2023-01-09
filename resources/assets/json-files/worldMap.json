@@ -132,27 +132,65 @@
           "cost": 25,
           "treasures": [
             {
-              "name": "mirror Yata no Kagami ",
-              "value": 35
+              "name": "Yata no Kagami  mirror",
+              "value": 135
             },
             {
-              "name": "jewel Yasakani no Magatama",
-              "value": 10
+              "name": "Shintake samurai sword",
+              "value": 150
+            },
+            {
+              "name": "Tagakawa crown",
+              "value": 145
+            },
+            {
+              "name": "Yasakani no Magatama jewel",
+              "value": 110
             }
           ],
           "riddles": [
             {
-              "text": "I'm made up of thousands of islands\nAnd my highest point is Mt. Fuji\nI'm well known for my fast bullet train\nHaikus, sumo and Hello Kitty\n\n",
+              "text": "I'm made up of thousands of islands\nAnd my highest point is Mt. Fuji\nI'm well known for my fast bullet train\n\n",
               "options": [
-                "Mt. Fuji",
+                "Alaska",
                 "Japan",
                 "China",
-                "Asia"
+                "Korea"
               ],
               "answer": "Japan"
             },
             {
-              "text": "Which science-fiction movie had been filmed on Mount Fuji?",
+              "text": "This is a test Riddle #1\nthe answer is Number.\n\n",
+              "options": [
+                "Option #1",
+                "Option #2",
+                "Option #3",
+                "Number"
+              ],
+              "answer": "Number"
+            },
+            {
+              "text": "This is test Riddle #2\nthe answer is Number.\n\n",
+              "options": [
+                "Option #1",
+                "Option #2",
+                "Option #3",
+                "Number"
+              ],
+              "answer": "Number"
+            },
+            {
+              "text": "This is test Riddle #3\nthe answer is Number.\n\n",
+              "options": [
+                "Option #1",
+                "Option #2",
+                "Option #3",
+                "Number"
+              ],
+              "answer": "Number"
+            },
+            {
+              "text": "Which science-fiction movie\nwas filmed on Mount Fuji?",
               "options": [
                 "Sasquatch Mountain",
                 "Star Trek",

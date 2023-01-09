@@ -1,12 +1,10 @@
-package com.treasuresconquests.playground;
+package com.treasuresconquests.guielements;
 
-import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiclient.ScreenLauncher;
 import com.treasuresconquests.guiengine.Handlers;
 import com.treasuresconquests.guiengine.callbacks.Navigable;
 import com.treasuresconquests.guiengine.callbacks.NavigbleSubscriber;
 import com.treasuresconquests.guiengine.other.Music;
-import com.treasuresconquests.playground.centercards.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +24,7 @@ public class BottomPanel extends JPanel implements NavigbleSubscriber {
     Handlers.BackHandler backHandler = new Handlers.BackHandler();
 
     public BottomPanel(){
-        music.playMusic("com/treasuresconquests/guiengine/Songs/example.wav",-1);
+        music.playMusic("assets/songs/example.wav",-1);
         setLayout(null);
         setBackground(Color.blue);
 
@@ -56,7 +54,7 @@ public class BottomPanel extends JPanel implements NavigbleSubscriber {
                         Music.stopMusic();
                         btnMute.setText("UNMUTE");
                     }else{
-                        Music.playMusic("com/treasuresconquests/guiengine/Songs/example.wav",-1);
+                        Music.playMusic("assets/songs/example.wav",-1);
                         btnMute.setText("MUTE");
                     }
                 }
@@ -65,7 +63,7 @@ public class BottomPanel extends JPanel implements NavigbleSubscriber {
                         Music.stopMusic();
                         btnMute.setText("UNMUTE");
                     }else{
-                        Music.playMusic("com/treasuresconquests/guiengine/Songs/nyc.wav",-1);
+                        Music.playMusic("assets/songs/nyc.wav",-1);
                         btnMute.setText("MUTE");
                     }
                 }
@@ -74,7 +72,7 @@ public class BottomPanel extends JPanel implements NavigbleSubscriber {
                         Music.stopMusic();
                         btnMute.setText("UNMUTE");
                     }else{
-                        Music.playMusic("com/treasuresconquests/guiengine/Songs/Tokyo.wav",-1);
+                        Music.playMusic("assets/songs/Tokyo.wav",-1);
                         btnMute.setText("MUTE");
                     }
                 }

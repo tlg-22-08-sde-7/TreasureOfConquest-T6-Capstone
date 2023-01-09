@@ -1,20 +1,7 @@
-Welcome to Treasure of Conquest!
-
- Your mission is to travel the world while collecting as many treasures and money as possible.
- As you visit each country, you will be accompanied by a tour guide.
- This tour guide has been instructed to give you options to visit restaurants, attractions, go shopping, or the airport!
-
- Your travels will be limited by the amount of money that you have.
-
- If you run out of money then you may visit an excursion in order to earn more.
-
- In order to travel to other countries, including back home, you must have enough to purchase tickets for the flight.
-
- You should also beware of evil-doers who are lurking within these countries!
- They will unexpectedly attack you in order to steal your health, money, and/or treasures!
- Defeat them to earn their goods. Lose, and they will take some of yours.
-
- If you run out of XP then you fail the mission and the game ends.
- If you return home, you have ended the game and your score will be based on the amount of treasure and money you have.
-
-Good luck!
+Welcome to Treasures of Conquests!
+  Your mission is to travel, solve riddles, and collect treasure.
+  You can visit restaurants, attractions, hotels, the airport, etc.
+  Your travels will be limited by the amount of money that you have.
+  If you run out of money, try solving riddles to earn more.
+  You win the game by collecting 3 treasures in one country.
+  Good luck!

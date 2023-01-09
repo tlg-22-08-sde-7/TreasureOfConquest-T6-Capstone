@@ -1,15 +1,12 @@
-package com.treasuresconquests.playground.centercards;
+package com.treasuresconquests.guielements.centercards;
 
 import com.treasuresconquests.guiclient.ScreenLauncher;
 import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiengine.Handlers;
 import com.treasuresconquests.guiengine.callbacks.Navigable;
-import com.treasuresconquests.guiengine.other.Music;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class StartScreen extends JPanel implements Navigable {
 
@@ -43,14 +40,13 @@ public class StartScreen extends JPanel implements Navigable {
         titlePanelTreasures.setBackground(Color.black);
         titlePanelTreasures.setLayout(new FlowLayout());
 
-
-
         titleLabelTreasures = new JLabel("TREASURES of...");
         titleLabelTreasures.setForeground(Color.yellow);
         titleLabelTreasures.setFont(titleFont);
 
         titlePanelTreasures.add(titleLabelTreasures);
         titlePanelTreasures.setBounds(100, 100, 700, 100);
+
         // conquests panel
         titlePanelConquests = new JPanel();
         titlePanelConquests.setBounds(100, 250, 700, 100);
@@ -62,7 +58,6 @@ public class StartScreen extends JPanel implements Navigable {
         titleLabelConquests.setFont(titleFont);
 
         titlePanelConquests.add(titleLabelConquests);
-
 
         //buttons panel
         titlePanelButtons = new JPanel();
@@ -86,12 +81,11 @@ public class StartScreen extends JPanel implements Navigable {
 //        btnLoad.setFont(btnFont);
 //        btnLoad.addActionListener(handlerLoad);
 
-        btnInstructions = new JButton("Read Instructions");
-        btnInstructions.setBackground(Color.darkGray);
+        btnInstructions = new JButton("Read instructions");
+        btnInstructions.setBackground(Color.black);
         btnInstructions.setForeground(Color.white);
         btnInstructions.setFont(btnFont);
         btnInstructions.addActionListener(helpHandler);
-
 
         btnQuit = new JButton("Quit ToC");
         btnQuit.setBackground(Color.black);
