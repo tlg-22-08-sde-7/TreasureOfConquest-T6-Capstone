@@ -21,7 +21,6 @@ import java.util.Vector;
 public class Handlers {
     public static Music music = new Music();
 
-
     // Static method that can be called from outside
     public static class StartHandler implements ActionListener {
         private GUIController guiController;
@@ -332,12 +331,13 @@ public class Handlers {
         @Override
         public void itemSelected(String selectedAttraction, String section, String country) {
             CenterPanel.japanAttractionPage(selectedAttraction);
-            RiddlesTreasures riddles
-                    = guiController.loadAQuiz(selectedAttraction, country);
+            List<RiddlesTreasures> riddles
+                    = guiController.loadQuizzes(selectedAttraction, country);
             if(riddles != null){
-                Quiz quiz = new Quiz(riddles );
+                BottomRightPanel.showQuizzesPanel(riddles);
+                // Quiz quiz = new Quiz(riddles);
 
-                BottomRightPanel.showQuizPanel(quiz);
+                // BottomRightPanel.showQuizPanel(quiz);
             }
 
         }
@@ -348,6 +348,7 @@ public class Handlers {
         private Quiz quiz;
         private GUIController guiController;
         private JDialog dialog;
+        private BottomRightPanel subscriber;
 
         public QuizHandler(ButtonGroup buttonGroup, Quiz quiz,
                            GUIController guiController) {
@@ -361,6 +362,8 @@ public class Handlers {
             if(dialog != null){
                 dialog.dispose();
             }
+
+
             String chosenAnswer = buttonGroup.
                     getSelection().getActionCommand();
             System.out.println(chosenAnswer);
@@ -377,7 +380,11 @@ public class Handlers {
             }
             else{
                 BottomRightPanel.showInformationPanel("That was the wrong answer!\n"+
-                        "The correct answer is " + quiz.getAnswer());
+                        // "The correct answer is " + quiz.getAnswer());
+                        "Try again");
+            }
+            if(subscriber != null){
+                subscriber.dialogClosed();
             }
         }
 
@@ -388,6 +395,37 @@ public class Handlers {
 
         public void setDialog(JDialog dialog) {
             this.dialog = dialog;
+        }
+
+        public void setSubscriber(BottomRightPanel subscriber) {
+            this.subscriber = subscriber;
+        }
+    }
+
+    public static class InitializeQuizPanel implements ActionListener{
+
+        private GUIController guiController;
+        private String selectedAttraction;
+        private String country;
+
+        public InitializeQuizPanel(GUIController guiController,
+                                   String country) {
+            this.guiController = guiController;
+            this.country = country;
+
+        }
+
+        public void setSelectedAttraction(String selectedAttraction) {
+            this.selectedAttraction = selectedAttraction;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            List<RiddlesTreasures> riddles
+                    = guiController.loadQuizzes(selectedAttraction, country);
+            if(riddles != null){
+                BottomRightPanel.showQuizzesPanel(riddles);
+            }
         }
     }
 

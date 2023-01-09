@@ -3,6 +3,7 @@ package com.treasuresconquests.playground.bottomrightcards;
 import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiengine.Handlers;
 import com.treasuresconquests.guiengine.other.Quiz;
+import com.treasuresconquests.playground.BottomRightPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -112,7 +113,9 @@ public class QuizPanel extends JPanel{
     }
 
 
-    public void closeWhenDone(JDialog dialog) {
+    public void closeWhenDone(JDialog dialog,
+                              BottomRightPanel subscriber) {
         quizHandler.setDialog(dialog);
+        quizHandler.setSubscriber(subscriber);
     }
 }
