@@ -127,7 +127,7 @@ public class Screen {
         @Override
         public void actionPerformed(ActionEvent e) {
             Music.stopMusic();
-            Music.playMusic("assets/songs/example.wav", -1);
+            Music.playMusic("resources/assets/songs/example.wav", -1);
             launchGameScreen();
         }
     }

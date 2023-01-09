@@ -69,6 +69,6 @@
 //    public void setCommands() throws FileNotFoundException {
 //        Gson gson = new Gson();
 //
-//        commandsMap = gson.fromJson(new FileReader("assets/commands/npcWordBank.json"), HashMap.class);
+//        commandsMap = gson.fromJson(new FileReader("resources/assets/commands/npcWordBank.json"), HashMap.class);
 //    };
 //};

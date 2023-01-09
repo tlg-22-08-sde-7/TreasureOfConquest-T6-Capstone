@@ -26,9 +26,9 @@ public class NPC {
 
     private void populateNPCList(){
         Gson gson = new Gson();
-        // worldMap = gson.fromJson(new InputStreamReader(TestGSON.getFileFromResourceAsStream("assets/json-files/worldMap.json")), WorldMap.class);
-        //Reader reader = Files.newBufferedReader(("assets/json-files/npcWordBank.json"));
-        npcList = Arrays.asList(gson.fromJson(new InputStreamReader(TestGSON.getFileFromResourceAsStream("assets/json-files/npcWordBank.json")), NPC[].class));
+        // worldMap = gson.fromJson(new InputStreamReader(TestGSON.getFileFromResourceAsStream("resources/assets/json-files/worldMap.json")), WorldMap.class);
+        //Reader reader = Files.newBufferedReader(("resources/assets/json-files/npcWordBank.json"));
+        npcList = Arrays.asList(gson.fromJson(new InputStreamReader(TestGSON.getFileFromResourceAsStream("resources/assets/json-files/npcWordBank.json")), NPC[].class));
         //reader.close();
     }
 

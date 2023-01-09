@@ -37,7 +37,7 @@ public class Handlers {
 
             if (Music.musicOn == true){
                 Music.stopMusic();
-                Music.playMusic("assets/songs/nyc.wav", -1);
+                Music.playMusic("resources/assets/songs/nyc.wav", -1);
             }
 
             //ScreenLauncher.showGameScreen();
@@ -97,7 +97,7 @@ public class Handlers {
                 CenterPanel.japanLandingPage();
                 if (Music.musicClip.isActive()){
                     Music.stopMusic();
-                    Music.playMusic("assets/songs/Tokyo.wav",-1);
+                    Music.playMusic("resources/assets/songs/Tokyo.wav",-1);
                 }
             /*    music.stopMusic();
                 Music.playMusic("com/treasuresconquests/guiengine/Songs/Tokyo.wav", -1);*/
