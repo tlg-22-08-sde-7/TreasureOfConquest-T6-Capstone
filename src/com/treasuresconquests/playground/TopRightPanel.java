@@ -1,6 +1,7 @@
 package com.treasuresconquests.playground;
 
 import com.treasuresconquests.app.GUIController;
+import com.treasuresconquests.guiclient.ScreenLauncher;
 import com.treasuresconquests.guiengine.other.Utilities;
 
 import javax.swing.*;
@@ -35,6 +36,7 @@ public class TopRightPanel extends JPanel {
         moneyValue = new JLabel("" + guiController.getPlayer().getAmountOfCash());
         treasureText = new JLabel("Rewards: ");
         treasureList = new JList(loadTreasures());
+        JScrollPane scrollPane = new JScrollPane(treasureList);
 
         add(healthText);
         add(healthValue);
@@ -45,7 +47,7 @@ public class TopRightPanel extends JPanel {
         add(moneyText);
         add(moneyValue);
         add(treasureText);
-        add(treasureList);
+        add(scrollPane);
     }
 
     public void updateValues(){
@@ -59,14 +61,28 @@ public class TopRightPanel extends JPanel {
         repaint();
     }
 
-    private void populateModel(DefaultListModel model) {
+//    private void populateModel(DefaultListModel model) {
+//       Vector<String> list = loadTreasures();
+//       if(list.size() >= 3){
+//           ScreenLauncher.showSplashScreenAndExitGame();
+//       }
+//       else {
+//           for (String item : list) {
+//               model.addElement(item);
+//           }
+//       }
+//    }
 
-       Vector<String> list = loadTreasures();
-        for (String item : list
-             ) {
-            model.addElement(item);
-        }
+    // IF I don't wan't rewards = 3
+    private void populateModel(DefaultListModel model) {
+        Vector<String> list = loadTreasures();
+
+            for (String item : list) {
+                model.addElement(item);
+            }
+
     }
+
 
     private String extractLocation(){
         return guiController.getPlayer().getCurrentCountry();

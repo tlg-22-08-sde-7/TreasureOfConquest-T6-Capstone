@@ -136,6 +136,14 @@
               "value": 35
             },
             {
+              "name": "TEST Treasure #1 ",
+              "value": 50
+            },
+            {
+              "name": "TEST Treasure #2",
+              "value": 45
+            },
+            {
               "name": "jewel Yasakani no Magatama",
               "value": 10
             }
@@ -150,6 +158,16 @@
                 "Asia"
               ],
               "answer": "Japan"
+            },
+            {
+              "text": "This is a test Riddle\nJust a # 1 test Riddle to seei\nthat 3 riddles will work\nHNot to worrk with thisy\n\n",
+              "options": [
+                "Option #1i",
+                "Option #2",
+                "ption #3",
+                "Number"
+              ],
+              "answer": "Number"
             },
             {
               "text": "Which science-fiction movie had been filmed on Mount Fuji?",

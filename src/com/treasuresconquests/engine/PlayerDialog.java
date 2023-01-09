@@ -191,7 +191,7 @@ public class PlayerDialog {
         // Find what type of location user would like to visit
         while (null == parsedUserInput) {
             userInput = prompter.prompt("Hi, I am the tour guide. Would " +
-                    "you like to visit an attraction, airport, restaurant, or weapon store? \n" +
+                    "you like to visit an attraction, explore airport, restaurant, or weapon store? \n" +
                     "(Enter 'help' for instructions or 'quit' to end game)");
 
             parsedUserInput = textParser.parse(userInput, npc.get("tourGuide").getCommands(), options);

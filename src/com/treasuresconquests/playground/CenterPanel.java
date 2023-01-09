@@ -177,7 +177,11 @@ public class CenterPanel extends JPanel {
         else if(tagName.equalsIgnoreCase(JAPANATTRACTIONPAGE) ){
             notifySubscribers(japanAttractionScreen);
         }
-
     }
 
+    public static void showStartScreenWithoutPrompt() {
+        CardLayout cl = (CardLayout) (cards.getLayout());
+        cl.show(cards, STARTSCREEN);
+        notifySubscribers(startScreen);
+    }
 }
