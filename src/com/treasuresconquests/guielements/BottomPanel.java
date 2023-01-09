@@ -24,7 +24,7 @@ public class BottomPanel extends JPanel implements NavigbleSubscriber {
     Handlers.BackHandler backHandler = new Handlers.BackHandler();
 
     public BottomPanel(){
-        music.playMusic("assets/songs/example.wav",-1);
+        music.playMusic("resources/assets/songs/example.wav",-1);
         setLayout(null);
         setBackground(Color.blue);
 
@@ -54,7 +54,7 @@ public class BottomPanel extends JPanel implements NavigbleSubscriber {
                         Music.stopMusic();
                         btnMute.setText("UNMUTE");
                     }else{
-                        Music.playMusic("assets/songs/example.wav",-1);
+                        Music.playMusic("resources/assets/songs/example.wav",-1);
                         btnMute.setText("MUTE");
                     }
                 }
@@ -63,7 +63,7 @@ public class BottomPanel extends JPanel implements NavigbleSubscriber {
                         Music.stopMusic();
                         btnMute.setText("UNMUTE");
                     }else{
-                        Music.playMusic("assets/songs/nyc.wav",-1);
+                        Music.playMusic("resources/assets/songs/nyc.wav",-1);
                         btnMute.setText("MUTE");
                     }
                 }
@@ -72,7 +72,7 @@ public class BottomPanel extends JPanel implements NavigbleSubscriber {
                         Music.stopMusic();
                         btnMute.setText("UNMUTE");
                     }else{
-                        Music.playMusic("assets/songs/Tokyo.wav",-1);
+                        Music.playMusic("resources/assets/songs/Tokyo.wav",-1);
                         btnMute.setText("MUTE");
                     }
                 }
