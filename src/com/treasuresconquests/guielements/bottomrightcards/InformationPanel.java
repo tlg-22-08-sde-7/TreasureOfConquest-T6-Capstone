@@ -1,7 +1,6 @@
-package com.treasuresconquests.playground.bottomrightcards;
+package com.treasuresconquests.guielements.bottomrightcards;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class InformationPanel extends JPanel {

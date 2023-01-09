@@ -1,9 +1,7 @@
-package com.treasuresconquests.playground;
+package com.treasuresconquests.guielements;
 
 import javax.swing.*;
 import java.awt.*;
-
-
 
     public  class FinalScreen extends JWindow {
         Image splashScreen;

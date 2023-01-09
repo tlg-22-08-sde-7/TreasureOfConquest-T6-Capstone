@@ -1,4 +1,4 @@
-package com.treasuresconquests.playground;
+package com.treasuresconquests.guielements;
 
 import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiclient.ScreenLauncher;
@@ -61,27 +61,27 @@ public class TopRightPanel extends JPanel {
         repaint();
     }
 
-//    private void populateModel(DefaultListModel model) {
-//       Vector<String> list = loadTreasures();
-//       if(list.size() >= 3){
-//           ScreenLauncher.showSplashScreenAndExitGame();
-//       }
-//       else {
-//           for (String item : list) {
-//               model.addElement(item);
-//           }
-//       }
-//    }
+    private void populateModel(DefaultListModel model) {
+       Vector<String> list = loadTreasures();
+       if(list.size() >= 3){
+           ScreenLauncher.showSplashScreenAndExitGame();
+       }
+       else {
+           for (String item : list) {
+               model.addElement(item);
+           }
+       }
+    }
 
     // IF I don't wan't rewards = 3
-    private void populateModel(DefaultListModel model) {
-        Vector<String> list = loadTreasures();
-
-            for (String item : list) {
-                model.addElement(item);
-            }
-
-    }
+//    private void populateModel(DefaultListModel model) {
+//        Vector<String> list = loadTreasures();
+//
+//            for (String item : list) {
+//                model.addElement(item);
+//            }
+//
+//    }
 
 
     private String extractLocation(){

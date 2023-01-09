@@ -1,4 +1,4 @@
-package com.treasuresconquests.playground;
+package com.treasuresconquests.guielements;
 
 import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiengine.callbacks.ComboCallback;
@@ -6,7 +6,7 @@ import com.treasuresconquests.guiengine.other.Combo;
 import com.treasuresconquests.guiengine.other.DialogSubscriber;
 import com.treasuresconquests.guiengine.other.Quiz;
 import com.treasuresconquests.guiengine.other.RiddlesTreasures;
-import com.treasuresconquests.playground.bottomrightcards.*;
+import com.treasuresconquests.guielements.bottomrightcards.*;
 
 import javax.swing.*;
 import java.awt.*;

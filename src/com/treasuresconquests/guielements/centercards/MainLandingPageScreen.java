@@ -1,11 +1,11 @@
-package com.treasuresconquests.playground.centercards;
+package com.treasuresconquests.guielements.centercards;
 
 import com.treasuresconquests.app.GUIController;
 import com.treasuresconquests.guiclient.ScreenLauncher;
 import com.treasuresconquests.guiengine.Handlers;
 import com.treasuresconquests.guiengine.callbacks.Navigable;
-import com.treasuresconquests.playground.BottomRightPanel;
-import com.treasuresconquests.playground.CenterPanel;
+import com.treasuresconquests.guielements.BottomRightPanel;
+import com.treasuresconquests.guielements.CenterPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

@@ -1,9 +1,7 @@
 package com.treasuresconquests.guiclient;
 
 import com.treasuresconquests.app.GUIController;
-import com.treasuresconquests.playground.*;
-import com.treasuresconquests.playground.SplashScreen;
-import com.treasuresconquests.playground.centercards.*;
+import com.treasuresconquests.guielements.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,9 +16,6 @@ public class ScreenLauncher {
     private static TopRightPanel topRightPanel;
     //private static SplashScreen splashScreen;
     public static int frameState = 1;
-
-
-
 
     public static void main(String[] args) {
         /* Use an appropriate Look and Feel */
@@ -116,14 +111,14 @@ public class ScreenLauncher {
 
     public static void showSplashScreenAndExitGame(){
         SwingUtilities.invokeLater(() -> {
-//            FinalScreen splash = new FinalScreen();
-//            try {
-//                // Make JWindow appear for 10 seconds before disappear
-//                Thread.sleep(000);
-//                splash.dispose();
-//            } catch(Exception e) {
-//                e.printStackTrace();
-//            }
+            FinalScreen splash = new FinalScreen();
+            try {
+                // Make JWindow appear for 10 seconds before disappear
+                Thread.sleep(3000);
+                splash.dispose();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
             CenterPanel.showStartScreenWithoutPrompt();
         });
 

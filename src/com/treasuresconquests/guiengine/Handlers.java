@@ -6,8 +6,8 @@ import com.treasuresconquests.guiclient.ScreenLauncher;
 import com.treasuresconquests.guiengine.callbacks.ComboCallback;
 import com.treasuresconquests.guiengine.callbacks.Navigable;
 import com.treasuresconquests.guiengine.other.*;
-import com.treasuresconquests.playground.BottomRightPanel;
-import com.treasuresconquests.playground.CenterPanel;
+import com.treasuresconquests.guielements.BottomRightPanel;
+import com.treasuresconquests.guielements.CenterPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.List;
-import java.util.Random;
 import java.util.Vector;
 
 public class Handlers {
@@ -38,7 +37,7 @@ public class Handlers {
 
             if (Music.musicOn == true){
                 Music.stopMusic();
-                Music.playMusic("com/treasuresconquests/guiengine/Songs/nyc.wav", -1);
+                Music.playMusic("assets/songs/nyc.wav", -1);
             }
 
             //ScreenLauncher.showGameScreen();
@@ -98,7 +97,7 @@ public class Handlers {
                 CenterPanel.japanLandingPage();
                 if (Music.musicClip.isActive()){
                     Music.stopMusic();
-                    Music.playMusic("com/treasuresconquests/guiengine/Songs/Tokyo.wav",-1);
+                    Music.playMusic("assets/songs/Tokyo.wav",-1);
                 }
             /*    music.stopMusic();
                 Music.playMusic("com/treasuresconquests/guiengine/Songs/Tokyo.wav", -1);*/
